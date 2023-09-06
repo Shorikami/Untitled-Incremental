@@ -1,0 +1,19 @@
+# Binaries
+**/bin/
+bin-int/
+UserSettings/
+Logs/
+Library/
+obj/
+Temp/
+
+# Visual Studio files and folder
+.vs/
+.vsconfig
+**.csproj
+**.sln
+**.vcxproj
+**.vcxproj.filters
+**.vcxproj.user
+**.ini
+**.exe
