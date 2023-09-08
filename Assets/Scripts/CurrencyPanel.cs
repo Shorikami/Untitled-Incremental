@@ -74,14 +74,22 @@ public class CurrencyPanel : MonoBehaviour
         // y-position must always be 0 to align with screen
         m_PanelBG.transform.localPosition = new Vector3((btnWidth + Mathf.Abs((m_PanelBG.rect.width - btnWidth) / 2)) * multiplier, 
             -transform.localPosition.y, m_PanelBG.transform.localPosition.z);
+
+        CreateUpgrades();
     }
 
     public void CreateUpgrades()
     {
-        GameObject horizPanel = Instantiate(m_HorizPanel);
-        horizPanel.transform.SetParent(m_VerticalLayout.transform);
-
-        //Instantiate(m_UpgradePrefab, m_VerticalLayout.transform);
+        //GameObject horizPanel = Instantiate(m_HorizPanel);
+        //horizPanel.transform.SetParent(m_VerticalLayout.transform);
+        ////horizPanel.GetComponent<RectTransform>().anchoredPosition = m_VerticalLayout.GetComponent<RectTransform>().position;
+        ////horizPanel.GetComponent<RectTransform>().anchorMin = new Vector2(0.5f, 0);
+        ////horizPanel.GetComponent<RectTransform>().anchorMax = new Vector2(0.5f, 1);
+        ////horizPanel.GetComponent<RectTransform>().pivot = new Vector2(1, 1);
+        ////horizPanel.GetComponent<RectTransform>().sizeDelta = m_VerticalLayout.GetComponent<RectTransform>().rect.size;
+        //
+        //GameObject newButton = Instantiate(m_UpgradePrefab) as GameObject;
+        //newButton.transform.SetParent(horizPanel.transform);
     }
 
     public void Toggle()

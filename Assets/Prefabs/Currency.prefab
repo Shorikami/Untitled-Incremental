@@ -61,7 +61,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Panel: {fileID: 5941884556889643631}
-  m_VerticalLayout: {fileID: 7095277583985325283}
+  m_VerticalLayout: {fileID: 0}
+  m_HorizPanel: {fileID: 7924481659873413840, guid: f0bc47c9cf423dc48a4653a80718ce17, type: 3}
+  m_UpgradePrefab: {fileID: 948674847100151009, guid: ba005a1f17474974bae4564a157236a6, type: 3}
   m_Placement: 0
   m_Visible: 0
 --- !u!1 &3108358192880623019
@@ -467,6 +469,7 @@ GameObject:
   - component: {fileID: 5655534971681276442}
   - component: {fileID: 699485740352331483}
   - component: {fileID: 760996115017238262}
+  - component: {fileID: 2824419283459012662}
   m_Layer: 0
   m_Name: Panel BG
   m_TagString: Untagged
@@ -485,15 +488,14 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
-  m_Children:
-  - {fileID: 1032534324262236458}
+  m_Children: []
   m_Father: {fileID: 2048018364340154968}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 545.4, y: -54.533325}
-  m_SizeDelta: {x: 790.8, y: 409.0667}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 1505.4, y: -594.5333}
+  m_SizeDelta: {x: 790.80005, y: 409.0667}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &699485740352331483
 CanvasRenderer:
@@ -533,53 +535,16 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!1 &7095277583985325283
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1032534324262236458}
-  - component: {fileID: 7540306368930867253}
-  m_Layer: 0
-  m_Name: Vertical Sorter
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1032534324262236458
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7095277583985325283}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5655534971681276442}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &7540306368930867253
+--- !u!114 &2824419283459012662
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7095277583985325283}
+  m_GameObject: {fileID: 6138051144594554894}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
+  m_Script: {fileID: 11500000, guid: a09c8da2e025c4e4780a2fc6f58eb468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
@@ -587,12 +552,11 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 0
-  m_Spacing: 0
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 0
-  m_ChildControlHeight: 0
-  m_ChildScaleWidth: 0
-  m_ChildScaleHeight: 0
-  m_ReverseArrangement: 0
+  m_ChildAlignment: 4
+  m_Rows: 0
+  m_Columns: 0
+  m_CellSize: {x: NaN, y: NaN}
+  m_Spacing: {x: 0, y: 0}
+  m_FitType: 0
+  fitX: 1
+  fitY: 1
