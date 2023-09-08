@@ -21,13 +21,16 @@ public class Incr2DHandler : MonoBehaviour
         m_Width = Mathf.RoundToInt(m_GameCanvas.GetComponent<RectTransform>().rect.width);
         m_Height = Mathf.RoundToInt(m_GameCanvas.GetComponent<RectTransform>().rect.height);
 
-        m_CurrCurrencies.Add(Instantiate(m_CurrencyPrefab, m_GameCanvas.transform));
+        for (int i = 0; i < 6; ++i)
+        {
+            m_CurrCurrencies.Add(Instantiate(m_CurrencyPrefab, m_GameCanvas.transform));
+        }
 
         // initialize in order
         int c = 0;
         foreach (GameObject g in m_CurrCurrencies)
         {
-            g.GetComponent<CurrencyPanel>().Initialize(m_Width, m_Height,
+            g.GetComponent<CurrencyPanel>().Initialize(m_Width, m_Height, c,
                 c < 3 ? CurrencyPanel.Side.Left : CurrencyPanel.Side.Right);
 
             ++c;

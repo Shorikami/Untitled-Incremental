@@ -31,6 +31,13 @@ public class CurrencyPanel : MonoBehaviour
     // button, background, all purchaseable upgrades
     // all purchaseable upgrades will be children of the background object
     public GameObject m_Panel;
+    private RectTransform m_PanelBG;
+    private RectTransform m_Button;
+
+    public GameObject m_VerticalLayout;
+
+    public GameObject m_HorizPanel;
+    public GameObject m_UpgradePrefab;
 
     // which side the panel appears (either left or right)
     public Side m_Placement;
@@ -38,29 +45,56 @@ public class CurrencyPanel : MonoBehaviour
     // whether or not this panel is visible
     public bool m_Visible;
 
-    public void Initialize(int w, int h, Side s = Side.Left)
+    // whether or not this panel is currently opened
+    private bool m_Opened = false;
+
+    public void Awake()
     {
         // Get button and Panel BG
-        RectTransform panelRect = FindChildWithName(gameObject, "Panel BG").GetComponent<RectTransform>();
-        Rect button = FindChildWithName(gameObject, "Button").GetComponent<RectTransform>().rect;
+        m_PanelBG = FindChildWithName(gameObject, "Panel BG").GetComponent<RectTransform>();
+        m_Button = FindChildWithName(gameObject, "Button").GetComponent<RectTransform>();
+    }
+
+    public void Initialize(int w, int h, int iter, Side s = Side.Left)
+    {
+        m_Placement = s;
 
         // Resize Panel BG to appropriate size
-        panelRect.sizeDelta = new Vector2(w / 4, h);
+        m_PanelBG.sizeDelta = new Vector2(w / 4, h);
 
-        int btnWidth = Mathf.RoundToInt(button.width);
-        int btnHeight = Mathf.RoundToInt(button.height);
+        int btnWidth = Mathf.RoundToInt(m_Button.rect.width);
+        int btnHeight = Mathf.RoundToInt(m_Button.rect.height);
         int multiplier = s == Side.Left ? -1 : 1;
 
         // Move entire panel to appropriate side
-        transform.localPosition = new Vector3(Mathf.Abs((w - btnWidth) / 2) * multiplier, (h - btnHeight) / 2, -10);
+        transform.localPosition = new Vector3(Mathf.Abs((w - btnWidth) / 2) * multiplier,
+           (1 - (iter % 3)) * (h - btnHeight) / 2, transform.localPosition.z);
 
         // Reposition Panel BG to correct location
         // y-position must always be 0 to align with screen
-        panelRect.transform.localPosition = new Vector3((btnWidth + Mathf.Abs((panelRect.rect.width - btnWidth) / 2)) * multiplier, -transform.localPosition.y, -10);
+        m_PanelBG.transform.localPosition = new Vector3((btnWidth + Mathf.Abs((m_PanelBG.rect.width - btnWidth) / 2)) * multiplier, 
+            -transform.localPosition.y, m_PanelBG.transform.localPosition.z);
     }
 
-    public void Test()
+    public void CreateUpgrades()
     {
-        Debug.Log("a");
+        GameObject horizPanel = Instantiate(m_HorizPanel);
+        horizPanel.transform.SetParent(m_VerticalLayout.transform);
+
+        //Instantiate(m_UpgradePrefab, m_VerticalLayout.transform);
+    }
+
+    public void Toggle()
+    {
+        transform.SetAsLastSibling();
+
+        m_Opened = !m_Opened;
+        m_PanelBG.gameObject.SetActive(m_Opened);
+
+        int dir = m_Opened ? 1 : -1;
+        int multiplier = m_Placement == Side.Left ? 1 : -1;
+
+        transform.localPosition = new Vector3((multiplier * (dir * m_PanelBG.rect.width)) + transform.localPosition.x,
+                                    transform.localPosition.y, transform.localPosition.z);
     }
 }
