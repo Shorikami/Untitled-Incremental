@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CurrencyPanel : MonoBehaviour
 {
@@ -34,10 +35,10 @@ public class CurrencyPanel : MonoBehaviour
     private RectTransform m_PanelBG;
     private RectTransform m_Button;
 
-    public GameObject m_VerticalLayout;
-
-    public GameObject m_HorizPanel;
+    public GameObject m_PanelPrefab;
     public GameObject m_UpgradePrefab;
+
+    private List<GameObject> m_Panels = new List<GameObject>();
 
     // which side the panel appears (either left or right)
     public Side m_Placement;
@@ -80,16 +81,28 @@ public class CurrencyPanel : MonoBehaviour
 
     public void CreateUpgrades()
     {
-        //GameObject horizPanel = Instantiate(m_HorizPanel);
-        //horizPanel.transform.SetParent(m_VerticalLayout.transform);
-        ////horizPanel.GetComponent<RectTransform>().anchoredPosition = m_VerticalLayout.GetComponent<RectTransform>().position;
-        ////horizPanel.GetComponent<RectTransform>().anchorMin = new Vector2(0.5f, 0);
-        ////horizPanel.GetComponent<RectTransform>().anchorMax = new Vector2(0.5f, 1);
-        ////horizPanel.GetComponent<RectTransform>().pivot = new Vector2(1, 1);
-        ////horizPanel.GetComponent<RectTransform>().sizeDelta = m_VerticalLayout.GetComponent<RectTransform>().rect.size;
-        //
-        //GameObject newButton = Instantiate(m_UpgradePrefab) as GameObject;
-        //newButton.transform.SetParent(horizPanel.transform);
+        // Modify scroll rectangle's "content" panel
+        m_PanelBG.GetComponent<ScrollRect>().content.sizeDelta = new Vector2(Mathf.Abs(m_PanelBG.rect.width), m_PanelBG.rect.height * 2);
+        m_PanelBG.GetComponent<ScrollRect>().content.anchorMin = new Vector2(0, 1);
+        m_PanelBG.GetComponent<ScrollRect>().content.anchorMax = new Vector2(0, 1);
+        m_PanelBG.GetComponent<ScrollRect>().content.pivot = new Vector2(0, 1);
+
+        // Dynamically create layout grouping
+        DynamicLayout layout = m_PanelBG.GetComponent<ScrollRect>().content.gameObject.AddComponent<DynamicLayout>();
+        layout.m_FitType = DynamicLayout.FitType.FixedColumns;
+        layout.m_Columns = 1;
+        layout.fitX = layout.fitY = true;
+
+        // Add the panels
+        // TODO: Add different panels based on currency (i.e. coins include automation but chroma does not, etc.)
+        m_Panels.Add(Instantiate(m_PanelPrefab, m_PanelBG.GetComponent<ScrollRect>().content.transform));
+        m_Panels.Add(Instantiate(m_PanelPrefab, m_PanelBG.GetComponent<ScrollRect>().content.transform));
+
+        // for each panel, add the appropriate upgrades
+        foreach (GameObject panel in m_Panels)
+        {
+            Instantiate(m_UpgradePrefab, panel.transform);
+        }
     }
 
     public void Toggle()
