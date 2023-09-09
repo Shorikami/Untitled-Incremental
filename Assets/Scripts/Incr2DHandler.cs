@@ -21,7 +21,7 @@ public class Incr2DHandler : MonoBehaviour
         m_Width = Mathf.RoundToInt(m_GameCanvas.GetComponent<RectTransform>().rect.width);
         m_Height = Mathf.RoundToInt(m_GameCanvas.GetComponent<RectTransform>().rect.height);
 
-        for (int i = 0; i < 1; ++i)
+        for (int i = 0; i < 2; ++i)
         {
             m_CurrCurrencies.Add(Instantiate(m_CurrencyPrefab, m_GameCanvas.transform));
         }

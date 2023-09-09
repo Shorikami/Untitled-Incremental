@@ -83,9 +83,13 @@ public class CurrencyPanel : MonoBehaviour
         CreateUpgrades();
     }
 
-    public void CreateUpgrades()
+    public void CreateUpgrades(int spacing = 30, int topPadding = 50, int bottomPadding = 50)
     {
         m_Scroll.GetComponent<RectTransform>().sizeDelta = new Vector2(Mathf.Abs(m_PanelBG.rect.width), m_PanelBG.rect.height);
+
+        m_Scroll.GetComponent<ScrollRect>().content.GetComponent<VerticalLayoutGroup>().spacing = spacing;
+        m_Scroll.GetComponent<ScrollRect>().content.GetComponent<VerticalLayoutGroup>().padding.top = topPadding;
+        m_Scroll.GetComponent<ScrollRect>().content.GetComponent<VerticalLayoutGroup>().padding.bottom = bottomPadding;
 
         // Modify scroll rectangle's "content" panel
         m_Scroll.GetComponent<ScrollRect>().content.sizeDelta = new Vector2(Mathf.Abs(m_PanelBG.rect.width), m_PanelBG.rect.height);
@@ -102,20 +106,12 @@ public class CurrencyPanel : MonoBehaviour
 
         // Add the panels
         // TODO: Add different panels based on currency (i.e. coins include automation but chroma does not, etc.)
+        CreatePanelImage("destiny2");
+        CreateHorizontalPanels(3, 2);
+        CreateEmptySpace(300);
+        CreatePanelImage("destiny2");
+        CreateHorizontalPanels();
 
-        for (int ii = 0; ii < 4; ++ii)
-        {
-            GameObject newHorizPanel = Instantiate(m_HorizPanelPrefab, m_Scroll.GetComponent<ScrollRect>().content.transform);
-
-            for (int i = 0; i < 2; ++i)
-            {
-                Instantiate(m_UpgradePrefab, newHorizPanel.transform);
-            }
-
-            m_Panels.Add(newHorizPanel);
-        }
-
-        
         //m_Panels.Add(Instantiate(m_HorizPanelPrefab, m_Scroll.GetComponent<ScrollRect>().content.transform));
 
         // for each panel, add the appropriate upgrades
@@ -123,6 +119,61 @@ public class CurrencyPanel : MonoBehaviour
         //{
         //    Instantiate(m_UpgradePrefab, panel.transform);
         //}
+    }
+
+    // dynamically create image child
+    private void CreatePanelImage(string path = null)
+    {
+        GameObject newImage = new GameObject("Upgrade Image");
+
+        RectTransform rT = newImage.AddComponent<RectTransform>();
+        rT.transform.SetParent(m_Scroll.GetComponent<ScrollRect>().content);
+        rT.localScale = Vector3.one;
+        rT.anchoredPosition = new Vector2(0, 0);
+        rT.sizeDelta = new Vector2(150, 200); // <--- I don't think this matters? It's edited when the actual image appears
+
+        Image img = newImage.AddComponent<Image>();
+        Texture2D tex = Resources.Load<Texture2D>("Textures/" + path);
+        img.sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f));
+        img.transform.SetParent(m_Scroll.GetComponent<ScrollRect>().content);
+    }
+
+    // dynamically create empty space
+    private void CreateEmptySpace(int height = 100)
+    {
+        GameObject newImage = new GameObject("Empty Panel Space");
+
+        // regular transform -> rectangle transform (ui element)
+        RectTransform rT = newImage.AddComponent<RectTransform>();
+        rT.transform.SetParent(m_Scroll.GetComponent<ScrollRect>().content);
+        rT.localScale = Vector3.one;
+        rT.anchoredPosition = new Vector2(0, 0);
+        rT.sizeDelta = new Vector2(150, height);
+
+        // "empty" image (it's invisible)
+        Image img = newImage.AddComponent<Image>();
+        img.color = new Color(0, 0, 0, 0);
+        img.transform.SetParent(m_Scroll.GetComponent<ScrollRect>().content);
+
+        // ignores forced height scaling of layouts
+        LayoutElement lE = newImage.AddComponent<LayoutElement>();
+        lE.minHeight = height;
+        lE.transform.SetParent(m_Scroll.GetComponent<ScrollRect>().content);
+    }
+
+    private void CreateHorizontalPanels(int numPanels = 1, int numUpgrades = 2)
+    {
+        for (int i = 0; i < numPanels; ++i)
+        {
+            GameObject newHorizPanel = Instantiate(m_HorizPanelPrefab, m_Scroll.GetComponent<ScrollRect>().content.transform);
+
+            for (int j = 0; j < numUpgrades; ++j)
+            {
+                Instantiate(m_UpgradePrefab, newHorizPanel.transform);
+            }
+
+            m_Panels.Add(newHorizPanel);
+        }
     }
 
     public void Toggle()
