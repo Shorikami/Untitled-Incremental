@@ -4,8 +4,16 @@ using UnityEngine;
 
 public class Incr2DHandler : MonoBehaviour
 {
+    // THIS IS NOT A SINGLETON SO IT WILL BE DESTROYED AND ANY 2D INFO WILL BE LOST!!
+    // THIS IS GOOD BECAUSE THE GAME WILL EVENTUALLY TRANSITION TO 3D!!!!
+
+
     // 2D Game canvas
     public GameObject m_GameCanvas;
+    
+    // exp bar, currency display, maybe tier bar soon?
+    public GameObject m_ExpBar;
+    public GameObject m_CurrencyDisplay;
 
     // Prefab of currencies
     public GameObject m_CurrencyPrefab;
