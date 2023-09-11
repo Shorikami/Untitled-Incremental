@@ -171,7 +171,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Panel: {fileID: 5941884556889643631}
   m_Scroll: {fileID: 326896725950721226}
-  m_PanelPrefab: {fileID: 8082421956231135435, guid: efdd59c785ea74d42ae1f63030e476b4, type: 3}
   m_UpgradePrefab: {fileID: 4871016230695492167, guid: 58591b82cfb6a3946adb8a3a729a7d96, type: 3}
   m_HorizPanelPrefab: {fileID: 7924481659873413840, guid: f0bc47c9cf423dc48a4653a80718ce17, type: 3}
   m_Placement: 0

@@ -52,6 +52,8 @@ public class CurrencyPanel : MonoBehaviour
     // whether or not this panel is currently opened
     private bool m_Opened = false;
 
+    public Currency m_Currency;
+
     public void Awake()
     {
         // Get button and Panel BG

@@ -45,6 +45,6 @@ public class Dice : MonoBehaviour
     {
         int res = Random.Range(1, 7);
         Debug.Log("You rolled a " + res + "!");
-        m_2DHandler.UpdateText(res);
+        m_2DHandler.UpdateValue(res);
     }
 }
