@@ -38,7 +38,6 @@ public class CurrencyPanel : MonoBehaviour
     private RectTransform m_PanelBG;
     private RectTransform m_Button;
 
-    public GameObject m_PanelPrefab;
     public GameObject m_UpgradePrefab;
     public GameObject m_HorizPanelPrefab;
 
@@ -60,8 +59,12 @@ public class CurrencyPanel : MonoBehaviour
         m_Button = FindChildWithName(gameObject, "Button").GetComponent<RectTransform>();
     }
 
-    public void Initialize(int w, int h, int iter, Side s = Side.Left)
+    public void Initialize(int w, int h, int iter, int btnW = 200, int btnH = 200, Side s = Side.Left)
     {
+        // set button size
+        m_Button.sizeDelta = new Vector2(btnW, btnH);
+        FindChildWithName(m_Button.gameObject, "Icon").GetComponent<RectTransform>().sizeDelta = new Vector2(btnW, btnH);
+
         m_Placement = s;
 
         // Resize Panel BG to appropriate size

@@ -14,12 +14,15 @@ public class Currency : MonoBehaviour
         Paint
     }
 
+    // this might overflow but this is mostly for debugging
+    public int m_TotalCount = 0;
+
     // How many (in current rank) e.g. 0-9
-    private int m_Count = 0;
+    public int m_Count = 0;
 
     // Current tenths position e.g. 10s, 100s, 1000s...
     [Min(1)]
-    private int m_Rank;
+    public int m_Rank;
 
     public CurrencyType m_CurrencyType;
 }

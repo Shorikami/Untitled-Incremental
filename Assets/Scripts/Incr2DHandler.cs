@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class Incr2DHandler : MonoBehaviour
 {
@@ -38,15 +40,25 @@ public class Incr2DHandler : MonoBehaviour
         int c = 0;
         foreach (GameObject g in m_CurrCurrencies)
         {
-            g.GetComponent<CurrencyPanel>().Initialize(m_Width, m_Height, c,
+            g.GetComponent<CurrencyPanel>().Initialize(m_Width, m_Height, c, 200, 200,
                 c < 3 ? CurrencyPanel.Side.Left : CurrencyPanel.Side.Right);
 
             ++c;
         }
+
+        // manual. todo: load from save
+        m_CurrencyDisplay.GetComponent<TextMeshProUGUI>().text = (0).ToString();
     }
 
     void Update()
     {
         
+    }
+
+    public void UpdateText(int updCur)
+    {
+        int curr = int.Parse(m_CurrencyDisplay.GetComponent<TextMeshProUGUI>().text);
+
+        m_CurrencyDisplay.GetComponent<TextMeshProUGUI>().text = (curr + updCur).ToString();
     }
 }

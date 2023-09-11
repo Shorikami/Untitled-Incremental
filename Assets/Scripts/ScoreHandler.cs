@@ -21,7 +21,13 @@ public class ScoreHandler : MonoBehaviour
     public List<Currency> m_Currencies;
 
     private void Start()
+
     {
-        // load in currencies from save
+        //// temp load in manually. no saving
+        //// todo: load in currencies from save
+        //for (int i = 0; i < 6; ++i)
+        //{
+        //    m_Currencies.Add(new Currency());
+        //}
     }
 }

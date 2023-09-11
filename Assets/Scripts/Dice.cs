@@ -8,6 +8,8 @@ public class Dice : MonoBehaviour
     private float m_CurrRoll;
     private bool m_PaidOut = true;
 
+    public Incr2DHandler m_2DHandler;
+
     public void Update()
     {
         // todo: better timer?
@@ -41,6 +43,8 @@ public class Dice : MonoBehaviour
 
     public void Payout()
     {
-        Debug.Log("You rolled a " + Random.Range(1, 7) + "!");
+        int res = Random.Range(1, 7);
+        Debug.Log("You rolled a " + res + "!");
+        m_2DHandler.UpdateText(res);
     }
 }
