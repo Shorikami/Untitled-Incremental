@@ -15,7 +15,8 @@ public class Incr2DHandler : MonoBehaviour, ISavableData
     
     // exp bar, currency display, maybe tier bar soon?
     public GameObject m_ExpBar;
-    public GameObject m_CurrencyDisplay;
+    public TextMeshProUGUI m_ExpText;
+    public GameObject m_CurrencyText;
 
     // Prefab of currencies
     public GameObject m_CurrencyPrefab;
@@ -107,14 +108,20 @@ public class Incr2DHandler : MonoBehaviour, ISavableData
     public void UpdateValue(int val)
     {
         m_ActivePanels[m_ActiveCurrIdx].GetComponent<CurrencyPanel>().m_Currency.UpdateCurrency(val);
+        gameObject.GetComponent<Experience>().AddExperience(val);
         UpdateText();
     }
 
     public void UpdateText(string color = "#5c5c5c")
     {
-        m_CurrencyDisplay.GetComponent<TextMeshProUGUI>().text = 
+        m_CurrencyText.GetComponent<TextMeshProUGUI>().text = 
             "<color=" + color + ">" + 
             m_ActivePanels[m_ActiveCurrIdx].GetComponent<CurrencyPanel>().m_Currency.m_TotalCount.ToString()
             + "</color>";
+
+        Experience xp = gameObject.GetComponent<Experience>();
+
+        m_ExpText.text = "<color=#0ae0f0><b>" + xp.m_CurrExp + " / " + xp.RequiredExperience() + "</b></color>";
+        m_ExpBar.GetComponent<Slider>().value = (float)xp.m_CurrExp / (float)xp.RequiredExperience();
     }
 }

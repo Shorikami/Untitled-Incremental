@@ -5,7 +5,7 @@ using System.Linq;
 
 public class DataManager : MonoBehaviour
 {
-    [Header("File Storage Configuration")]
+    [Header("File Storage Configuration\n====================")]
     [SerializeField] private string m_FileName;
     public static DataManager m_Instance { get; private set; }
 

@@ -9,6 +9,7 @@ public class Dice : MonoBehaviour
     private bool m_PaidOut = true;
 
     public Incr2DHandler m_2DHandler;
+    public Experience m_ExperienceHandler;
 
     public void Update()
     {
