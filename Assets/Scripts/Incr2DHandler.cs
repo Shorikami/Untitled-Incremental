@@ -24,7 +24,7 @@ public class Incr2DHandler : MonoBehaviour, ISavableData
     // Currently active currencies (this should be private)
     public List<GameObject> m_ActivePanels;
     private int m_ActiveCurrIdx;
-    
+
     [Min(1)]
     private int m_Width, m_Height;
 
@@ -76,7 +76,6 @@ public class Incr2DHandler : MonoBehaviour, ISavableData
         // initialize to dollars display first. always safe?
         // todo: check active status of other currencies to switch this dynamically on start up
         m_ActiveCurrIdx = 0;
-        UpdateText();
     }
 
     void Start()
@@ -98,6 +97,8 @@ public class Incr2DHandler : MonoBehaviour, ISavableData
 
             ++c;
         }
+
+        UpdateText();
     }
 
     void Update()

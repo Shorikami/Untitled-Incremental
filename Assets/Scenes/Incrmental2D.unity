@@ -709,6 +709,7 @@ MonoBehaviour:
   m_CurrencyText: {fileID: 334583077}
   m_CurrencyPrefab: {fileID: 948674847100151009, guid: ad476e302c76079408bea800f12fa124, type: 3}
   m_ActivePanels: []
+  m_ExpHandler: {fileID: 605023136}
 --- !u!114 &605023136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -721,6 +722,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09e34c5ede0b98044ac289212bff9593, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_TotalExperience: 0
   m_CurrLevel: 0
   m_CurrExp: 0
 --- !u!1 &654907397
