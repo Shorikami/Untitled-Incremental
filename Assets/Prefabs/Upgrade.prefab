@@ -268,6 +268,7 @@ GameObject:
   - component: {fileID: 2008581652513081789}
   - component: {fileID: 8494676990877130030}
   - component: {fileID: 1009869783528424043}
+  - component: {fileID: 888794486207686745}
   m_Layer: 0
   m_Name: Upgrade
   m_TagString: Untagged
@@ -335,6 +336,23 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &888794486207686745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4871016230695492167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bea0ebeed7f6fd4a8cc460ab80ef8be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_CurrencyPanel: {fileID: 0}
+  m_UpgradeType: 0
+  m_CurrLevel: 0
+  m_MaxLevel: 0
+  m_CurrCost: 0
 --- !u!1 &6354180848611598550
 GameObject:
   m_ObjectHideFlags: 0
@@ -456,7 +474,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5506938192729229662}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 888794486207686745}
+        m_TargetAssemblyTypeName: Upgrade, Assembly-CSharp
+        m_MethodName: OpenUpgradeMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7820295993984684978
 GameObject:
   m_ObjectHideFlags: 0

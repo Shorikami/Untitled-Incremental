@@ -33,7 +33,7 @@ public class CurrencyPanel : MonoBehaviour
     // all purchaseable upgrades will be children of the background object
     public GameObject m_Panel;
     public GameObject m_Scroll;
-   
+    public GameObject m_UpgradeDisplay;
 
     private RectTransform m_PanelBG;
     private RectTransform m_Button;
@@ -59,6 +59,7 @@ public class CurrencyPanel : MonoBehaviour
         // Get button and Panel BG
         m_PanelBG = FindChildWithName(gameObject, "Panel BG").GetComponent<RectTransform>();
         m_Button = FindChildWithName(gameObject, "Button").GetComponent<RectTransform>();
+        m_UpgradeDisplay.SetActive(false);
     }
 
     public void Initialize(int w, int h, int iter, int btnW = 200, int btnH = 200, Side s = Side.Left)
@@ -174,14 +175,27 @@ public class CurrencyPanel : MonoBehaviour
 
             for (int j = 0; j < numUpgrades; ++j)
             {
-                Instantiate(m_UpgradePrefab, newHorizPanel.transform);
+                GameObject upgr = Instantiate(m_UpgradePrefab, newHorizPanel.transform);
+                upgr.GetComponent<Upgrade>().m_CurrencyPanel = this.gameObject;
             }
 
             m_Panels.Add(newHorizPanel);
         }
     }
 
-    public void Toggle()
+    // TODO: Add upgrade image eventually
+    public void UpdateUpgradeParams(string name, string desc, string bonusDesc, int bonus, int curLev, int maxLev)
+    { 
+    
+    }
+
+    public void ToggleUpgradeMenu(bool open)
+    {
+        m_UpgradeDisplay.SetActive(open);
+        m_Scroll.SetActive(!open);
+    }
+
+    public void SwapPositions()
     {
         transform.SetAsLastSibling();
 

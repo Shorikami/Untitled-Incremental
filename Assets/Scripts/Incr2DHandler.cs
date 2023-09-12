@@ -110,8 +110,11 @@ public class Incr2DHandler : MonoBehaviour, ISavableData
         UpdateText();
     }
 
-    public void UpdateText()
+    public void UpdateText(string color = "#5c5c5c")
     {
-        m_CurrencyDisplay.GetComponent<TextMeshProUGUI>().text = m_ActivePanels[m_ActiveCurrIdx].GetComponent<CurrencyPanel>().m_Currency.m_TotalCount.ToString();
+        m_CurrencyDisplay.GetComponent<TextMeshProUGUI>().text = 
+            "<color=" + color + ">" + 
+            m_ActivePanels[m_ActiveCurrIdx].GetComponent<CurrencyPanel>().m_Currency.m_TotalCount.ToString()
+            + "</color>";
     }
 }
