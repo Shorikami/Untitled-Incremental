@@ -86,6 +86,7 @@ public class CurrencyPanel : MonoBehaviour
         m_PanelBG.transform.localPosition = new Vector3((btnWidth + Mathf.Abs((m_PanelBG.rect.width - btnWidth) / 2)) * multiplier, 
             -transform.localPosition.y, m_PanelBG.transform.localPosition.z);
 
+        // TODO: Create upgrades based on currency (it will construct upgrade types within some function)
         CreateUpgrades();
     }
 
