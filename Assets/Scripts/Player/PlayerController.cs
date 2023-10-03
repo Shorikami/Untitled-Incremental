@@ -19,17 +19,20 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] Transform m_Player;
 
-    public float m_MouseSens = 100.0f;
-    private float m_RotationX = 0.0f;
-
-    private Vector2 m_MousePos;
-    private bool m_InFirstPerson = true;
-
     InputAction i_LMB;
     InputAction i_RMB;
 
+    public Transform m_Orientation;
+
     private Vector2 m_MoveDir;
+    private Vector2 m_MousePos;
     public float m_Speed;
+    
+    [Header("Ground Check")]
+    private bool m_Grounded;
+    public float m_PlayerHeight;
+    public LayerMask m_Ground;
+    public float m_GroundDrag;
 
     public Rigidbody m_RB;
 
@@ -68,27 +71,19 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        // TODO: Change this sometime pls
-        m_Camera = GameObject.FindGameObjectWithTag("MainCamera");
 
-        m_Camera.transform.SetParent(transform);
     }
 
     private void Update()
     {
-        m_InFirstPerson = m_Camera.transform.localPosition == Vector3.zero ? true : false;
-        RotateCameraWithMouse();
-
-        Debug.Log(i_RMB.ReadValue<float>());
-
-        m_Camera.transform.localPosition += m_Camera.transform.forward * Input.GetAxis("Mouse ScrollWheel") * 100.0f * Time.deltaTime;
-
+        LimitSpeed();
+        GroundCheck();
+        transform.rotation = m_Orientation.rotation;
     }
 
     private void FixedUpdate()
     {
-        Vector3 playerVel = new Vector3(m_MoveDir.x * m_Speed, m_RB.velocity.y, m_MoveDir.y * m_Speed);
-        m_RB.velocity = transform.TransformDirection(playerVel);
+        MovePlayer();
     }
 
     void Move(InputAction.CallbackContext ctx)
@@ -101,20 +96,31 @@ public class PlayerController : MonoBehaviour
         m_MousePos = ctx.ReadValue<Vector2>();
     }
 
-    private void RotateCameraWithMouse()
+    private void MovePlayer()
     {
-        float mX = Input.GetAxis("Mouse X") * m_MouseSens * Time.deltaTime;
-        float mY = Input.GetAxis("Mouse Y") * m_MouseSens * Time.deltaTime;
+        Vector3 moveDir = m_Orientation.forward * m_MoveDir.y + m_Orientation.right * m_MoveDir.x;
 
-        //Debug.Log(mX + " " + mY);
+        // TODO: Change arbitrary 10.0f value
+        m_RB.AddForce(moveDir.normalized * m_Speed * 10.0f, ForceMode.Force);
+    }
 
-        if (m_InFirstPerson || (!m_InFirstPerson && i_RMB.ReadValue<float>() > 0.0f))
-        m_RotationX -= mY;
-        m_RotationX = Mathf.Clamp(m_RotationX, -90.0f, m_MinViewDist);
+    private void GroundCheck()
+    {
+        // TODO: Make player height based on character OR hitbox + change the arbitrary 0.2f value
+        m_Grounded = Physics.Raycast(transform.position, Vector3.down, m_PlayerHeight * 0.5f + 0.2f, m_Ground);
 
-        m_Camera.transform.localRotation = Quaternion.Euler(m_RotationX, 0.0f, 0.0f);
+        m_RB.drag = m_Grounded ? m_GroundDrag : 0.0f;
+    }
 
-        if (m_InFirstPerson)
-            transform.Rotate(Vector3.up * mX);
+    // Control object speed if it starts to move faster than max speed
+    private void LimitSpeed()
+    {
+        Vector3 vel = new Vector3(m_RB.velocity.x, 0.0f, m_RB.velocity.z);
+        
+        if (vel.magnitude > m_Speed)
+        {
+            Vector3 limitedVelocity = vel.normalized * m_Speed;
+            m_RB.velocity = new Vector3(limitedVelocity.x, m_RB.velocity.y, limitedVelocity.z);
+        }
     }
 }
