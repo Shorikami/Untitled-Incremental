@@ -21,6 +21,19 @@ public class PlayerController : MonoBehaviour
 
     InputAction i_LMB;
     InputAction i_RMB;
+    InputAction i_MouseWheel;
+
+    public InputAction RightClick
+    {
+        get { return i_RMB; }
+        private set { i_RMB = value; }
+    }
+
+    public InputAction MouseScroll
+    {
+        get { return i_MouseWheel; }
+        private set { i_MouseWheel = value; }
+    }
 
     public Transform m_Orientation;
 
@@ -65,6 +78,7 @@ public class PlayerController : MonoBehaviour
 
         i_LMB = m_PlayerInput.Player.LMB;
         i_RMB = m_PlayerInput.Player.RMB;
+        i_MouseWheel = m_PlayerInput.Player.MouseWheel;
 
         m_RB = GetComponent<Rigidbody>();
     }
