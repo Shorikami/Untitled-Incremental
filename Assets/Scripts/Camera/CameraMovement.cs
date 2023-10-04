@@ -40,12 +40,16 @@ public class CameraMovement : MonoBehaviour
 
     void Start()
     {
-        
+        //Cursor.visible = true;
     }
 
-    void LateUpdate()
+    void Update()
     {
         m_InFirstPerson = Mathf.Approximately(m_DistFromTarget, 0.0f) ? true : false;
+        Cursor.lockState = m_InFirstPerson ? CursorLockMode.Locked : CursorLockMode.None;
+    }
+    void LateUpdate()
+    {
         RotateCameraAndTarget(m_InFirstPerson);
         ZoomCamera();
     }
