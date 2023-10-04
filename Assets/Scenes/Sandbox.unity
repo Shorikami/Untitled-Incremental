@@ -703,6 +703,7 @@ MonoBehaviour:
   m_DistFromTarget: 0
   m_MaxDistFromTarget: 15
   m_SmoothingTime: 0
+  m_MinMaxViewAngle: 65
   m_InFirstPerson: 0
 --- !u!4 &1781026673 stripped
 Transform:

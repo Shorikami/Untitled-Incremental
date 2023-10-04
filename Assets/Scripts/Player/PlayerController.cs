@@ -37,6 +37,13 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 m_MoveDir;
     private Vector2 m_MousePos;
+
+    public Vector2 MousePosition
+    {
+        get { return m_MousePos; }
+        private set { m_MousePos = value; }
+    }
+
     public float m_Speed;
     
     [Header("Ground Check")]
@@ -122,11 +129,13 @@ public class PlayerController : MonoBehaviour
 
         if (inputDir != Vector3.zero)
         {
+            // First-person
             if (m_Camera.GetComponent<CameraMovement>().m_InFirstPerson)
             {
                 targetDir = inputDir.normalized;
             }
 
+            // Third-person
             else
             {
                 Vector3 forward = cameraTransf.forward;
@@ -139,7 +148,7 @@ public class PlayerController : MonoBehaviour
 
                 //targetDir = cameraTransf.TransformDirection(m_MoveDir.x, 0.0f, m_MoveDir.y);
                 targetDir = (forward * m_MoveDir.y + right * m_MoveDir.x);
-                targetDir = new Vector3(targetDir.x, 0.0f, targetDir.z);
+                //targetDir = new Vector3(targetDir.x, 0.0f, targetDir.z);
             }
 
             //transform.forward = endRes;
