@@ -19,9 +19,11 @@ public class CameraMovement : MonoBehaviour
     private Transform m_TargetOrientation;
 
     [SerializeField]
+    [Min(0)]
     private float m_DistFromTarget = 3.0f;
 
     [SerializeField]
+    [Range(1, 15)]
     private float m_MaxDistFromTarget = 15.0f;
 
     private Vector3 m_CurrRot;
@@ -30,6 +32,11 @@ public class CameraMovement : MonoBehaviour
     [SerializeField]
     private float m_SmoothingTime = 0.1f;
 
+    [SerializeField]
+    private float m_MinMaxViewDist = 85.0f;
+
+    public bool m_InFirstPerson = false;
+
     void Start()
     {
         
@@ -37,11 +44,9 @@ public class CameraMovement : MonoBehaviour
 
     void LateUpdate()
     {
-        bool inFirstPerson = Mathf.Approximately(m_DistFromTarget, 0.0f) ? true : false;
-        RotateCameraAndTarget(inFirstPerson);
+        m_InFirstPerson = Mathf.Approximately(m_DistFromTarget, 0.0f) ? true : false;
+        RotateCameraAndTarget(m_InFirstPerson);
         ZoomCamera();
-
-        Debug.Log(inFirstPerson);
     }
 
     private void ZoomCamera()
@@ -67,9 +72,7 @@ public class CameraMovement : MonoBehaviour
         m_RotY += mX;
         m_RotX -= mY;
 
-
-
-        m_RotX = Mathf.Clamp(m_RotX, -80.0f, 80.0f);
+        m_RotX = Mathf.Clamp(m_RotX, -m_MinMaxViewDist, m_MinMaxViewDist);
 
         Vector3 nextRot = new Vector3(m_RotX, m_RotY);
         m_CurrRot = Vector3.SmoothDamp(m_CurrRot, nextRot, ref m_SmoothingVelocity, m_SmoothingTime);
@@ -77,7 +80,6 @@ public class CameraMovement : MonoBehaviour
         if (firstPerson || (!firstPerson && m_PlayerController.RightClick.ReadValue<float>() > 0.0f))
         {
             transform.localEulerAngles = m_CurrRot;
-            
         }
 
         if (firstPerson)

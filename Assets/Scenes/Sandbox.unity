@@ -292,6 +292,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2156609036107398984, guid: 81f7e40812aa7b74c9e419a30a7a6a22, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1776323199}
     - target: {fileID: 5896950599737117324, guid: 81f7e40812aa7b74c9e419a30a7a6a22, type: 3}
       propertyPath: m_Name
       value: Character
@@ -606,7 +610,6 @@ GameObject:
   - component: {fileID: 1776323202}
   - component: {fileID: 1776323201}
   - component: {fileID: 1776323200}
-  - component: {fileID: 1776323203}
   - component: {fileID: 1776323204}
   m_Layer: 0
   m_Name: Player Camera
@@ -681,20 +684,6 @@ Transform:
   m_Father: {fileID: 1464588441}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1776323203
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1776323199}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 059ae14aad24feb4e84fc255c28d0f08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_MouseSens: 1000
-  m_Orientation: {fileID: 598192572}
 --- !u!114 &1776323204
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -712,8 +701,9 @@ MonoBehaviour:
   m_PlayerController: {fileID: 551782554}
   m_TargetOrientation: {fileID: 598192572}
   m_DistFromTarget: 0
-  m_MaxDistFromTarget: 3
+  m_MaxDistFromTarget: 15
   m_SmoothingTime: 0
+  m_InFirstPerson: 0
 --- !u!4 &1781026673 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 702918813688223423, guid: 81f7e40812aa7b74c9e419a30a7a6a22, type: 3}

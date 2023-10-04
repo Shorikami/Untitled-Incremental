@@ -6,6 +6,7 @@ using UnityEngine.InputSystem.Controls;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField]
     private GameObject m_Camera;
 
     public GameObject Camera
@@ -13,9 +14,6 @@ public class PlayerController : MonoBehaviour
         get { return m_Camera; }
         set { m_Camera = value; }
     }
-
-    [SerializeField] 
-    float m_MinViewDist = 90.0f;
 
     [SerializeField] Transform m_Player;
 
@@ -92,12 +90,14 @@ public class PlayerController : MonoBehaviour
     {
         LimitSpeed();
         GroundCheck();
-        transform.rotation = m_Orientation.rotation;
+
+        if (m_Camera.GetComponent<CameraMovement>().m_InFirstPerson)
+            transform.rotation = m_Orientation.rotation;
     }
 
     private void FixedUpdate()
     {
-        MovePlayer();
+        MovePlayer(m_Camera.transform);
     }
 
     void Move(InputAction.CallbackContext ctx)
@@ -110,12 +110,46 @@ public class PlayerController : MonoBehaviour
         m_MousePos = ctx.ReadValue<Vector2>();
     }
 
-    private void MovePlayer()
+    // https://www.youtube.com/watch?v=4HpC--2iowE
+    // https://www.youtube.com/watch?v=BJzYGsMcy8Q
+    // https://forum.unity.com/threads/how-to-turn-input-axes-to-vectors-relative-to-the-way-an-object-is-facing.1375653/
+    // https://catlikecoding.com/unity/tutorials/movement/orbit-camera/
+    private void MovePlayer(Transform cameraTransf)
     {
-        Vector3 moveDir = m_Orientation.forward * m_MoveDir.y + m_Orientation.right * m_MoveDir.x;
+        Vector3 inputDir = m_Orientation.forward * m_MoveDir.y + m_Orientation.right * m_MoveDir.x;
+        Vector3 targetDir = Vector3.zero;
+        //Vector3 inputDir = new Vector3(m_MoveDir.x, 0.0f, m_MoveDir.y);
+
+        if (inputDir != Vector3.zero)
+        {
+            if (m_Camera.GetComponent<CameraMovement>().m_InFirstPerson)
+            {
+                targetDir = inputDir.normalized;
+            }
+
+            else
+            {
+                Vector3 forward = cameraTransf.forward;
+                forward.y = 0.0f;
+                forward.Normalize();
+
+                Vector3 right = cameraTransf.right;
+                right.y = 0.0f;
+                right.Normalize();
+
+                //targetDir = cameraTransf.TransformDirection(m_MoveDir.x, 0.0f, m_MoveDir.y);
+                targetDir = (forward * m_MoveDir.y + right * m_MoveDir.x);
+                targetDir = new Vector3(targetDir.x, 0.0f, targetDir.z);
+            }
+
+            //transform.forward = endRes;
+            transform.forward = Vector3.Slerp(transform.forward, targetDir, Time.deltaTime * 5.0f);
+        }
 
         // TODO: Change arbitrary 10.0f value
-        m_RB.AddForce(moveDir.normalized * m_Speed * 10.0f, ForceMode.Force);
+        m_RB.AddForce(targetDir * m_Speed * 10.0f, ForceMode.Force);
+
+        //transform.Translate(inputDir.normalized * m_Speed * Time.deltaTime, Space.World);
     }
 
     private void GroundCheck()
