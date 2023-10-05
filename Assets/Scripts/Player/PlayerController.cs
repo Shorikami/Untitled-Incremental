@@ -119,9 +119,11 @@ public class PlayerController : MonoBehaviour
 
     private void HandleInteractionCheck()
     {
-        if (Physics.Raycast(m_Camera.GetComponent<Camera>().ViewportPointToRay(m_InteractionRayPoint), out RaycastHit hit, m_InteractionDist))
+        if (Physics.Raycast(m_Camera.GetComponent<Camera>().ViewportPointToRay(m_InteractionRayPoint), 
+            out RaycastHit hit, m_InteractionDist))
         {
-            if (hit.collider.gameObject.layer == 7 && (m_CurrInteractable == null || hit.collider.gameObject.GetInstanceID() != m_CurrInteractable.GetInstanceID()))
+            if (hit.collider.gameObject.layer == 7 && 
+                (m_CurrInteractable == null || hit.collider.gameObject.GetInstanceID() != m_CurrInteractable.GetInstanceID()))
             {
                 hit.collider.TryGetComponent(out m_CurrInteractable);
 
