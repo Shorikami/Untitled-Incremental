@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7621485585927408900}
   - component: {fileID: 3278714706663456808}
   - component: {fileID: 9019559122940625769}
+  - component: {fileID: 528242642590460074}
   m_Layer: 0
   m_Name: Upgrade
   m_TagString: Untagged
@@ -78,6 +79,29 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &528242642590460074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 360586422766285890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bea0ebeed7f6fd4a8cc460ab80ef8be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_CurrencyPanel: {fileID: 0}
+  m_UpgradeName: 
+  m_Description: 
+  m_BonusDesc: 
+  m_CurrLevel: 0
+  m_MaxLevel: 0
+  m_UpgradeType:
+    m_CurrentBonus: 0
+    m_RequiredLevels: 0
+    m_BonusMultiplier: 0
+  m_CurrCost: 0
 --- !u!1 &1409739605917273568
 GameObject:
   m_ObjectHideFlags: 0

@@ -593,6 +593,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 629705581}
     m_Modifications:
+    - target: {fileID: 119811061642511096, guid: 3a493b651c0f6bf42abf4da654e47a34, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 119811061707055998, guid: 3a493b651c0f6bf42abf4da654e47a34, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 119811061707055998, guid: 3a493b651c0f6bf42abf4da654e47a34, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 119811063278965958, guid: 3a493b651c0f6bf42abf4da654e47a34, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1317756114403644404, guid: 3a493b651c0f6bf42abf4da654e47a34, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -799,6 +815,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4968873447407911626, guid: 3a493b651c0f6bf42abf4da654e47a34, type: 3}
       propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6165612590136667749, guid: 3a493b651c0f6bf42abf4da654e47a34, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6165612590136667749, guid: 3a493b651c0f6bf42abf4da654e47a34, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6165612590136667749, guid: 3a493b651c0f6bf42abf4da654e47a34, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6165612590136667749, guid: 3a493b651c0f6bf42abf4da654e47a34, type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6165716776501832146, guid: 3a493b651c0f6bf42abf4da654e47a34, type: 3}
