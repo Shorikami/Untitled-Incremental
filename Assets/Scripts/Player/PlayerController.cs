@@ -52,6 +52,12 @@ public class PlayerController : MonoBehaviour
     public LayerMask m_Ground;
     public float m_GroundDrag;
 
+    [Header("First-Person Interaction")]
+    [SerializeField] private Vector3 m_InteractionRayPoint = default;
+    [SerializeField] private float m_InteractionDist = default;
+    [SerializeField] private LayerMask m_InteractionLayer = default;
+    private Interactable m_CurrInteractable;
+
     public Rigidbody m_RB;
 
     [SerializeField]
@@ -99,12 +105,46 @@ public class PlayerController : MonoBehaviour
         GroundCheck();
 
         if (m_Camera.GetComponent<CameraMovement>().m_InFirstPerson)
+        {
             transform.rotation = m_Orientation.rotation;
+            HandleInteractionCheck();
+            HandleInteractionInput();
+        }
     }
 
     private void FixedUpdate()
     {
         MovePlayer(m_Camera.transform);
+    }
+
+    private void HandleInteractionCheck()
+    {
+        if (Physics.Raycast(m_Camera.GetComponent<Camera>().ViewportPointToRay(m_InteractionRayPoint), out RaycastHit hit, m_InteractionDist))
+        {
+            if (hit.collider.gameObject.layer == 7 && (m_CurrInteractable == null || hit.collider.gameObject.GetInstanceID() != m_CurrInteractable.GetInstanceID()))
+            {
+                hit.collider.TryGetComponent(out m_CurrInteractable);
+
+                if (m_CurrInteractable)
+                    m_CurrInteractable.OnFocus();
+            }
+        }
+
+        else if (m_CurrInteractable)
+        {
+            m_CurrInteractable.OnLoseFocus();
+            m_CurrInteractable = null;
+        }
+    }
+
+    private void HandleInteractionInput()
+    {
+        if (i_LMB.triggered && m_CurrInteractable != null && 
+            Physics.Raycast(m_Camera.GetComponent<Camera>().ViewportPointToRay(m_InteractionRayPoint), out RaycastHit hit,
+            m_InteractionDist, m_InteractionLayer))
+        {
+            m_CurrInteractable.OnInteract();
+        }
     }
 
     void Move(InputAction.CallbackContext ctx)
