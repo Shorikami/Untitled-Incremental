@@ -104,8 +104,12 @@ public class PlayerController : MonoBehaviour
         LimitSpeed();
         GroundCheck();
 
+        if (!m_Camera.GetComponent<CameraMovement>().m_InFirstPerson)
+            MouseRaycast();
+
         if (m_Camera.GetComponent<CameraMovement>().m_InFirstPerson)
         {
+            m_Camera.GetComponent<CameraMovement>().m_PreventZoom = false;
             transform.rotation = m_Orientation.rotation;
             HandleInteractionCheck();
             HandleInteractionInput();
@@ -115,6 +119,19 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         MovePlayer(m_Camera.transform);
+    }
+
+    private void MouseRaycast()
+    {
+        Ray r = m_Camera.GetComponent<Camera>().ScreenPointToRay(m_MousePos);
+        if (Physics.Raycast(r, out RaycastHit hit))
+        {
+            if (hit.collider.gameObject.layer == 8 || hit.collider.gameObject.layer == 7)
+                m_Camera.GetComponent<CameraMovement>().m_PreventZoom = true;
+
+            else
+                m_Camera.GetComponent<CameraMovement>().m_PreventZoom = false;
+        }
     }
 
     private void HandleInteractionCheck()

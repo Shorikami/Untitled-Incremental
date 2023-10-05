@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class CameraMovement : MonoBehaviour
 {
@@ -37,28 +38,44 @@ public class CameraMovement : MonoBehaviour
     private float m_MinMaxViewAngle = 65.0f;
 
     public bool m_InFirstPerson = false;
+    public bool m_PreventZoom = false;
+
+    // 0 = first person, 1 = third person
+    private int m_CameraState;
 
     void Start()
     {
-        
+        m_CameraState = Convert.ToInt32(m_InFirstPerson);
     }
 
     void Update()
     {
-        m_InFirstPerson = Mathf.Approximately(m_DistFromTarget, 0.0f) ? true : false;
-        Cursor.lockState = m_InFirstPerson ? CursorLockMode.Locked : CursorLockMode.None;
-        //Cursor.visible = true;
+        HandleCameraPerspective();
     }
     
 
     void LateUpdate()
     {
-        RotateCameraAndTarget(m_InFirstPerson);
+        RotateCameraAndTarget();
         ZoomCamera();
+        HandleCameraState();
+    }
+
+    private void HandleCameraPerspective()
+    {
+        m_InFirstPerson = Mathf.Approximately(m_DistFromTarget, 0.0f) ? true : false;
+        Cursor.lockState = m_InFirstPerson ? CursorLockMode.Locked : CursorLockMode.None;
+    }
+
+    private void HandleCameraState()
+    {
     }
 
     private void ZoomCamera()
     {
+        if (m_PreventZoom)
+            return;
+
         // Windows has a built-in hard value for mouse scrolling. This is a fix to clamp the value as either -1, 0, or 1
         float readIn = m_PlayerController.MouseScroll.ReadValue<float>();
         float absScroll = Mathf.Abs(readIn);
@@ -71,9 +88,8 @@ public class CameraMovement : MonoBehaviour
         m_DistFromTarget = Mathf.Max(0.0f, Mathf.Min(m_MaxDistFromTarget, m_DistFromTarget - res));
     }
 
-    private void RotateCameraAndTarget(bool firstPerson)
+    private void RotateCameraAndTarget()
     {
-
         float mX = Input.GetAxis("Mouse X") * m_Sensitivity * Time.deltaTime;
         float mY = Input.GetAxis("Mouse Y") * m_Sensitivity * Time.deltaTime;
 
@@ -82,12 +98,32 @@ public class CameraMovement : MonoBehaviour
 
         m_RotX = Mathf.Clamp(m_RotX, -m_MinMaxViewAngle, m_MinMaxViewAngle);
 
-        Vector3 nextRot = new Vector3(m_RotX, m_RotY);
-        m_CurrRot = Vector3.SmoothDamp(m_CurrRot, nextRot, ref m_SmoothingVelocity, m_SmoothingTime);
+        Vector3 nextRot = Vector3.zero;
+        
+        nextRot = new Vector3(m_RotX, m_RotY);
 
-        if (firstPerson)
+        if (!(Mathf.Approximately(mX, 0.0f) && Mathf.Approximately(mY, 0.0f)))
+            m_CurrRot = Vector3.SmoothDamp(m_CurrRot, nextRot, ref m_SmoothingVelocity, m_SmoothingTime);
+
+        int camState = Convert.ToInt32(m_InFirstPerson);
+
+        if (m_InFirstPerson)
         {
-            transform.localEulerAngles = m_CurrRot;
+            // if we're moving from third to first person in this frame,
+            // change player orientation before rotating camera in LateUpdate
+            if (m_CameraState != camState)
+            {
+                m_CurrRot = transform.localEulerAngles;
+                m_RotX = m_CurrRot.x;
+                m_RotY = m_CurrRot.y;
+                m_TargetOrientation.rotation = transform.rotation;
+            }
+
+            else
+            {
+                transform.localEulerAngles = m_CurrRot;
+                m_TargetOrientation.rotation = Quaternion.Euler(0.0f, m_RotY, 0.0f);
+            }
         }
 
         // https://www.youtube.com/watch?v=rDJOilo4Xrg
@@ -125,7 +161,6 @@ public class CameraMovement : MonoBehaviour
                     //Debug.Log("Hit1");
                     transform.Rotate(Vector3.right, verticalAngle);
                 }
-                    
 
                 transform.Rotate(Vector3.up, -direction.x * 180.0f * m_Sensitivity * Time.deltaTime, Space.World);
 
@@ -140,52 +175,7 @@ public class CameraMovement : MonoBehaviour
             }
         }
 
-#region Old
-        //Debug.Log(transform.rotation.eulerAngles.x);
-
-        //else if (!firstPerson && m_PlayerController.RightClick.ReadValue<float>() > 0.0f)
-        //{
-        //    ////transform.Rotate(m_TargetOrientation.up, -mX * 5.0f, Space.World);
-        //    //float angleX = -mY * m_Sensitivity * Time.deltaTime;
-        //    //float angleY = mX * m_Sensitivity * Time.deltaTime;
-        //    //
-        //    //transform.Rotate(transform.up, angleY, Space.World);
-        //    //
-        //    ////Debug.Log(angle);
-        //    ////Debug.Log("OLD ANGLE: " + transform.eulerAngles.x);
-        //    //transform.Rotate(transform.right, angleX, Space.World);
-        //    ////Debug.Log("NEW ANGLE: " + transform.eulerAngles.x);
-        //    //
-        //    //float correctRotX = transform.rotation.eulerAngles.x;
-        //    //
-        //    //if (transform.rotation.eulerAngles.x > 90.0f)
-        //    //{
-        //    //    if (transform.rotation.eulerAngles.x + angleX < 360.0f - m_MinMaxViewAngle)
-        //    //        correctRotX = 360.0f - m_MinMaxViewAngle;
-        //    //
-        //    //}
-        //    //else if (transform.rotation.eulerAngles.x < 90.0f)
-        //    //{
-        //    //    if (transform.rotation.eulerAngles.x + angleX > m_MinMaxViewAngle)
-        //    //        correctRotX = m_MinMaxViewAngle;
-        //    //}
-        //    //
-        //    //transform.rotation = Quaternion.Euler(correctRotX, transform.eulerAngles.y, 0.0f);
-        //
-        //    //Vector3 transformEulerAngles = transform.rotation.eulerAngles;
-        //    //transformEulerAngles.x = Mathf.Clamp(transformEulerAngles.x, -m_MinMaxViewAngle, m_MinMaxViewAngle);
-        //    //Debug.Log(transformEulerAngles.x);
-        //    //
-        //    //transform.localEulerAngles = new Vector3(transformEulerAngles.x, transform.localEulerAngles.y, transform.localEulerAngles.z);
-        //
-        //    //transform.rotation = Quaternion.Euler(transformEulerAngles);
-        //
-        //    //transform.rotation = Quaternion.Euler(m_RotX, 0.0f, 0.0f);
-        //}
-#endregion Old
-
-        if (firstPerson)
-            m_TargetOrientation.rotation = Quaternion.Euler(0.0f, m_RotY, 0.0f);
+        m_CameraState = camState;
 
         transform.position = m_Target.position - transform.forward * m_DistFromTarget;
     }
