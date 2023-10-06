@@ -18,7 +18,7 @@ public class Collectable : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
     }
 }
