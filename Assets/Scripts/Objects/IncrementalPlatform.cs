@@ -8,8 +8,14 @@ public class IncrementalPlatform : MonoBehaviour
     [Min(0)] public float m_TimerMultiplier;
     private float m_CurrTime;
 
+    public Collectable.CollectableType m_CollectableType;
+
+    private GameCurrency m_CurrencyToModify;
+    private Experience m_ExpToModify;
+
     private void Start()
     {
+        InitializeCollectable();
         m_CurrTime = 1.0f / m_TimerMultiplier;
     }
 
@@ -32,6 +38,19 @@ public class IncrementalPlatform : MonoBehaviour
 
             GameObject spawnedCol = Instantiate(m_Collectable, spawnPos, Quaternion.identity);
             spawnedCol.transform.parent = transform;
+            spawnedCol.GetComponent<Collectable>().m_CurrencyToModify = m_CurrencyToModify;
+            spawnedCol.GetComponent<Collectable>().m_ExpToModify = m_ExpToModify;
+        }
+    }
+
+    private void InitializeCollectable()
+    {
+        switch (m_CollectableType)
+        {
+            case Collectable.CollectableType.Default:
+                m_CurrencyToModify = StatsManager.m_Instance.FindContainer<GameCurrency>(StatsManager.GameCurrencyType.Coins).GetComponent<GameCurrency>();
+                m_ExpToModify = StatsManager.m_Instance.FindContainer<Experience>(StatsManager.GameCurrencyType.Experience).GetComponent<Experience>();
+                break;
         }
     }
 }

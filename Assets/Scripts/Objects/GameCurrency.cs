@@ -30,7 +30,7 @@ public class GameCurrency : MonoBehaviour, ISavableData
 }
 
 [System.Serializable]
-public struct CurrencyData
+public class CurrencyData
 {
     // this might overflow but this is mostly for debugging
     public int m_TotalCount;
@@ -43,4 +43,12 @@ public struct CurrencyData
     public int m_Rank;
 
     public StatsManager.GameCurrencyType m_CurrencyType;
+
+    public void Save(CurrencyData other)
+    {
+        m_TotalCount = other.m_TotalCount;
+        m_Count = other.m_Count;
+        m_Rank = other.m_Rank;
+        m_CurrencyType = other.m_CurrencyType;
+    }
 }

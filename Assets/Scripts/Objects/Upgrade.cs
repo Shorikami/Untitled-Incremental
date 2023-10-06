@@ -31,13 +31,13 @@ public class Upgrade : MonoBehaviour, ISavableData
 }
 
 [System.Serializable]
-public struct UpgradeData
+public class UpgradeData
 {
     // If an upgrade is for a specified currency (e.g. game currency, exp),
     // then this will be used. If it's of an unspecified type (e.g. UpgradeType == UNSPECIFIED),
     // then the description will be used.
     [System.Serializable]
-    public struct Bonus
+    public class Bonus
     {
         // current bonus to specific upgrade
         public float m_CurrentBonus;
@@ -69,4 +69,15 @@ public struct UpgradeData
 
     [Min(1)]
     public int m_BaseCost;
+
+    public void Save(UpgradeData other)
+    {
+        m_UpgradeName = other.m_UpgradeName;
+        m_Description = other.m_Description;
+        m_BonusDesc = other.m_BonusDesc;
+        m_UpgradeType = other.m_UpgradeType;
+        m_CurrLevel = other.m_CurrLevel;
+        m_MaxLevel = other.m_MaxLevel;
+        m_BaseCost = other.m_BaseCost;
+    }
 }

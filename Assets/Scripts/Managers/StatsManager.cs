@@ -16,7 +16,6 @@ public class StatsManager : MonoBehaviour
         Credits,
 
         Experience,
-
         Tier
     };
 
@@ -30,5 +29,32 @@ public class StatsManager : MonoBehaviour
         }
         m_Instance = this;
         DontDestroyOnLoad(this.gameObject);
+    }
+
+    // binary search
+    public GameObject FindContainer<T>(GameCurrencyType gct)
+    {
+        foreach (GameObject gO in m_LoadedDataNodes)
+        {
+            T res = gO.GetComponent<T>();
+
+            if (res != null)
+            {
+                switch (res)
+                {
+                    case GameCurrency gc:
+                        if (gc.m_Currency.m_CurrencyType == gct)
+                            return gO;
+                        break;
+
+                    case Experience ex:
+                        if (ex.m_ExpData.m_ExpType == gct)
+                            return gO;
+                        break;
+                }
+            }
+        }
+
+        return null;
     }
 }

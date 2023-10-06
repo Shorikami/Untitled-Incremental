@@ -122,7 +122,7 @@ public class Incr2DHandler : MonoBehaviour, ISavableData
 
         Experience xp = gameObject.GetComponent<Experience>();
 
-        m_ExpText.text = "<color=#0ae0f0><b>" + xp.m_ExpData.m_CurrExp + " / " + xp.RequiredExperience() + "</b></color>";
-        m_ExpBar.GetComponent<Slider>().value = (float)xp.m_ExpData.m_CurrExp / (float)xp.RequiredExperience();
+        m_ExpText.text = "<color=#0ae0f0><b>" + xp.m_ExpData.m_CurrExp + " / " + xp.m_ExpData.RequiredExperience() + "</b></color>";
+        m_ExpBar.GetComponent<Slider>().value = (float)xp.m_ExpData.m_CurrExp / (float)xp.m_ExpData.RequiredExperience();
     }
 }

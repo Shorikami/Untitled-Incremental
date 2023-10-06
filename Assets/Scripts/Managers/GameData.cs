@@ -21,36 +21,33 @@ public class GameData
     // ----
     // TODO: Binary search? they'll be small containers so it might not be necessary but whatever
     // ----
-    
+    public void SaveCurrency(CurrencyData data)
+    {
+        m_GameCurrencies.Find(searched => searched.m_CurrencyType == data.m_CurrencyType).Save(data);
+    }
+
+    public void SaveExperience(ExperienceData data)
+    {
+        m_ExperienceTypes.Find(searched => searched.m_ExpType == data.m_ExpType).Save(data);
+    }
+
+    public void SaveUpgrade(UpgradeData data)
+    {
+        m_AvailableUpgrades.Find(searched => searched.m_UpgradeName.CompareTo(data.m_UpgradeName) == 0).Save(data);
+    }
+
     public ExperienceData FindExperienceType(StatsManager.GameCurrencyType type)
     {
-        foreach (ExperienceData e in m_ExperienceTypes)
-        {
-            if (e.m_ExpType == type)
-                return e;
-        }
-        return default(ExperienceData);
+        return m_ExperienceTypes.Find(searched => searched.m_ExpType == type);
     }
 
     public CurrencyData FindGameCurrency(StatsManager.GameCurrencyType type)
     {
-        foreach (CurrencyData gc in m_GameCurrencies)
-        {
-            if (gc.m_CurrencyType == type)
-                return gc;
-        }
-        return default(CurrencyData);
+        return m_GameCurrencies.Find(searched => searched.m_CurrencyType == type);
     }
 
     public UpgradeData FindUpgrade(string name)
     {
-        foreach (UpgradeData u in m_AvailableUpgrades)
-        {
-            if (u.m_UpgradeName.CompareTo(name) == 0)
-                return u;
-        }
-        return default(UpgradeData);
+        return m_AvailableUpgrades.Find(searched => searched.m_UpgradeName.CompareTo(name) == 0);
     }
-
-
 }

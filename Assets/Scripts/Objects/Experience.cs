@@ -8,8 +8,7 @@ public class Experience : MonoBehaviour, ISavableData
 
     public void SaveData(ref GameData data)
     {
-        ExperienceData toSave = data.FindExperienceType(m_ExpData.m_ExpType);
-        toSave.m_TotalExperience = m_ExpData.m_TotalExperience;
+        data.SaveExperience(m_ExpData);
     }
     public void LoadData(GameData data)
     {
@@ -47,9 +46,9 @@ public class Experience : MonoBehaviour, ISavableData
         // check if player has reached xp threshold first...
         bool leveledUp = false;
 
-        if (m_ExpData.m_CurrExp >= RequiredExperience())
+        if (m_ExpData.m_CurrExp >= m_ExpData.RequiredExperience())
         {
-            m_ExpData.m_CurrExp -= RequiredExperience();
+            m_ExpData.m_CurrExp -= m_ExpData.RequiredExperience();
             leveledUp = true;
         }
 
@@ -59,17 +58,10 @@ public class Experience : MonoBehaviour, ISavableData
 
         return leveledUp;
     }
-
-    // Required amount of experience to level up
-    // formula: 25 + (5 * currLevel * 1.05^currLevel)
-    public int RequiredExperience()
-    {
-        return 25 + Mathf.RoundToInt(5 * m_ExpData.m_CurrLevel * Mathf.Pow(1.05f, m_ExpData.m_CurrLevel));
-    }
 }
 
 [System.Serializable]
-public struct ExperienceData
+public class ExperienceData
 {
     // TODO: Eventually crunch this down to handle super big numbers
     public int m_TotalExperience;
@@ -78,4 +70,19 @@ public struct ExperienceData
     public int m_CurrExp;
 
     public StatsManager.GameCurrencyType m_ExpType;
+
+    // Required amount of experience to level up
+    // formula: 25 + (5 * currLevel * 1.05^currLevel)
+    public int RequiredExperience()
+    {
+        return 25 + Mathf.RoundToInt(5 * m_CurrLevel * Mathf.Pow(1.05f, m_CurrLevel));
+    }
+
+    public void Save(ExperienceData other)
+    {
+        m_TotalExperience = other.m_TotalExperience;
+        m_CurrLevel = other.m_CurrLevel;
+        m_CurrExp = other.m_CurrExp;
+        m_ExpType = other.m_ExpType;
+    }
 }
