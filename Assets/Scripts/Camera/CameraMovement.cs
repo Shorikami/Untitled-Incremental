@@ -110,7 +110,8 @@ public class CameraMovement : MonoBehaviour
         if (m_InFirstPerson)
         {
             // if we're moving from third to first person in this frame,
-            // change player orientation before rotating camera in LateUpdate
+            // change player orientation, reset X/Y rotations and current rotation
+            // to change positioning of future rotations (so the camera doesn't freak out)
             if (m_CameraState != camState)
             {
                 m_CurrRot = transform.localEulerAngles;

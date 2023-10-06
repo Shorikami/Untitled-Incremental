@@ -15,7 +15,8 @@ public class BoardPanel : MonoBehaviour
 
     private void Awake()
     {
-        
+        Camera mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        m_ScrollPanel.GetComponent<Canvas>().worldCamera = mainCamera;
     }
 
     private void Start()

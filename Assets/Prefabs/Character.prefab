@@ -172,7 +172,7 @@ GameObject:
   - component: {fileID: 4283652011950134819}
   m_Layer: 0
   m_Name: Character
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -208,7 +208,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Camera: {fileID: 0}
-  m_MinViewDist: 25
   m_Player: {fileID: 7811751356474991522}
   m_Orientation: {fileID: 1833552227006671844}
   m_Speed: 6
@@ -217,6 +216,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   m_GroundDrag: 5
+  m_InteractionRayPoint: {x: 0, y: 0, z: 0}
+  m_InteractionDist: 0
+  m_InteractionLayer:
+    serializedVersion: 2
+    m_Bits: 0
   m_RB: {fileID: 4283652011950134819}
 --- !u!54 &4283652011950134819
 Rigidbody:
