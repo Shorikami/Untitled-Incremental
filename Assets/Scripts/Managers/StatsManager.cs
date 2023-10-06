@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class StatsManager : MonoBehaviour
 {
     public static StatsManager m_Instance { get; private set; }
 
-    public List<LoadedCurrency> m_LoadedCurrencies = new List<LoadedCurrency>();
+    public List<GameObject> m_LoadedDataNodes = new List<GameObject>();
 
     public enum GameCurrencyType
     { 
@@ -29,15 +30,5 @@ public class StatsManager : MonoBehaviour
         }
         m_Instance = this;
         DontDestroyOnLoad(this.gameObject);
-    }
-
-    public void LoadCurrency()
-    { 
-        
-    }
-
-    public void LoadUpgrade()
-    {
-        
     }
 }

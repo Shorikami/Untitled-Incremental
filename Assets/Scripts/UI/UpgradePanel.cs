@@ -6,5 +6,5 @@ using TMPro;
 public class UpgradePanel : MonoBehaviour
 {
     public TextMeshProUGUI m_UpgrName, m_Description, m_BonusTxt;
-    public Upgrade.Bonus m_Bonus;
+    public UpgradeData.Bonus m_Bonus;
 }

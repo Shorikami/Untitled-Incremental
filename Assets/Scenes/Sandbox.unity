@@ -135,6 +135,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 993772771559680596, guid: 0593e364c16d50f48970a564e7b2c64e, type: 3}
+      propertyPath: m_FileName
+      value: Test.dat
+      objectReference: {fileID: 0}
+    - target: {fileID: 993772771559680596, guid: 0593e364c16d50f48970a564e7b2c64e, type: 3}
       propertyPath: m_LoadedUpgradePrefab
       value: 
       objectReference: {fileID: 71439263876465575, guid: 840e5f245b32d144d86aaf6b0dbf1394, type: 3}

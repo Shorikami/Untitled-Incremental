@@ -35,19 +35,26 @@ public class BoardPanel : MonoBehaviour
     {
         m_PanelContent.GetComponent<HorizontalLayoutGroup>().spacing = spacing;
 
-        // todo: serializable data
-        m_Upgrades.Add(CreateNewUpgrade("test", "lorem ipsum", 0, 100));
+        foreach (GameObject u in StatsManager.m_Instance.m_LoadedDataNodes)
+        {
+            if (u.TryGetComponent<Upgrade>(out Upgrade upgr))
+            {
+                m_Upgrades.Add(CreateNewUpgrade(upgr.m_UpgradeData));
+            }
+        }
+        //m_Upgrades.Add(CreateNewUpgrade("test", "lorem ipsum", 0, 100));
     }
 
-    private GameObject CreateNewUpgrade(string name, string desc, int curLev, int maxLev)
+    private GameObject CreateNewUpgrade(UpgradeData loadedUpgr)
     {
         GameObject upgr = Instantiate(m_UpgradePrefab, m_PanelContent.transform);
         upgr.GetComponent<Upgrade>().m_CurrencyPanel = this.gameObject;
 
-        upgr.GetComponent<Upgrade>().m_UpgradeName = name;
-        upgr.GetComponent<Upgrade>().m_Description = desc;
-        upgr.GetComponent<Upgrade>().m_CurrLevel = curLev;
-        upgr.GetComponent<Upgrade>().m_MaxLevel = maxLev;
+        upgr.GetComponent<Upgrade>().m_UpgradeData.m_UpgradeName = loadedUpgr.m_UpgradeName;
+        upgr.GetComponent<Upgrade>().m_UpgradeData.m_Description = loadedUpgr.m_Description;
+        upgr.GetComponent<Upgrade>().m_UpgradeData.m_CurrLevel = loadedUpgr.m_CurrLevel;
+        upgr.GetComponent<Upgrade>().m_UpgradeData.m_MaxLevel = loadedUpgr.m_MaxLevel;
+        upgr.GetComponent<Upgrade>().m_UpgradeData.m_BaseCost = loadedUpgr.m_BaseCost;
 
         return upgr;
     }

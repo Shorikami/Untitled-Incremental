@@ -6,50 +6,50 @@ using UnityEngine;
 
 public class GameData
 {
-    public List<GameCurrency> m_GameCurrencies;
-    public List<Experience> m_ExperienceTypes;
-    public List<Upgrade> m_AvailableUpgrades;
+    public List<CurrencyData> m_GameCurrencies;
+    public List<ExperienceData> m_ExperienceTypes;
+    public List<UpgradeData> m_AvailableUpgrades;
 
     // Constructor for when starting new game
     public GameData()
     {
-        m_GameCurrencies = new List<GameCurrency>();
-        m_ExperienceTypes = new List<Experience>();
-        m_AvailableUpgrades = new List<Upgrade>();
+        m_GameCurrencies = new List<CurrencyData>();
+        m_ExperienceTypes = new List<ExperienceData>();
+        m_AvailableUpgrades = new List<UpgradeData>();
     }
 
     // ----
     // TODO: Binary search? they'll be small containers so it might not be necessary but whatever
     // ----
     
-    public Experience FindExperienceType(StatsManager.GameCurrencyType type)
+    public ExperienceData FindExperienceType(StatsManager.GameCurrencyType type)
     {
-        foreach (Experience e in m_ExperienceTypes)
+        foreach (ExperienceData e in m_ExperienceTypes)
         {
             if (e.m_ExpType == type)
                 return e;
         }
-        return null;
+        return default(ExperienceData);
     }
 
-    public GameCurrency FindGameCurrency(StatsManager.GameCurrencyType type)
+    public CurrencyData FindGameCurrency(StatsManager.GameCurrencyType type)
     {
-        foreach (GameCurrency gc in m_GameCurrencies)
+        foreach (CurrencyData gc in m_GameCurrencies)
         {
             if (gc.m_CurrencyType == type)
                 return gc;
         }
-        return null;
+        return default(CurrencyData);
     }
 
-    public Upgrade FindUpgrade(string name)
+    public UpgradeData FindUpgrade(string name)
     {
-        foreach (Upgrade u in m_AvailableUpgrades)
+        foreach (UpgradeData u in m_AvailableUpgrades)
         {
             if (u.m_UpgradeName.CompareTo(name) == 0)
                 return u;
         }
-        return null;
+        return default(UpgradeData);
     }
 
 
