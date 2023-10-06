@@ -15,7 +15,15 @@ public class PlayerController : MonoBehaviour
         set { m_Camera = value; }
     }
 
-    [SerializeField] Transform m_Player;
+    [SerializeField] private Transform m_Player;
+    [SerializeField] private GameObject m_PrefabPlayerUI;
+    private PlayerInterface m_PlayerUI;
+
+    public PlayerInterface PlayerUI
+    { 
+        get { return m_PlayerUI; }
+        private set { m_PlayerUI = value; }
+    }
 
     InputAction i_LMB;
     InputAction i_RMB;
@@ -92,6 +100,7 @@ public class PlayerController : MonoBehaviour
         i_MouseWheel = m_PlayerInput.Player.MouseWheel;
 
         m_RB = GetComponent<Rigidbody>();
+        m_PlayerUI = Instantiate(m_PrefabPlayerUI, transform).GetComponent<PlayerInterface>();
     }
 
     private void Start()

@@ -26,13 +26,14 @@ public class DataManager : MonoBehaviour
         }
         m_Instance = this;
         DontDestroyOnLoad(this.gameObject);
+
+        m_FileDataHandler = new FileHandler(Application.persistentDataPath, m_FileName);
+        m_SavedData = FindSavedData();
+        Load();
     }
 
     private void Start()
     {
-        m_FileDataHandler = new FileHandler(Application.persistentDataPath, m_FileName);
-        m_SavedData = FindSavedData();
-        Load();
     }
 
     public void NewGame()

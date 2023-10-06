@@ -19,6 +19,8 @@ public class Collectable : MonoBehaviour
     [HideInInspector] public GameCurrency m_CurrencyToModify;
     [HideInInspector] public Experience m_ExpToModify;
 
+    private bool m_TaggedForDeletion = false;
+
     void Start()
     {
         
@@ -31,15 +33,19 @@ public class Collectable : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player" && !m_TaggedForDeletion)
         {
-            Collect();
+            m_TaggedForDeletion = true;
+            Collect(other.gameObject.GetComponentInParent<PlayerController>());
         }
     }
 
-    private void Collect()
+    private void Collect(PlayerController pc)
     {
         m_ExpToModify.AddExperience(Mathf.FloorToInt(m_BaseExpValue));
+        m_CurrencyToModify.UpdateCurrency(Mathf.FloorToInt(m_BaseCurrencyValue));
+
+        pc.PlayerUI.UpdateText(m_CurrencyToModify.m_Currency.m_TotalCount.ToString());
         Destroy(gameObject);
     }
 }

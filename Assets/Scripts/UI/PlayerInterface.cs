@@ -1,0 +1,22 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+
+public class PlayerInterface : MonoBehaviour
+{
+    [SerializeField] private TextMeshProUGUI m_CurrencyNumber;
+
+    public StatsManager.GameCurrencyType m_CurrDisplayType = StatsManager.GameCurrencyType.Coins;
+
+    private void Start()
+    {
+        m_CurrencyNumber.text = StatsManager.m_Instance.FindContainer<GameCurrency>(m_CurrDisplayType).GetComponent<GameCurrency>().m_Currency.m_TotalCount.ToString();
+    }
+
+    public void UpdateText(string text)
+    {
+        m_CurrencyNumber.text = text;
+    }
+}

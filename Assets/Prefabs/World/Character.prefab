@@ -209,6 +209,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Camera: {fileID: 0}
   m_Player: {fileID: 7811751356474991522}
+  m_PrefabPlayerUI: {fileID: 658944925226131003, guid: 46d992bfdb3fffc4eb72de8eddbc9b81, type: 3}
   m_Orientation: {fileID: 1833552227006671844}
   m_Speed: 6
   m_PlayerHeight: 2
