@@ -325,6 +325,7 @@ GameObject:
   - component: {fileID: 4821532354392217411}
   - component: {fileID: 4867820906019836357}
   - component: {fileID: 3737443275784321580}
+  - component: {fileID: 8810060937734252031}
   m_Layer: 0
   m_Name: Buy One
   m_TagString: Untagged
@@ -448,6 +449,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 0
+--- !u!114 &8810060937734252031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4102555846264266573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31380e685b49cc94c8887be3976a4010, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UpgradePanel: {fileID: 4238037111078818610}
+  m_UpgrToHandle: {fileID: 0}
+  m_BuyMax: 0
 --- !u!1 &4371305657797933856
 GameObject:
   m_ObjectHideFlags: 0
@@ -459,6 +475,7 @@ GameObject:
   - component: {fileID: 2710820114648693130}
   - component: {fileID: 7835839468931539639}
   - component: {fileID: 5606804992006634869}
+  - component: {fileID: 4238037111078818610}
   m_Layer: 0
   m_Name: Upgrade Display
   m_TagString: Untagged
@@ -530,6 +547,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &4238037111078818610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4371305657797933856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25e641e3a08dd8d4bb9e6906b844d252, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UpgrName: {fileID: 501829826984692895}
+  m_Description: {fileID: 7408994963546027272}
+  m_Level: {fileID: 2499703032037781833}
+  m_BonusText: {fileID: 3722908097078425947}
 --- !u!1 &4394215766332660858
 GameObject:
   m_ObjectHideFlags: 0
@@ -1079,6 +1112,7 @@ GameObject:
   - component: {fileID: 3286031116922257955}
   - component: {fileID: 7501638629684920098}
   - component: {fileID: 7227673508607808883}
+  - component: {fileID: 7065578948496563034}
   m_Layer: 0
   m_Name: Buy Max
   m_TagString: Untagged
@@ -1202,6 +1236,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 0
+--- !u!114 &7065578948496563034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5450368027176910347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31380e685b49cc94c8887be3976a4010, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UpgradePanel: {fileID: 4238037111078818610}
+  m_UpgrToHandle: {fileID: 0}
+  m_BuyMax: 0
 --- !u!1 &5869201923353595454
 GameObject:
   m_ObjectHideFlags: 0

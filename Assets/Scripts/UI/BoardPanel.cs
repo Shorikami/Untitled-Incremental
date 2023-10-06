@@ -50,11 +50,7 @@ public class BoardPanel : MonoBehaviour
         GameObject upgr = Instantiate(m_UpgradePrefab, m_PanelContent.transform);
         upgr.GetComponent<Upgrade>().m_CurrencyPanel = this.gameObject;
 
-        upgr.GetComponent<Upgrade>().m_UpgradeData.m_UpgradeName = loadedUpgr.m_UpgradeName;
-        upgr.GetComponent<Upgrade>().m_UpgradeData.m_Description = loadedUpgr.m_Description;
-        upgr.GetComponent<Upgrade>().m_UpgradeData.m_CurrLevel = loadedUpgr.m_CurrLevel;
-        upgr.GetComponent<Upgrade>().m_UpgradeData.m_MaxLevel = loadedUpgr.m_MaxLevel;
-        upgr.GetComponent<Upgrade>().m_UpgradeData.m_BaseCost = loadedUpgr.m_BaseCost;
+        upgr.GetComponent<Upgrade>().m_UpgradeData = loadedUpgr;
 
         return upgr;
     }

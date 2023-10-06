@@ -44,6 +44,14 @@ public class CurrencyData
 
     public StatsManager.GameCurrencyType m_CurrencyType;
 
+    public CurrencyData()
+    {
+        m_TotalCount = 0;
+        m_Count = 0;
+        m_Rank = 0;
+        m_CurrencyType = StatsManager.GameCurrencyType.None;
+    }
+
     public void Save(CurrencyData other)
     {
         m_TotalCount = other.m_TotalCount;

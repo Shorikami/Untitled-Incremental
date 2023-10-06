@@ -42,8 +42,8 @@ public class Collectable : MonoBehaviour
 
     private void Collect(PlayerController pc)
     {
-        m_ExpToModify.AddExperience(Mathf.FloorToInt(m_BaseExpValue));
-        m_CurrencyToModify.UpdateCurrency(Mathf.FloorToInt(m_BaseCurrencyValue));
+        m_ExpToModify.AddExperience(Mathf.FloorToInt(m_BaseExpValue * StatsManager.m_Instance.m_Multipliers[m_ExpToModify.m_ExpData.m_ExpType]));
+        m_CurrencyToModify.UpdateCurrency(Mathf.FloorToInt(m_BaseCurrencyValue * StatsManager.m_Instance.m_Multipliers[m_CurrencyToModify.m_Currency.m_CurrencyType]));
 
         pc.PlayerUI.UpdateText(m_CurrencyToModify.m_Currency.m_TotalCount.ToString());
         Destroy(gameObject);

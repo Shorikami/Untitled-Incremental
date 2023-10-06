@@ -101,7 +101,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 0
 --- !u!114 &2019890678240315040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,6 +115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CurrencyNumber: {fileID: 7244472747172515366}
+  m_CurrDisplayType: 1
 --- !u!1 &658944926206339529
 GameObject:
   m_ObjectHideFlags: 0

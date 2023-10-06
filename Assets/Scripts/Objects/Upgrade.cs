@@ -5,8 +5,8 @@ using UnityEngine;
 public class Upgrade : MonoBehaviour, ISavableData
 {
     public GameObject m_CurrencyPanel;
-
     public UpgradeData m_UpgradeData;
+    public enum Operation { Add = 0, Multiply };
 
     public void SaveData(ref GameData data)
     {
@@ -14,6 +14,10 @@ public class Upgrade : MonoBehaviour, ISavableData
         upgr.m_CurrLevel = m_UpgradeData.m_CurrLevel;
         upgr.m_MaxLevel = m_UpgradeData.m_MaxLevel;
         upgr.m_BaseCost = m_UpgradeData.m_BaseCost;
+        upgr.m_CollectableType = m_UpgradeData.m_CollectableType;
+        upgr.m_CurrencyType = m_UpgradeData.m_CurrencyType;
+        upgr.m_UpgradeBonuses = m_UpgradeData.m_UpgradeBonuses;
+        upgr.m_Description = m_UpgradeData.m_Description;
     }
 
     public void LoadData(GameData data)
@@ -22,11 +26,34 @@ public class Upgrade : MonoBehaviour, ISavableData
         m_UpgradeData.m_CurrLevel = upgr.m_CurrLevel;
         m_UpgradeData.m_MaxLevel = upgr.m_MaxLevel;
         m_UpgradeData.m_BaseCost = upgr.m_BaseCost;
+        m_UpgradeData.m_CollectableType = upgr.m_CollectableType;
+        m_UpgradeData.m_CurrencyType = upgr.m_CurrencyType;
+        m_UpgradeData.m_UpgradeBonuses = upgr.m_UpgradeBonuses;
+        m_UpgradeData.m_Description = upgr.m_Description;
     }
 
     public void OpenUpgradeMenu()
     {
         m_CurrencyPanel.GetComponent<BoardPanel>().ToggleUpgradeMenu(true);
+    }
+
+    public static void UpdateMultiplier(Upgrade ug, Operation what, float val)
+    {
+        switch (what)
+        {
+            case Operation.Add:
+                ug.m_UpgradeData.m_UpgradeBonuses.m_CurrentBonus += val;
+                break;
+            case Operation.Multiply:
+                ug.m_UpgradeData.m_UpgradeBonuses.m_CurrentBonus *= val;
+                break;
+        }
+
+        // Apply bonus if modulo returns 0, current level isn't 0, and required levels is greater
+        // than 0 (anything equal or less implies there's no bonus)
+        if (ug.m_UpgradeData.m_CurrLevel % ug.m_UpgradeData.m_UpgradeBonuses.m_RequiredLevels == 0 
+            && ug.m_UpgradeData.m_CurrLevel != 0 && ug.m_UpgradeData.m_UpgradeBonuses.m_RequiredLevels > 0)
+            ug.m_UpgradeData.m_UpgradeBonuses.m_CurrentBonus *= ug.m_UpgradeData.m_UpgradeBonuses.m_LevelBonus;
     }
 }
 
@@ -40,20 +67,16 @@ public class UpgradeData
     public class Bonus
     {
         // current bonus to specific upgrade
-        public float m_CurrentBonus;
+        public float m_CurrentBonus = 1.0f;
+
+        // how much the bonus is
+        public float m_BonusMultiplier;
 
         // "X bonus is given every Y levels..."
-        // BonusMultiplier is X
+        // LevelBonus is X
         // RequiredLevels is Y
         public int m_RequiredLevels;
-        public float m_BonusMultiplier;
-        public enum UpgradeType
-        {
-            UNSPECIFIED,
-            Currency,
-            Exp,
-            Tier
-        }
+        public float m_LevelBonus;
     }
 
     public string m_UpgradeName;
@@ -65,7 +88,9 @@ public class UpgradeData
 
     public int m_CurrLevel, m_MaxLevel;
 
-    public Bonus m_UpgradeType;
+    public Bonus m_UpgradeBonuses;
+    public Collectable.CollectableType m_CollectableType = Collectable.CollectableType.Default;
+    public StatsManager.GameCurrencyType m_CurrencyType = StatsManager.GameCurrencyType.None;
 
     [Min(1)]
     public int m_BaseCost;
@@ -75,9 +100,11 @@ public class UpgradeData
         m_UpgradeName = other.m_UpgradeName;
         m_Description = other.m_Description;
         m_BonusDesc = other.m_BonusDesc;
-        m_UpgradeType = other.m_UpgradeType;
+        m_UpgradeBonuses = other.m_UpgradeBonuses;
         m_CurrLevel = other.m_CurrLevel;
         m_MaxLevel = other.m_MaxLevel;
         m_BaseCost = other.m_BaseCost;
+        m_CollectableType = other.m_CollectableType;
+        m_CurrencyType = other.m_CurrencyType;
     }
 }

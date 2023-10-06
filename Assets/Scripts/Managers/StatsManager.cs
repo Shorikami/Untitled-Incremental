@@ -5,12 +5,8 @@ using UnityEngine;
 [System.Serializable]
 public class StatsManager : MonoBehaviour
 {
-    public static StatsManager m_Instance { get; private set; }
-
-    public List<GameObject> m_LoadedDataNodes = new List<GameObject>();
-
     public enum GameCurrencyType
-    { 
+    {
         None = 0,
         Coins = 1,
         Credits,
@@ -18,6 +14,11 @@ public class StatsManager : MonoBehaviour
         Experience,
         Tier
     };
+
+    public static StatsManager m_Instance { get; private set; }
+
+    public List<GameObject> m_LoadedDataNodes = new List<GameObject>();
+    public Dictionary<GameCurrencyType, float> m_Multipliers = new Dictionary<GameCurrencyType, float>();
 
     // Singleton
     private void Awake()
@@ -31,7 +32,15 @@ public class StatsManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
-    // binary search
+    public void UpdateMultiplier(GameCurrencyType gct, float val)
+    {
+        if (gct == GameCurrencyType.None)
+            return;
+
+        m_Multipliers[gct] = val;
+    }
+
+    // todo: binary search
     public GameObject FindContainer<T>(GameCurrencyType gct)
     {
         foreach (GameObject gO in m_LoadedDataNodes)
@@ -54,7 +63,14 @@ public class StatsManager : MonoBehaviour
                 }
             }
         }
-
         return null;
+    }
+
+    public List<GameObject> FindUpgrades(Collectable.CollectableType type)
+    {
+        List<GameObject> res = new List<GameObject>();
+        var cont = m_LoadedDataNodes.FindAll(searched => searched.GetComponent<Upgrade>() != null);
+        res = cont.FindAll(searched => searched.GetComponent<Upgrade>().m_UpgradeData.m_CollectableType == type);
+        return res;
     }
 }

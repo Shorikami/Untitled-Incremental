@@ -50,51 +50,85 @@ public class DataManager : MonoBehaviour
 
         GameObject gO = Instantiate(m_LoadedCurrencyPrefab, StatsManager.m_Instance.gameObject.transform);
         gO.AddComponent<GameCurrency>();
-        gO.GetComponent<GameCurrency>().m_Currency.m_CurrencyType = StatsManager.GameCurrencyType.Coins;
-        gO.GetComponent<GameCurrency>().m_Currency.m_Count = 0;
+        GameCurrency gc = gO.GetComponent<GameCurrency>();
 
-        m_GameData.m_GameCurrencies.Add(gO.GetComponent<GameCurrency>().m_Currency);
+        gc.m_Currency = new CurrencyData();
+        gc.m_Currency.m_CurrencyType = StatsManager.GameCurrencyType.Coins;
+        gc.m_Currency.m_Count = 0;
+
+        m_GameData.m_GameCurrencies.Add(gc.m_Currency);
         StatsManager.m_Instance.m_LoadedDataNodes.Add(gO);
 
         gO = Instantiate(m_LoadedCurrencyPrefab, StatsManager.m_Instance.gameObject.transform);
         gO.AddComponent<Experience>();
-        gO.GetComponent<Experience>().m_ExpData.m_ExpType = StatsManager.GameCurrencyType.Experience;
-        gO.GetComponent<Experience>().m_ExpData.m_TotalExperience = 0;
+        Experience ex = gO.GetComponent<Experience>();
 
-        m_GameData.m_ExperienceTypes.Add(gO.GetComponent<Experience>().m_ExpData);
+        ex.m_ExpData = new ExperienceData();
+        ex.m_ExpData.m_ExpType = StatsManager.GameCurrencyType.Experience;
+        ex.m_ExpData.m_TotalExperience = 0;
+
+        m_GameData.m_ExperienceTypes.Add(ex.m_ExpData);
         StatsManager.m_Instance.m_LoadedDataNodes.Add(gO);
 
         gO = Instantiate(m_LoadedCurrencyPrefab, StatsManager.m_Instance.gameObject.transform);
         gO.AddComponent<Upgrade>();
-        gO.GetComponent<Upgrade>().m_UpgradeData.m_UpgradeName = "Coins Value";
-        gO.GetComponent<Upgrade>().m_UpgradeData.m_Description = "Increases value of coins by +25% per level. Coin value is doubled every 25 levels.";
-        gO.GetComponent<Upgrade>().m_UpgradeData.m_CurrLevel = 0;
-        gO.GetComponent<Upgrade>().m_UpgradeData.m_MaxLevel = 500;
-        gO.GetComponent<Upgrade>().m_UpgradeData.m_BaseCost = 25;
+        Upgrade up = gO.GetComponent<Upgrade>();
 
-        m_GameData.m_AvailableUpgrades.Add(gO.GetComponent<Upgrade>().m_UpgradeData);
+        up.m_UpgradeData = new UpgradeData();
+        up.m_UpgradeData.m_UpgradeBonuses = new UpgradeData.Bonus();
+        up.m_UpgradeData.m_UpgradeName = "Coins Value";
+        up.m_UpgradeData.m_Description = "Increases value of coins by +25% per level. Coin value is doubled every 25 levels.";
+        up.m_UpgradeData.m_CurrLevel = 0;
+        up.m_UpgradeData.m_MaxLevel = 500;
+        up.m_UpgradeData.m_BaseCost = 25;
+        up.m_UpgradeData.m_UpgradeBonuses.m_RequiredLevels = 25;
+        up.m_UpgradeData.m_UpgradeBonuses.m_LevelBonus = 2.0f;
+        up.m_UpgradeData.m_UpgradeBonuses.m_BonusMultiplier = 0.25f;
+        up.m_UpgradeData.m_CurrencyType = StatsManager.GameCurrencyType.Coins;
+        up.m_UpgradeData.m_CollectableType = Collectable.CollectableType.Default;
+        StatsManager.m_Instance.UpdateMultiplier(up.m_UpgradeData.m_CurrencyType, up.m_UpgradeData.m_UpgradeBonuses.m_CurrentBonus);
+
+        m_GameData.m_AvailableUpgrades.Add(up.m_UpgradeData);
         StatsManager.m_Instance.m_LoadedDataNodes.Add(gO);
 
         gO = Instantiate(m_LoadedCurrencyPrefab, StatsManager.m_Instance.gameObject.transform);
         gO.AddComponent<Upgrade>();
-        gO.GetComponent<Upgrade>().m_UpgradeData.m_UpgradeName = "Growth";
-        gO.GetComponent<Upgrade>().m_UpgradeData.m_Description = "Increases spawn rate by +20% per level.";
-        gO.GetComponent<Upgrade>().m_UpgradeData.m_CurrLevel = 0;
-        gO.GetComponent<Upgrade>().m_UpgradeData.m_MaxLevel = 10;
-        gO.GetComponent<Upgrade>().m_UpgradeData.m_BaseCost = 200;
+        up = gO.GetComponent<Upgrade>();
 
-        m_GameData.m_AvailableUpgrades.Add(gO.GetComponent<Upgrade>().m_UpgradeData);
+        up.m_UpgradeData = new UpgradeData();
+        up.m_UpgradeData.m_UpgradeBonuses = new UpgradeData.Bonus();
+        up.m_UpgradeData.m_UpgradeName = "Growth";
+        up.m_UpgradeData.m_Description = "Increases spawn rate by +20% per level.";
+        up.m_UpgradeData.m_CurrLevel = 0;
+        up.m_UpgradeData.m_MaxLevel = 10;
+        up.m_UpgradeData.m_BaseCost = 200;
+        up.m_UpgradeData.m_UpgradeBonuses.m_BonusMultiplier = 0.20f;
+        up.m_UpgradeData.m_CurrencyType = StatsManager.GameCurrencyType.None;
+        up.m_UpgradeData.m_CollectableType = Collectable.CollectableType.Default;
+        StatsManager.m_Instance.UpdateMultiplier(up.m_UpgradeData.m_CurrencyType, up.m_UpgradeData.m_UpgradeBonuses.m_CurrentBonus);
+
+        m_GameData.m_AvailableUpgrades.Add(up.m_UpgradeData);
         StatsManager.m_Instance.m_LoadedDataNodes.Add(gO);
 
         gO = Instantiate(m_LoadedCurrencyPrefab, StatsManager.m_Instance.gameObject.transform);
         gO.AddComponent<Upgrade>();
-        gO.GetComponent<Upgrade>().m_UpgradeData.m_UpgradeName = "XP Value";
-        gO.GetComponent<Upgrade>().m_UpgradeData.m_Description = "Increases XP value by +25% per level. XP Value is doubled every 25 levels.";
-        gO.GetComponent<Upgrade>().m_UpgradeData.m_CurrLevel = 0;
-        gO.GetComponent<Upgrade>().m_UpgradeData.m_MaxLevel = 500;
-        gO.GetComponent<Upgrade>().m_UpgradeData.m_BaseCost = 50;
+        up = gO.GetComponent<Upgrade>();
 
-        m_GameData.m_AvailableUpgrades.Add(gO.GetComponent<Upgrade>().m_UpgradeData);
+        up.m_UpgradeData = new UpgradeData();
+        up.m_UpgradeData.m_UpgradeBonuses = new UpgradeData.Bonus();
+        up.m_UpgradeData.m_UpgradeName = "XP Value";
+        up.m_UpgradeData.m_Description = "Increases XP value by +25% per level. XP Value is doubled every 25 levels.";
+        up.m_UpgradeData.m_CurrLevel = 0;
+        up.m_UpgradeData.m_MaxLevel = 500;
+        up.m_UpgradeData.m_BaseCost = 50;
+        up.m_UpgradeData.m_UpgradeBonuses.m_RequiredLevels = 25;
+        up.m_UpgradeData.m_UpgradeBonuses.m_LevelBonus = 2.0f;
+        up.m_UpgradeData.m_UpgradeBonuses.m_BonusMultiplier = 0.25f;
+        up.m_UpgradeData.m_CurrencyType = StatsManager.GameCurrencyType.Experience;
+        up.m_UpgradeData.m_CollectableType = Collectable.CollectableType.Default;
+        StatsManager.m_Instance.UpdateMultiplier(up.m_UpgradeData.m_CurrencyType, up.m_UpgradeData.m_UpgradeBonuses.m_CurrentBonus);
+
+        m_GameData.m_AvailableUpgrades.Add(up.m_UpgradeData);
         StatsManager.m_Instance.m_LoadedDataNodes.Add(gO);
     }
 
@@ -154,6 +188,7 @@ public class DataManager : MonoBehaviour
         {
             gO = Instantiate(m_LoadedCurrencyPrefab, StatsManager.m_Instance.gameObject.transform);
             gO.AddComponent<GameCurrency>();
+            gO.GetComponent<GameCurrency>().m_Currency = new CurrencyData();
             gO.GetComponent<GameCurrency>().m_Currency = cd;
             StatsManager.m_Instance.m_LoadedDataNodes.Add(gO);
         }
@@ -162,6 +197,7 @@ public class DataManager : MonoBehaviour
         {
             gO = Instantiate(m_LoadedCurrencyPrefab, StatsManager.m_Instance.gameObject.transform);
             gO.AddComponent<Experience>();
+            gO.GetComponent<Experience>().m_ExpData = new ExperienceData();
             gO.GetComponent<Experience>().m_ExpData = ed;
             StatsManager.m_Instance.m_LoadedDataNodes.Add(gO);
         }
@@ -170,8 +206,13 @@ public class DataManager : MonoBehaviour
         {
             gO = Instantiate(m_LoadedCurrencyPrefab, StatsManager.m_Instance.gameObject.transform);
             gO.AddComponent<Upgrade>();
-            gO.GetComponent<Upgrade>().m_UpgradeData = ud;
+            Upgrade up = gO.GetComponent<Upgrade>();
+
+            up.m_UpgradeData = new UpgradeData();
+            up.m_UpgradeData.m_UpgradeBonuses = new UpgradeData.Bonus();
+            up.m_UpgradeData = ud;
             StatsManager.m_Instance.m_LoadedDataNodes.Add(gO);
+            StatsManager.m_Instance.UpdateMultiplier(up.m_UpgradeData.m_CurrencyType, up.m_UpgradeData.m_UpgradeBonuses.m_CurrentBonus);
         }
     }
 }

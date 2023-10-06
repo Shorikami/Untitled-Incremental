@@ -12,6 +12,9 @@ public class IncrementalPlatform : MonoBehaviour
 
     private GameCurrency m_CurrencyToModify;
     private Experience m_ExpToModify;
+    private List<GameObject> m_Upgrades;
+
+    private Upgrade m_GrowthUpgrade;
 
     private void Start()
     {
@@ -26,7 +29,7 @@ public class IncrementalPlatform : MonoBehaviour
 
         if (m_CurrTime <= 0.0f)
         {
-            m_CurrTime = 1.0f / m_TimerMultiplier;
+            m_CurrTime = 1.0f / (m_TimerMultiplier * m_GrowthUpgrade.m_UpgradeData.m_UpgradeBonuses.m_CurrentBonus);
 
             // TODO: make the collectables guaranteed to spawn without overlap
             float halfScaleX = transform.localScale.x / 2.0f;
@@ -50,6 +53,9 @@ public class IncrementalPlatform : MonoBehaviour
             case Collectable.CollectableType.Default:
                 m_CurrencyToModify = StatsManager.m_Instance.FindContainer<GameCurrency>(StatsManager.GameCurrencyType.Coins).GetComponent<GameCurrency>();
                 m_ExpToModify = StatsManager.m_Instance.FindContainer<Experience>(StatsManager.GameCurrencyType.Experience).GetComponent<Experience>();
+
+                m_Upgrades = StatsManager.m_Instance.FindUpgrades(m_CollectableType);
+                m_GrowthUpgrade = m_Upgrades.Find(search => search.GetComponent<Upgrade>().m_UpgradeData.m_UpgradeName.CompareTo("Growth") == 0).GetComponent<Upgrade>();
                 break;
         }
     }

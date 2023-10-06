@@ -43,11 +43,9 @@ public class UpgradeInteractable : ButtonInteractable
     {
         if (!m_BoardPanel.m_UpgradeDisplay.activeSelf)
         {
-            FindChildWithName(m_UpgradeDisplay, "Name").GetComponent<TextMeshProUGUI>().text = m_UpgradeStats.m_UpgradeData.m_UpgradeName;
-            FindChildWithName(m_UpgradeDisplay, "Description").GetComponent<TextMeshProUGUI>().text = m_UpgradeStats.m_UpgradeData.m_Description;
-
-            FindChildWithName(m_UpgradeDisplay, "Level").GetComponent<TextMeshProUGUI>().text =
-                "Level " + m_UpgradeStats.m_UpgradeData.m_CurrLevel.ToString() + " / " + m_UpgradeStats.m_UpgradeData.m_MaxLevel.ToString();
+            m_UpgradeDisplay.GetComponent<UpgradePanel>().UpdateText(m_UpgradeStats);
+            FindChildWithName(m_UpgradeDisplay, "Buy One").GetComponent<MultiplierInteractable>().UpdateHandledUpgrade(m_UpgradeStats);
+            FindChildWithName(m_UpgradeDisplay, "Buy Max").GetComponent<MultiplierInteractable>().UpdateHandledUpgrade(m_UpgradeStats);
         }
 
         m_BoardPanel.ToggleUpgradeMenu(true);
