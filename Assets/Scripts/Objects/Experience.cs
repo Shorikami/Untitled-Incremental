@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class Experience : MonoBehaviour, ISavableData
 {
     // TODO: Eventually crunch this down to handle super big numbers
@@ -10,13 +11,15 @@ public class Experience : MonoBehaviour, ISavableData
     public int m_CurrLevel;
     public int m_CurrExp;
 
+    public StatsManager.GameCurrencyType m_ExpType;
+
     public void SaveData(ref GameData data)
     {
-        data.m_Experience = m_TotalExperience;
+        data.FindExperienceType(m_ExpType).m_TotalExperience = m_TotalExperience;
     }
     public void LoadData(GameData data)
     {
-        m_CurrExp = m_TotalExperience = data.m_Experience;
+        m_CurrExp = m_TotalExperience = data.FindExperienceType(m_ExpType).m_TotalExperience;
         CalculateLevel();
     }
 

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Collectable : MonoBehaviour
 {
+    [SerializeField] private float m_BaseCurrencyValue = 1.0f;
+    [SerializeField] private float m_BaseExpValue = 1.0f;
+
     void Start()
     {
         
@@ -18,7 +21,12 @@ public class Collectable : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            Destroy(gameObject);
+            Collect();
         }
+    }
+
+    private void Collect()
+    {
+        Destroy(gameObject);
     }
 }

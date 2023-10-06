@@ -9,6 +9,9 @@ public class DataManager : MonoBehaviour
     [SerializeField] private string m_FileName;
     public static DataManager m_Instance { get; private set; }
 
+    [SerializeField] private GameObject m_LoadedCurrencyPrefab;
+    [SerializeField] private GameObject m_LoadedUpgradePrefab;
+
     private GameData m_GameData;
     private List<ISavableData> m_SavedData;
     private FileHandler m_FileDataHandler;
@@ -34,7 +37,59 @@ public class DataManager : MonoBehaviour
 
     public void NewGame()
     {
+        // TODO: When starting completely fresh, the following will always be available from the start:
+        // - initial currency type
+        // - initial exp type
+        // - 3 upgrades, which are the following:
+        //  - increase initial currency value
+        //  - increase initial currency spawn rate
+        //  - increase initial exp value
+        // update this as more initial values are added
         m_GameData = new GameData();
+
+        GameObject gO = Instantiate(m_LoadedCurrencyPrefab, StatsManager.m_Instance.gameObject.transform);
+        gO.AddComponent<GameCurrency>();
+        gO.GetComponent<GameCurrency>().m_CurrencyType = StatsManager.GameCurrencyType.Coins;
+        gO.GetComponent<GameCurrency>().m_Count = 0;
+
+        m_GameData.m_GameCurrencies.Add(gO.GetComponent<GameCurrency>());
+
+        gO = Instantiate(m_LoadedCurrencyPrefab, StatsManager.m_Instance.gameObject.transform);
+        gO.AddComponent<Experience>();
+        gO.GetComponent<Experience>().m_ExpType = StatsManager.GameCurrencyType.Experience;
+        gO.GetComponent<Experience>().m_TotalExperience = 0;
+
+        m_GameData.m_ExperienceTypes.Add(gO.GetComponent<Experience>());
+
+        gO = Instantiate(m_LoadedCurrencyPrefab, StatsManager.m_Instance.gameObject.transform);
+        gO.AddComponent<Upgrade>();
+        gO.GetComponent<Upgrade>().m_UpgradeName = "Coins Value";
+        gO.GetComponent<Upgrade>().m_Description = "Increases value of coins by +25% per level. Coin value is doubled every 25 levels.";
+        gO.GetComponent<Upgrade>().m_CurrLevel = 0;
+        gO.GetComponent<Upgrade>().m_MaxLevel = 500;
+        gO.GetComponent<Upgrade>().m_CurrCost = 25;
+
+        m_GameData.m_AvailableUpgrades.Add(gO.GetComponent<Upgrade>());
+
+        gO = Instantiate(m_LoadedCurrencyPrefab, StatsManager.m_Instance.gameObject.transform);
+        gO.AddComponent<Upgrade>();
+        gO.GetComponent<Upgrade>().m_UpgradeName = "Growth";
+        gO.GetComponent<Upgrade>().m_Description = "Increases spawn rate by +20% per level.";
+        gO.GetComponent<Upgrade>().m_CurrLevel = 0;
+        gO.GetComponent<Upgrade>().m_MaxLevel = 10;
+        gO.GetComponent<Upgrade>().m_CurrCost = 200;
+
+        m_GameData.m_AvailableUpgrades.Add(gO.GetComponent<Upgrade>());
+
+        gO = Instantiate(m_LoadedCurrencyPrefab, StatsManager.m_Instance.gameObject.transform);
+        gO.AddComponent<Upgrade>();
+        gO.GetComponent<Upgrade>().m_UpgradeName = "XP Value";
+        gO.GetComponent<Upgrade>().m_Description = "Increases XP value by +25% per level. XP Value is doubled every 25 levels.";
+        gO.GetComponent<Upgrade>().m_CurrLevel = 0;
+        gO.GetComponent<Upgrade>().m_MaxLevel = 500;
+        gO.GetComponent<Upgrade>().m_CurrCost = 50;
+
+        m_GameData.m_AvailableUpgrades.Add(gO.GetComponent<Upgrade>());
     }
 
     public void Save()

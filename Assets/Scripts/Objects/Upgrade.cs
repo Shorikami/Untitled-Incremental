@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Upgrade : MonoBehaviour
+public class Upgrade : MonoBehaviour, ISavableData
 {
     public GameObject m_CurrencyPanel;
 
@@ -42,6 +42,16 @@ public class Upgrade : MonoBehaviour
 
     [Min(1)]
     public int m_CurrCost;
+
+    public void SaveData(ref GameData data)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void LoadData(GameData data)
+    {
+        throw new System.NotImplementedException();
+    }
 
     public void OpenUpgradeMenu()
     {

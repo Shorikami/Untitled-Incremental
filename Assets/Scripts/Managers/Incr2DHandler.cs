@@ -35,47 +35,47 @@ public class Incr2DHandler : MonoBehaviour, ISavableData
 
     public void SaveData(ref GameData data)
     {
-        // this only happens when it's a new game
-        // todo: make this more efficient?
-        if (data.m_Currencies.Count == 0)
-        {
-            data.m_Currencies.Add(m_ActivePanels[0].GetComponent<CurrencyPanel>().m_Currency);
-        }
-
-        else
-        {
-            for (int i = 0; i < m_ActivePanels.Count; ++i)
-            {
-                Currency c = m_ActivePanels[i].GetComponent<CurrencyPanel>().m_Currency;
-                data.m_Currencies[i] = c;
-            }
-        }
+        //// this only happens when it's a new game
+        //// todo: make this more efficient?
+        //if (data.m_Currencies.Count == 0)
+        //{
+        //    data.m_Currencies.Add(m_ActivePanels[0].GetComponent<CurrencyPanel>().m_Currency);
+        //}
+        //
+        //else
+        //{
+        //    for (int i = 0; i < m_ActivePanels.Count; ++i)
+        //    {
+        //        Currency c = m_ActivePanels[i].GetComponent<CurrencyPanel>().m_Currency;
+        //        data.m_Currencies[i] = c;
+        //    }
+        //}
     }
 
     public void LoadData(GameData data)
     {
-        foreach (Currency c in data.m_Currencies)
-        {
-            GameObject addedCurr = Instantiate(m_CurrencyPrefab, m_GameCanvas.transform);
-            addedCurr.GetComponent<CurrencyPanel>().m_Currency = c;
-
-            m_ActivePanels.Add(addedCurr);
-        }
-
-        // will only hit if currencies are empty
-        // 1 currency must always be initialized: the starting currency (dollars)
-        if (data.m_Currencies.Count == 0)
-        {
-            GameObject firstCurr = Instantiate(m_CurrencyPrefab, m_GameCanvas.transform);
-            firstCurr.GetComponent<CurrencyPanel>().m_Currency.m_Rank = 0;
-            firstCurr.GetComponent<CurrencyPanel>().m_Currency.m_CurrencyType = Currency.CurrencyType.Dollars;
-
-            m_ActivePanels.Add(firstCurr);
-        }
-
-        // initialize to dollars display first. always safe?
-        // todo: check active status of other currencies to switch this dynamically on start up
-        m_ActiveCurrIdx = 0;
+       //foreach (Currency c in data.m_Currencies)
+       //{
+       //    GameObject addedCurr = Instantiate(m_CurrencyPrefab, m_GameCanvas.transform);
+       //    addedCurr.GetComponent<CurrencyPanel>().m_Currency = c;
+       //
+       //    m_ActivePanels.Add(addedCurr);
+       //}
+       //
+       //// will only hit if currencies are empty
+       //// 1 currency must always be initialized: the starting currency (dollars)
+       //if (data.m_Currencies.Count == 0)
+       //{
+       //    GameObject firstCurr = Instantiate(m_CurrencyPrefab, m_GameCanvas.transform);
+       //    firstCurr.GetComponent<CurrencyPanel>().m_Currency.m_Rank = 0;
+       //    firstCurr.GetComponent<CurrencyPanel>().m_Currency.m_CurrencyType = Currency.CurrencyType.Dollars;
+       //
+       //    m_ActivePanels.Add(firstCurr);
+       //}
+       //
+       //// initialize to dollars display first. always safe?
+       //// todo: check active status of other currencies to switch this dynamically on start up
+       //m_ActiveCurrIdx = 0;
     }
 
     void Start()
