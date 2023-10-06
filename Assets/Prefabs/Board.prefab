@@ -111,7 +111,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cce7ad0bb64b92478903752759f421e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ScrollPanel: {fileID: 9058843846626423698}
+  m_Board: {fileID: 9058843846626423698}
+  m_ScrollPanel: {fileID: 9058843848321726864}
+  m_UpgradeDisplay: {fileID: 1183634316773905278}
   m_PanelContent: {fileID: 9058843848244749738}
   m_UpgradePrefab: {fileID: 360586422766285890, guid: f2210b55a881d6f4f96c2093bcd0853b, type: 3}
 --- !u!1001 &3225952230527346782
@@ -345,8 +347,41 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6154011193870243473, guid: e75e0c5d49d133249816d7922def3451, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6154011193870243473, guid: e75e0c5d49d133249816d7922def3451, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6154011193870243473, guid: e75e0c5d49d133249816d7922def3451, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6484462808559026087}
+    - target: {fileID: 6154011193870243473, guid: e75e0c5d49d133249816d7922def3451, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6154011193870243473, guid: e75e0c5d49d133249816d7922def3451, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ToggleUpgradeMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 6154011193870243473, guid: e75e0c5d49d133249816d7922def3451, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: BoardPanel, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6154011193870243473, guid: e75e0c5d49d133249816d7922def3451, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e75e0c5d49d133249816d7922def3451, type: 3}
+--- !u!1 &1183634316773905278 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4371305657797933856, guid: e75e0c5d49d133249816d7922def3451, type: 3}
+  m_PrefabInstance: {fileID: 3225952230527346782}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &9058843846626423697 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5869201923865877455, guid: e75e0c5d49d133249816d7922def3451, type: 3}
@@ -360,5 +395,10 @@ GameObject:
 --- !u!1 &9058843848244749738 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5869201924362489332, guid: e75e0c5d49d133249816d7922def3451, type: 3}
+  m_PrefabInstance: {fileID: 3225952230527346782}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &9058843848321726864 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5869201924418752974, guid: e75e0c5d49d133249816d7922def3451, type: 3}
   m_PrefabInstance: {fileID: 3225952230527346782}
   m_PrefabAsset: {fileID: 0}

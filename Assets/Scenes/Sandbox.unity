@@ -426,7 +426,7 @@ PrefabInstance:
       objectReference: {fileID: 6171947532550584525, guid: 2cc58112b53d11f40867ff4379d6c5e2, type: 3}
     - target: {fileID: 8028416413126410116, guid: 52f7dd33b27835b41bb7ef28f57bba35, type: 3}
       propertyPath: m_TimerMultiplier
-      value: 2
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 8028416413126410117, guid: 52f7dd33b27835b41bb7ef28f57bba35, type: 3}
       propertyPath: m_RootOrder

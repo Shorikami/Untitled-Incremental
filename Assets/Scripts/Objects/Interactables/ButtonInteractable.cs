@@ -21,8 +21,7 @@ public class ButtonInteractable : Interactable
         Debug.Log("Looked away from: " + gameObject.name);
     }
 
-    public void Test()
+    public virtual void Interaction()
     {
-        Debug.Log("I've been clicked!");
     }
 }

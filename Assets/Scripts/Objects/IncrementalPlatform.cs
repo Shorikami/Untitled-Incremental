@@ -30,13 +30,8 @@ public class IncrementalPlatform : MonoBehaviour
                 transform.position.y + ((m_Collectable.transform.localScale.y + transform.localScale.y) / 2.0f),
                 Random.Range(transform.position.z - halfScaleZ, transform.position.z + halfScaleZ));
 
-            //Vector3 localSpawnPos = new Vector3(Random.Range(-0.5f, 0.5f),
-            //    1.0f + (m_Collectable.transform.lossyScale.y - 1.0f) * 0.5f,
-            //    Random.Range(-0.5f, 0.5f));
-
             GameObject spawnedCol = Instantiate(m_Collectable, spawnPos, Quaternion.identity);
             spawnedCol.transform.parent = transform;
-            //spawnedCol.transform.localPosition = localSpawnPos;
         }
     }
 }

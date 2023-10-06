@@ -45,6 +45,6 @@ public class Upgrade : MonoBehaviour
 
     public void OpenUpgradeMenu()
     {
-        m_CurrencyPanel.GetComponent<CurrencyPanel>().ToggleUpgradeMenu(true);
+        m_CurrencyPanel.GetComponent<BoardPanel>().ToggleUpgradeMenu(true);
     }
 }
