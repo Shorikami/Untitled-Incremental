@@ -80,7 +80,7 @@ public class DataManager : MonoBehaviour
         up.m_UpgradeData.m_Description = "Increases value of coins by +25% per level. Coin value is doubled every 25 levels.";
         up.m_UpgradeData.m_CurrLevel = 0;
         up.m_UpgradeData.m_MaxLevel = 500;
-        up.m_UpgradeData.m_BaseCost = 25;
+        up.m_UpgradeData.m_BaseCost = 5;
         up.m_UpgradeData.m_UpgradeBonuses.m_RequiredLevels = 25;
         up.m_UpgradeData.m_UpgradeBonuses.m_LevelBonus = 2.0f;
         up.m_UpgradeData.m_UpgradeBonuses.m_BonusMultiplier = 0.25f;
@@ -102,7 +102,7 @@ public class DataManager : MonoBehaviour
         up.m_UpgradeData.m_Description = "Increases spawn rate by +20% per level.";
         up.m_UpgradeData.m_CurrLevel = 0;
         up.m_UpgradeData.m_MaxLevel = 10;
-        up.m_UpgradeData.m_BaseCost = 200;
+        up.m_UpgradeData.m_BaseCost = 10;
         up.m_UpgradeData.m_UpgradeBonuses.m_BonusMultiplier = 0.20f;
         up.m_UpgradeData.m_CurrencyType = StatsManager.GameCurrencyType.None;
         up.m_UpgradeData.m_NonCurrType = StatsManager.NonCurrencyUpgrades.DefaultGrowthRate;
@@ -123,7 +123,7 @@ public class DataManager : MonoBehaviour
         up.m_UpgradeData.m_Description = "Increases XP value by +25% per level. XP Value is doubled every 25 levels.";
         up.m_UpgradeData.m_CurrLevel = 0;
         up.m_UpgradeData.m_MaxLevel = 500;
-        up.m_UpgradeData.m_BaseCost = 50;
+        up.m_UpgradeData.m_BaseCost = 7;
         up.m_UpgradeData.m_UpgradeBonuses.m_RequiredLevels = 25;
         up.m_UpgradeData.m_UpgradeBonuses.m_LevelBonus = 2.0f;
         up.m_UpgradeData.m_UpgradeBonuses.m_BonusMultiplier = 0.25f;
@@ -170,6 +170,9 @@ public class DataManager : MonoBehaviour
         {
             d.LoadData(m_GameData);
         }
+
+        // after loading, set the player once
+        StatsManager.m_Instance.RefreshPlayer();
     }
 
     private List<ISavableData> FindSavedData()

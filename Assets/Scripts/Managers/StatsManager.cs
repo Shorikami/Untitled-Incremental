@@ -30,6 +30,14 @@ public class StatsManager : MonoBehaviour, ISavableData
     public Dictionary<GameCurrencyType, float> m_Multipliers = new Dictionary<GameCurrencyType, float>();
     public SerializableDict<NonCurrencyUpgrades, float> m_NonCurrMultipliers = new SerializableDict<NonCurrencyUpgrades, float>();
 
+    private GameObject m_Player;
+
+    public GameObject Player
+    { 
+        get { return m_Player; }
+        private set { m_Player = value; }
+    }
+
     // Singleton
     private void Awake()
     {
@@ -75,21 +83,10 @@ public class StatsManager : MonoBehaviour, ISavableData
             m_NonCurrMultipliers[data.m_NonCurrType] = val;
     }
 
-    //public void UpdateMultiplier(GameCurrencyType gct, float val)
-    //{
-    //    if (gct == GameCurrencyType.None)
-    //        return;
-    //
-    //    m_Multipliers[gct] = val;
-    //}
-    //
-    //public void UpdateNonCurrencyMultiplier(NonCurrencyUpgrades ncu, float val)
-    //{
-    //    if (ncu == NonCurrencyUpgrades.Invalid)
-    //        return;
-    //
-    //    m_NonCurrMultipliers[ncu] = val;
-    //}
+    public void RefreshPlayer()
+    {
+        m_Player =  GameObject.FindGameObjectWithTag("Player");
+    }
 
     // todo: binary search
     public GameObject FindContainer<T>(GameCurrencyType gct)

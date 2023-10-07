@@ -88,6 +88,8 @@ public class UpgradeData
     public string m_Description;
     public string m_BonusDesc;
 
+    public string m_Formula;
+
     public int m_CurrLevel, m_MaxLevel;
 
     public Bonus m_UpgradeBonuses;
@@ -96,7 +98,7 @@ public class UpgradeData
     public StatsManager.NonCurrencyUpgrades m_NonCurrType = StatsManager.NonCurrencyUpgrades.Invalid;
 
     [Min(1)]
-    public int m_BaseCost;
+    public double m_BaseCost;
 
     public void Save(UpgradeData other)
     {
@@ -110,4 +112,27 @@ public class UpgradeData
         m_CollectableType = other.m_CollectableType;
         m_CurrencyType = other.m_CurrencyType;
     }
+
+    public bool CanBuyLevel(out GameCurrency currToModify)
+    {
+        if (m_CurrLevel >= m_MaxLevel)
+        {
+            currToModify = null;
+            return false;
+        }
+
+        currToModify = StatsManager.m_Instance.FindContainer<GameCurrency>(m_CurrencyType).GetComponent<GameCurrency>();
+        return currToModify.m_Currency.m_TotalCount >= Cost();
+    }
+
+    public double Cost()
+    {
+        return System.Math.Floor(m_BaseCost + (m_BaseCost * Mathf.Pow(1.1f, m_CurrLevel)));
+    }
+
+    public int IntCost()
+    {
+        return System.Convert.ToInt32(Cost());
+    }
+
 }

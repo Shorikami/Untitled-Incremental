@@ -8,6 +8,7 @@ public class UpgradePanel : MonoBehaviour
     public TextMeshProUGUI m_UpgrName;
     public TextMeshProUGUI m_Description;
     public TextMeshProUGUI m_Level;
+    public TextMeshProUGUI m_CostText;
     public TextMeshProUGUI m_BonusText;
 
     public void UpdateText(Upgrade upgr)
@@ -21,6 +22,8 @@ public class UpgradePanel : MonoBehaviour
 
     public void UpdateLevelText(Upgrade upgr)
     {
+        m_CostText.text = "Cost: " + upgr.m_UpgradeData.IntCost().ToString();
+
         m_Level.text =
         "Level " + upgr.m_UpgradeData.m_CurrLevel.ToString() + " / " + upgr.m_UpgradeData.m_MaxLevel.ToString();
     }

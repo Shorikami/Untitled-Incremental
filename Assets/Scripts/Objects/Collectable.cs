@@ -8,27 +8,68 @@ public class Collectable : MonoBehaviour
     // this is an attempt to prevent having to search the StatsManager
     // container every time for the appropriate data
     public enum CollectableType
-    { 
+    {
         None = 0,
         Default
     }
 
-    [SerializeField] private float m_BaseCurrencyValue = 1.0f;
-    [SerializeField] private float m_BaseExpValue = 1.0f;
+    [SerializeField] private float m_BaseCurrencyValue;
+    [SerializeField] private float m_BaseExpValue;
+    private CollectableType m_CollectableType;
+
+
+    public float BaseCurrencyValue
+    {
+        get { return m_BaseCurrencyValue; }
+        set { m_BaseCurrencyValue = value; }
+    }
+
+    public float BaseExpValue
+    {
+        get { return m_BaseExpValue; }
+        set { m_BaseExpValue = value; }
+    }
+
+    public CollectableType CollectType
+    {
+        get { return m_CollectableType; }
+        set { m_CollectableType = value; }
+    }
 
     [HideInInspector] public GameCurrency m_CurrencyToModify;
     [HideInInspector] public Experience m_ExpToModify;
 
     private bool m_TaggedForDeletion = false;
 
+    void Awake()
+    {
+
+    }
+
     void Start()
     {
-        
+
     }
 
     void Update()
     {
-        
+
+    }
+
+    public void RefreshBaseValues()
+    { 
+        switch (m_CollectableType)
+        {
+            case CollectableType.Default:
+                m_BaseCurrencyValue = 10.0f;
+                m_BaseExpValue = 5.0f;
+                break;
+
+            default:
+                m_BaseCurrencyValue = 1.0f;
+                m_BaseExpValue = 1.0f;
+                break;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -36,7 +77,7 @@ public class Collectable : MonoBehaviour
         if (other.gameObject.tag == "Player" && !m_TaggedForDeletion)
         {
             m_TaggedForDeletion = true;
-            Collect(other.gameObject.GetComponentInParent<PlayerController>());
+            Collect(StatsManager.m_Instance.Player.GetComponentInParent<PlayerController>());
         }
     }
 

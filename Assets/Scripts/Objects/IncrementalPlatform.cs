@@ -41,8 +41,12 @@ public class IncrementalPlatform : MonoBehaviour
 
             GameObject spawnedCol = Instantiate(m_Collectable, spawnPos, Quaternion.identity);
             spawnedCol.transform.parent = transform;
-            spawnedCol.GetComponent<Collectable>().m_CurrencyToModify = m_CurrencyToModify;
-            spawnedCol.GetComponent<Collectable>().m_ExpToModify = m_ExpToModify;
+
+            Collectable modifyC = spawnedCol.GetComponent<Collectable>();
+            modifyC.m_CurrencyToModify = m_CurrencyToModify;
+            modifyC.m_ExpToModify = m_ExpToModify;
+            modifyC.CollectType = m_CollectableType;
+            modifyC.RefreshBaseValues();
         }
     }
 
