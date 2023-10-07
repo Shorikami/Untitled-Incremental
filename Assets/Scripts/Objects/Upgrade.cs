@@ -16,6 +16,7 @@ public class Upgrade : MonoBehaviour, ISavableData
         upgr.m_BaseCost = m_UpgradeData.m_BaseCost;
         upgr.m_CollectableType = m_UpgradeData.m_CollectableType;
         upgr.m_CurrencyType = m_UpgradeData.m_CurrencyType;
+        upgr.m_NonCurrType = m_UpgradeData.m_NonCurrType;
         upgr.m_UpgradeBonuses = m_UpgradeData.m_UpgradeBonuses;
         upgr.m_Description = m_UpgradeData.m_Description;
     }
@@ -28,6 +29,7 @@ public class Upgrade : MonoBehaviour, ISavableData
         m_UpgradeData.m_BaseCost = upgr.m_BaseCost;
         m_UpgradeData.m_CollectableType = upgr.m_CollectableType;
         m_UpgradeData.m_CurrencyType = upgr.m_CurrencyType;
+        m_UpgradeData.m_NonCurrType = upgr.m_NonCurrType;
         m_UpgradeData.m_UpgradeBonuses = upgr.m_UpgradeBonuses;
         m_UpgradeData.m_Description = upgr.m_Description;
     }
@@ -51,8 +53,8 @@ public class Upgrade : MonoBehaviour, ISavableData
 
         // Apply bonus if modulo returns 0, current level isn't 0, and required levels is greater
         // than 0 (anything equal or less implies there's no bonus)
-        if (ug.m_UpgradeData.m_CurrLevel % ug.m_UpgradeData.m_UpgradeBonuses.m_RequiredLevels == 0 
-            && ug.m_UpgradeData.m_CurrLevel != 0 && ug.m_UpgradeData.m_UpgradeBonuses.m_RequiredLevels > 0)
+        if (ug.m_UpgradeData.m_UpgradeBonuses.m_RequiredLevels > 0 &&
+            ug.m_UpgradeData.m_CurrLevel % ug.m_UpgradeData.m_UpgradeBonuses.m_RequiredLevels == 0 && ug.m_UpgradeData.m_CurrLevel != 0)
             ug.m_UpgradeData.m_UpgradeBonuses.m_CurrentBonus *= ug.m_UpgradeData.m_UpgradeBonuses.m_LevelBonus;
     }
 }
@@ -91,6 +93,7 @@ public class UpgradeData
     public Bonus m_UpgradeBonuses;
     public Collectable.CollectableType m_CollectableType = Collectable.CollectableType.Default;
     public StatsManager.GameCurrencyType m_CurrencyType = StatsManager.GameCurrencyType.None;
+    public StatsManager.NonCurrencyUpgrades m_NonCurrType = StatsManager.NonCurrencyUpgrades.Invalid;
 
     [Min(1)]
     public int m_BaseCost;

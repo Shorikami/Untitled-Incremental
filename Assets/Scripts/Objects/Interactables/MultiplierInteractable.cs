@@ -25,9 +25,7 @@ public class MultiplierInteractable : ButtonInteractable
         {
             m_UpgrToHandle.m_UpgradeData.m_CurrLevel += 1;
             Upgrade.UpdateMultiplier(m_UpgrToHandle, Upgrade.Operation.Add, m_UpgrToHandle.m_UpgradeData.m_UpgradeBonuses.m_BonusMultiplier);
-
-            if (m_UpgrToHandle.m_UpgradeData.m_CurrencyType != 0)
-                StatsManager.m_Instance.UpdateMultiplier(m_UpgrToHandle.m_UpgradeData.m_CurrencyType, m_UpgrToHandle.m_UpgradeData.m_UpgradeBonuses.m_CurrentBonus);
+            StatsManager.m_Instance.UpdateMultiplier(m_UpgrToHandle.m_UpgradeData, m_UpgrToHandle.m_UpgradeData.m_UpgradeBonuses.m_CurrentBonus);
         }
 
         m_UpgradePanel.UpdateLevelText(m_UpgrToHandle);

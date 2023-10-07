@@ -8,6 +8,7 @@ public class GameData
     public List<CurrencyData> m_GameCurrencies;
     public List<ExperienceData> m_ExperienceTypes;
     public List<UpgradeData> m_AvailableUpgrades;
+    public SerializableDict<StatsManager.NonCurrencyUpgrades, float> m_NonCurrMultipliers;
 
     // Constructor for when starting new game
     public GameData()
@@ -15,6 +16,7 @@ public class GameData
         m_GameCurrencies = new List<CurrencyData>();
         m_ExperienceTypes = new List<ExperienceData>();
         m_AvailableUpgrades = new List<UpgradeData>();
+        m_NonCurrMultipliers = new SerializableDict<StatsManager.NonCurrencyUpgrades, float>();
     }
 
     // ----

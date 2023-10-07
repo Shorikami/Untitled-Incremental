@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class StatsManager : MonoBehaviour
+public class StatsManager : MonoBehaviour, ISavableData
 {
     public enum GameCurrencyType
     {
@@ -15,10 +15,20 @@ public class StatsManager : MonoBehaviour
         Tier
     };
 
+    public enum NonCurrencyUpgrades
+    { 
+        Invalid = -1,
+        DefaultGrowthRate,
+
+        MoveSpeed,
+        PickupRange
+    }
+
     public static StatsManager m_Instance { get; private set; }
 
     public List<GameObject> m_LoadedDataNodes = new List<GameObject>();
     public Dictionary<GameCurrencyType, float> m_Multipliers = new Dictionary<GameCurrencyType, float>();
+    public SerializableDict<NonCurrencyUpgrades, float> m_NonCurrMultipliers = new SerializableDict<NonCurrencyUpgrades, float>();
 
     // Singleton
     private void Awake()
@@ -32,13 +42,54 @@ public class StatsManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
-    public void UpdateMultiplier(GameCurrencyType gct, float val)
+    public void SaveData(ref GameData data)
     {
-        if (gct == GameCurrencyType.None)
-            return;
+        foreach (var keyPair in m_NonCurrMultipliers)
+        {
+            if (!data.m_NonCurrMultipliers.ContainsKey(keyPair.Key))
+                data.m_NonCurrMultipliers.Add(keyPair.Key, keyPair.Value);
 
-        m_Multipliers[gct] = val;
+            else
+                data.m_NonCurrMultipliers[keyPair.Key] = keyPair.Value;
+        }
     }
+
+    public void LoadData(GameData data)
+    {
+        foreach (var keyPair in data.m_NonCurrMultipliers)
+        {
+            if (!m_NonCurrMultipliers.ContainsKey(keyPair.Key))
+                m_NonCurrMultipliers.Add(keyPair.Key, keyPair.Value);
+
+            else
+                m_NonCurrMultipliers[keyPair.Key] = keyPair.Value;
+        }
+    }
+
+    public void UpdateMultiplier(UpgradeData data, float val)
+    {
+        if (data.m_CurrencyType != GameCurrencyType.None)
+            m_Multipliers[data.m_CurrencyType] = val;
+
+        else
+            m_NonCurrMultipliers[data.m_NonCurrType] = val;
+    }
+
+    //public void UpdateMultiplier(GameCurrencyType gct, float val)
+    //{
+    //    if (gct == GameCurrencyType.None)
+    //        return;
+    //
+    //    m_Multipliers[gct] = val;
+    //}
+    //
+    //public void UpdateNonCurrencyMultiplier(NonCurrencyUpgrades ncu, float val)
+    //{
+    //    if (ncu == NonCurrencyUpgrades.Invalid)
+    //        return;
+    //
+    //    m_NonCurrMultipliers[ncu] = val;
+    //}
 
     // todo: binary search
     public GameObject FindContainer<T>(GameCurrencyType gct)
