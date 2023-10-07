@@ -5,7 +5,7 @@ using UnityEngine;
 public class IncrementalPlatform : MonoBehaviour
 {
     [SerializeField] private GameObject m_Collectable;
-    [Min(0)] public float m_TimerMultiplier;
+    [Min(0)] public float m_BaseTimer;
     private float m_CurrTime;
 
     public Collectable.CollectableType m_CollectableType;
@@ -19,7 +19,7 @@ public class IncrementalPlatform : MonoBehaviour
     private void Start()
     {
         InitializeCollectable();
-        m_CurrTime = 1.0f / m_TimerMultiplier;
+        m_CurrTime = 1.0f / m_BaseTimer;
     }
 
     // Update is called once per frame
@@ -29,7 +29,7 @@ public class IncrementalPlatform : MonoBehaviour
 
         if (m_CurrTime <= 0.0f)
         {
-            m_CurrTime = 1.0f / (m_TimerMultiplier * m_GrowthUpgrade.m_UpgradeData.m_UpgradeBonuses.m_CurrentBonus);
+            m_CurrTime = CalculateTime();
 
             // TODO: make the collectables guaranteed to spawn without overlap
             float halfScaleX = transform.localScale.x / 2.0f;
@@ -46,6 +46,11 @@ public class IncrementalPlatform : MonoBehaviour
         }
     }
 
+    private float CalculateTime()
+    { 
+        return 1.0f / (m_BaseTimer * m_GrowthUpgrade.m_UpgradeData.m_UpgradeBonuses.m_CurrentBonus);
+    }
+
     private void InitializeCollectable()
     {
         switch (m_CollectableType)
@@ -55,7 +60,7 @@ public class IncrementalPlatform : MonoBehaviour
                 m_ExpToModify = StatsManager.m_Instance.FindContainer<Experience>(StatsManager.GameCurrencyType.Experience).GetComponent<Experience>();
 
                 m_Upgrades = StatsManager.m_Instance.FindUpgrades(m_CollectableType);
-                m_GrowthUpgrade = m_Upgrades.Find(search => search.GetComponent<Upgrade>().m_UpgradeData.m_UpgradeName.CompareTo("Growth") == 0).GetComponent<Upgrade>();
+                m_GrowthUpgrade = m_Upgrades.Find(search => search.GetComponent<Upgrade>().m_UpgradeData.m_UpgradeName.Contains("Growth")).GetComponent<Upgrade>();
                 break;
         }
     }
