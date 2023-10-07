@@ -9,8 +9,7 @@ public class DataManager : MonoBehaviour
     [SerializeField] private string m_FileName;
     public static DataManager m_Instance { get; private set; }
 
-    [SerializeField] private GameObject m_LoadedCurrencyPrefab;
-    [SerializeField] private GameObject m_LoadedUpgradePrefab;
+    [SerializeField] private GameObject m_EmptyCurrencyPrefab;
 
     [SerializeField] private GameData m_GameData;
     private List<ISavableData> m_SavedData;
@@ -48,7 +47,7 @@ public class DataManager : MonoBehaviour
         // update this as more initial values are added
         m_GameData = new GameData();
 
-        GameObject gO = Instantiate(m_LoadedCurrencyPrefab, StatsManager.m_Instance.gameObject.transform);
+        GameObject gO = Instantiate(m_EmptyCurrencyPrefab, StatsManager.m_Instance.gameObject.transform);
         gO.AddComponent<GameCurrency>();
         GameCurrency gc = gO.GetComponent<GameCurrency>();
 
@@ -59,7 +58,7 @@ public class DataManager : MonoBehaviour
         m_GameData.m_GameCurrencies.Add(gc.m_Currency);
         StatsManager.m_Instance.m_LoadedDataNodes.Add(gO);
 
-        gO = Instantiate(m_LoadedCurrencyPrefab, StatsManager.m_Instance.gameObject.transform);
+        gO = Instantiate(m_EmptyCurrencyPrefab, StatsManager.m_Instance.gameObject.transform);
         gO.AddComponent<Experience>();
         Experience ex = gO.GetComponent<Experience>();
 
@@ -70,7 +69,7 @@ public class DataManager : MonoBehaviour
         m_GameData.m_ExperienceTypes.Add(ex.m_ExpData);
         StatsManager.m_Instance.m_LoadedDataNodes.Add(gO);
 
-        gO = Instantiate(m_LoadedCurrencyPrefab, StatsManager.m_Instance.gameObject.transform);
+        gO = Instantiate(m_EmptyCurrencyPrefab, StatsManager.m_Instance.gameObject.transform);
         gO.AddComponent<Upgrade>();
         Upgrade up = gO.GetComponent<Upgrade>();
 
@@ -92,7 +91,7 @@ public class DataManager : MonoBehaviour
         m_GameData.m_AvailableUpgrades.Add(up.m_UpgradeData);
         StatsManager.m_Instance.m_LoadedDataNodes.Add(gO);
 
-        gO = Instantiate(m_LoadedCurrencyPrefab, StatsManager.m_Instance.gameObject.transform);
+        gO = Instantiate(m_EmptyCurrencyPrefab, StatsManager.m_Instance.gameObject.transform);
         gO.AddComponent<Upgrade>();
         up = gO.GetComponent<Upgrade>();
 
@@ -113,7 +112,7 @@ public class DataManager : MonoBehaviour
         m_GameData.m_NonCurrMultipliers.Add(StatsManager.NonCurrencyUpgrades.DefaultGrowthRate, up.m_UpgradeData.m_UpgradeBonuses.m_CurrentBonus);
         StatsManager.m_Instance.m_LoadedDataNodes.Add(gO);
 
-        gO = Instantiate(m_LoadedCurrencyPrefab, StatsManager.m_Instance.gameObject.transform);
+        gO = Instantiate(m_EmptyCurrencyPrefab, StatsManager.m_Instance.gameObject.transform);
         gO.AddComponent<Upgrade>();
         up = gO.GetComponent<Upgrade>();
 
@@ -193,7 +192,7 @@ public class DataManager : MonoBehaviour
         GameObject gO;
         foreach (CurrencyData cd in m_GameData.m_GameCurrencies)
         {
-            gO = Instantiate(m_LoadedCurrencyPrefab, StatsManager.m_Instance.gameObject.transform);
+            gO = Instantiate(m_EmptyCurrencyPrefab, StatsManager.m_Instance.gameObject.transform);
             gO.AddComponent<GameCurrency>();
             gO.GetComponent<GameCurrency>().m_Currency = new CurrencyData();
             gO.GetComponent<GameCurrency>().m_Currency = cd;
@@ -202,7 +201,7 @@ public class DataManager : MonoBehaviour
 
         foreach (ExperienceData ed in m_GameData.m_ExperienceTypes)
         {
-            gO = Instantiate(m_LoadedCurrencyPrefab, StatsManager.m_Instance.gameObject.transform);
+            gO = Instantiate(m_EmptyCurrencyPrefab, StatsManager.m_Instance.gameObject.transform);
             gO.AddComponent<Experience>();
             gO.GetComponent<Experience>().m_ExpData = new ExperienceData();
             gO.GetComponent<Experience>().m_ExpData = ed;
@@ -211,7 +210,7 @@ public class DataManager : MonoBehaviour
 
         foreach (UpgradeData ud in m_GameData.m_AvailableUpgrades)
         {
-            gO = Instantiate(m_LoadedCurrencyPrefab, StatsManager.m_Instance.gameObject.transform);
+            gO = Instantiate(m_EmptyCurrencyPrefab, StatsManager.m_Instance.gameObject.transform);
             gO.AddComponent<Upgrade>();
             Upgrade up = gO.GetComponent<Upgrade>();
 

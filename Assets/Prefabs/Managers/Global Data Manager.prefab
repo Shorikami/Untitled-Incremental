@@ -44,10 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88e6dc1c75be3ba46ae4ee77651d7f89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Currencies:
-  - {fileID: 1668344308614305250, guid: 8fdfae59c6a858545914d2c12f22a820, type: 3}
-  - {fileID: 1668344308614305250, guid: ac2e0bfe3e57aab4e8e43a790d49ac71, type: 3}
-  - {fileID: 1668344308614305250, guid: b5e2d60ceee7c3942bd39317c1a0cb9d, type: 3}
-  - {fileID: 1668344308614305250, guid: 11142fbbb70406a4e967b06b675881b5, type: 3}
-  - {fileID: 1668344308614305250, guid: cdce4baa1e738924d908d8d3e544bc79, type: 3}
-  - {fileID: 1668344308614305250, guid: 496fe4716e9445142aa03efd44fac499, type: 3}
+  m_FileName: 
+  m_EmptyCurrencyPrefab: {fileID: 4794848375890685522, guid: c18bc963b58637c4f838f3ef236b1604, type: 3}
+  m_GameData:
+    m_GameCurrencies: []
+    m_ExperienceTypes: []
+    m_AvailableUpgrades: []
+    m_NonCurrMultipliers:
+      m_Keys: 
+      m_Values: []
