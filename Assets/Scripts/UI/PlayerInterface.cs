@@ -8,11 +8,13 @@ public class PlayerInterface : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI m_CurrencyNumber;
 
-    public StatsManager.GameCurrencyType m_CurrDisplayType = StatsManager.GameCurrencyType.Coins;
+    public StatsManager.GameCurrencyType m_DisplayWhatCurr = StatsManager.GameCurrencyType.Coins;
+    public Collectable.CollectableType m_DisplayWhatColl = Collectable.CollectableType.Default;
 
     private void Start()
     {
-        m_CurrencyNumber.text = StatsManager.m_Instance.FindContainer<GameCurrency>(m_CurrDisplayType).GetComponent<GameCurrency>().m_Currency.m_TotalCount.ToString();
+        m_CurrencyNumber.text = StatsManager.m_Instance.FindStatContainer(m_DisplayWhatCurr, m_DisplayWhatColl)
+            .GetComponent<GameCurrency>().m_Currency.m_TotalCount.ToString();
     }
 
     public void UpdateText(string text)

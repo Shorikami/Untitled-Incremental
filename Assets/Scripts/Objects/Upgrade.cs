@@ -60,7 +60,7 @@ public class Upgrade : MonoBehaviour, ISavableData
 }
 
 [System.Serializable]
-public class UpgradeData
+public class UpgradeData : Data
 {
     // If an upgrade is for a specified currency (e.g. game currency, exp),
     // then this will be used. If it's of an unspecified type (e.g. UpgradeType == UNSPECIFIED),
@@ -93,8 +93,6 @@ public class UpgradeData
     public int m_CurrLevel, m_MaxLevel;
 
     public Bonus m_UpgradeBonuses;
-    public Collectable.CollectableType m_CollectableType = Collectable.CollectableType.Default;
-    public StatsManager.GameCurrencyType m_CurrencyType = StatsManager.GameCurrencyType.None;
     public StatsManager.NonCurrencyUpgrades m_NonCurrType = StatsManager.NonCurrencyUpgrades.Invalid;
 
     [Min(1)]
@@ -121,30 +119,32 @@ public class UpgradeData
             return false;
         }
 
-        switch (m_CurrencyType)
-        {
+        currToModify = StatsManager.m_Instance.FindStatContainer(m_CurrencyType, m_CollectableType).GetComponent<GameCurrency>();
 
-            case StatsManager.GameCurrencyType.None:
-
-                // todo: improve deciding on what currency to modify if the game currency type is specified as none
-                StatsManager.GameCurrencyType toFind = StatsManager.GameCurrencyType.None;
-                switch (m_NonCurrType)
-                {
-                    case StatsManager.NonCurrencyUpgrades.DefaultGrowthRate:
-                        toFind = StatsManager.GameCurrencyType.Coins;
-                        break;
-                }
-
-                if (toFind == StatsManager.GameCurrencyType.None)
-                    Debug.LogError("Error when attempting to buy upgrade level! Currency type is still none at this point."); 
-
-                currToModify = StatsManager.m_Instance.FindContainer<GameCurrency>(toFind).GetComponent<GameCurrency>();
-                break;
-
-            default:
-                currToModify = StatsManager.m_Instance.FindContainer<GameCurrency>(m_CurrencyType).GetComponent<GameCurrency>();
-                break;
-        }
+        //switch (m_CurrencyType)
+        //{
+        //
+        //    case StatsManager.GameCurrencyType.None:
+        //
+        //        // todo: improve deciding on what currency to modify if the game currency type is specified as none
+        //        StatsManager.GameCurrencyType toFind = StatsManager.GameCurrencyType.None;
+        //        switch (m_NonCurrType)
+        //        {
+        //            case StatsManager.NonCurrencyUpgrades.DefaultGrowthRate:
+        //                toFind = StatsManager.GameCurrencyType.Coins;
+        //                break;
+        //        }
+        //
+        //        if (toFind == StatsManager.GameCurrencyType.None)
+        //            Debug.LogError("Error when attempting to buy upgrade level! Currency type is still none at this point."); 
+        //
+        //        currToModify = StatsManager.m_Instance.FindContainer<GameCurrency>(toFind).GetComponent<GameCurrency>();
+        //        break;
+        //
+        //    default:
+        //        currToModify = StatsManager.m_Instance.FindContainer<GameCurrency>(m_CurrencyType).GetComponent<GameCurrency>();
+        //        break;
+        //}
 
         return currToModify.m_Currency.m_TotalCount >= Cost();
     }

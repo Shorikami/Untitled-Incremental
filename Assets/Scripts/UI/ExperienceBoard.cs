@@ -10,12 +10,15 @@ public class ExperienceBoard : MonoBehaviour
     [SerializeField] private GameObject m_ExpBar;
     private Slider m_ExpSlider;
 
-    public StatsManager.GameCurrencyType m_ExpType;
+    public StatsManager.GameCurrencyType m_DisplayWhatExp = StatsManager.GameCurrencyType.Experience;
+    public Collectable.CollectableType m_DisplayWhatColl = Collectable.CollectableType.Default;
     private Experience m_ExpDataToHandle;
 
     void Start()
     {
-        m_ExpDataToHandle = StatsManager.m_Instance.FindContainer<Experience>(m_ExpType).GetComponent<Experience>();
+        m_ExpDataToHandle = StatsManager.m_Instance.FindStatContainer
+            (m_DisplayWhatExp, m_DisplayWhatColl).GetComponent<Experience>();
+
         m_ExpSlider = m_ExpBar.GetComponent<Slider>();
     }
 

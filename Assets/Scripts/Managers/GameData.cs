@@ -29,7 +29,7 @@ public class GameData
 
     public void SaveExperience(ExperienceData data)
     {
-        m_ExperienceTypes.Find(searched => searched.m_ExpType == data.m_ExpType).Save(data);
+        m_ExperienceTypes.Find(searched => searched.m_CurrencyType == data.m_CurrencyType).Save(data);
     }
 
     public void SaveUpgrade(UpgradeData data)
@@ -39,7 +39,7 @@ public class GameData
 
     public ExperienceData FindExperienceType(StatsManager.GameCurrencyType type)
     {
-        return m_ExperienceTypes.Find(searched => searched.m_ExpType == type);
+        return m_ExperienceTypes.Find(searched => searched.m_CurrencyType == type);
     }
 
     public CurrencyData FindGameCurrency(StatsManager.GameCurrencyType type)

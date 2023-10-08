@@ -30,7 +30,7 @@ public class GameCurrency : MonoBehaviour, ISavableData
 }
 
 [System.Serializable]
-public class CurrencyData
+public class CurrencyData : Data
 {
     // this might overflow but this is mostly for debugging
     public int m_TotalCount;
@@ -42,14 +42,13 @@ public class CurrencyData
     [Min(0)]
     public int m_Rank;
 
-    public StatsManager.GameCurrencyType m_CurrencyType;
-
     public CurrencyData()
     {
         m_TotalCount = 0;
         m_Count = 0;
         m_Rank = 0;
         m_CurrencyType = StatsManager.GameCurrencyType.None;
+        m_CollectableType = Collectable.CollectableType.None;
     }
 
     public void Save(CurrencyData other)

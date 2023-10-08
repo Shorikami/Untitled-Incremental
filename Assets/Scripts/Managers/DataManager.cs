@@ -53,6 +53,7 @@ public class DataManager : MonoBehaviour
 
         gc.m_Currency = new CurrencyData();
         gc.m_Currency.m_CurrencyType = StatsManager.GameCurrencyType.Coins;
+        gc.m_Currency.m_CollectableType = Collectable.CollectableType.Default;
         gc.m_Currency.m_Count = 0;
 
         m_GameData.m_GameCurrencies.Add(gc.m_Currency);
@@ -63,7 +64,8 @@ public class DataManager : MonoBehaviour
         Experience ex = gO.GetComponent<Experience>();
 
         ex.m_ExpData = new ExperienceData();
-        ex.m_ExpData.m_ExpType = StatsManager.GameCurrencyType.Experience;
+        ex.m_ExpData.m_CurrencyType = StatsManager.GameCurrencyType.Experience;
+        ex.m_ExpData.m_CollectableType = Collectable.CollectableType.Default;
         ex.m_ExpData.m_TotalExperience = 0;
 
         m_GameData.m_ExperienceTypes.Add(ex.m_ExpData);
@@ -104,12 +106,12 @@ public class DataManager : MonoBehaviour
         up.m_UpgradeData.m_BaseCost = 10;
         up.m_UpgradeData.m_UpgradeBonuses.m_BonusMultiplier = 0.20f;
         up.m_UpgradeData.m_CurrencyType = StatsManager.GameCurrencyType.None;
-        up.m_UpgradeData.m_NonCurrType = StatsManager.NonCurrencyUpgrades.DefaultGrowthRate;
+        up.m_UpgradeData.m_NonCurrType = StatsManager.NonCurrencyUpgrades.GrowthRate;
         up.m_UpgradeData.m_CollectableType = Collectable.CollectableType.Default;
         //StatsManager.m_Instance.UpdateMultiplier(up.m_UpgradeData, up.m_UpgradeData.m_UpgradeBonuses.m_CurrentBonus);
 
         m_GameData.m_AvailableUpgrades.Add(up.m_UpgradeData);
-        m_GameData.m_NonCurrMultipliers.Add(StatsManager.NonCurrencyUpgrades.DefaultGrowthRate, up.m_UpgradeData.m_UpgradeBonuses.m_CurrentBonus);
+        m_GameData.m_NonCurrMultipliers.Add(StatsManager.NonCurrencyUpgrades.GrowthRate, up.m_UpgradeData.m_UpgradeBonuses.m_CurrentBonus);
         StatsManager.m_Instance.m_LoadedDataNodes.Add(gO);
 
         gO = Instantiate(m_EmptyCurrencyPrefab, StatsManager.m_Instance.gameObject.transform);

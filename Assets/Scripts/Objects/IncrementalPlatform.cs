@@ -57,15 +57,17 @@ public class IncrementalPlatform : MonoBehaviour
 
     private void InitializeCollectable()
     {
-        switch (m_CollectableType)
-        {
-            case Collectable.CollectableType.Default:
-                m_CurrencyToModify = StatsManager.m_Instance.FindContainer<GameCurrency>(StatsManager.GameCurrencyType.Coins).GetComponent<GameCurrency>();
-                m_ExpToModify = StatsManager.m_Instance.FindContainer<Experience>(StatsManager.GameCurrencyType.Experience).GetComponent<Experience>();
+        m_CurrencyToModify = StatsManager.m_Instance.FindStatContainer
+            (StatsManager.GameCurrencyType.Coins, m_CollectableType).GetComponent<GameCurrency>();
 
-                m_Upgrades = StatsManager.m_Instance.FindUpgrades(m_CollectableType);
-                m_GrowthUpgrade = m_Upgrades.Find(search => search.GetComponent<Upgrade>().m_UpgradeData.m_UpgradeName.Contains("Growth")).GetComponent<Upgrade>();
-                break;
-        }
+        m_ExpToModify = StatsManager.m_Instance.FindStatContainer
+            (StatsManager.GameCurrencyType.Experience, m_CollectableType).GetComponent<Experience>();
+
+        m_Upgrades = StatsManager.m_Instance.FindUpgrades(m_CollectableType);
+
+        // todo: improve the search of this?
+        m_GrowthUpgrade = m_Upgrades
+            .Find(search => search.GetComponent<Upgrade>().m_UpgradeData.m_UpgradeName.Contains("Growth"))
+            .GetComponent<Upgrade>();
     }
 }

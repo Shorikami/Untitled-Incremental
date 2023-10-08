@@ -12,7 +12,7 @@ public class Experience : MonoBehaviour, ISavableData
     }
     public void LoadData(GameData data)
     {
-        ExperienceData toLoad = data.FindExperienceType(m_ExpData.m_ExpType);
+        ExperienceData toLoad = data.FindExperienceType(m_ExpData.m_CurrencyType);
         m_ExpData.m_TotalExperience = toLoad.m_TotalExperience;
         CalculateLevel();
     }
@@ -61,15 +61,13 @@ public class Experience : MonoBehaviour, ISavableData
 }
 
 [System.Serializable]
-public class ExperienceData
+public class ExperienceData : Data
 {
     // TODO: Eventually crunch this down to handle super big numbers
     public int m_TotalExperience;
 
     public int m_CurrLevel;
     public int m_CurrExp;
-
-    public StatsManager.GameCurrencyType m_ExpType;
 
     // Required amount of experience to level up
     // formula: 25 + (5 * currLevel * 1.05^currLevel)
@@ -83,6 +81,6 @@ public class ExperienceData
         m_TotalExperience = other.m_TotalExperience;
         m_CurrLevel = other.m_CurrLevel;
         m_CurrExp = other.m_CurrExp;
-        m_ExpType = other.m_ExpType;
+        m_CurrencyType = other.m_CurrencyType;
     }
 }

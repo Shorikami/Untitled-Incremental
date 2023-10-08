@@ -5,12 +5,16 @@ using UnityEngine;
 [System.Serializable]
 public class StatsManager : MonoBehaviour, ISavableData
 {
+    // THESE WILL BE STORED IN AN INSTANCED CLASS THAT IS
+    // ATTACHED TO THE MANAGER (m_LoadedDataNodes, which is
+    // taken from the data manager (they both know what currencies
+    // exist throughout the game's lifetime))!!!!!
     public enum GameCurrencyType
     {
         None = 0,
         Coins = 1,
         Credits,
-
+        Perks,
         Experience,
         Tier
     };
@@ -18,8 +22,8 @@ public class StatsManager : MonoBehaviour, ISavableData
     public enum NonCurrencyUpgrades
     { 
         Invalid = -1,
-        DefaultGrowthRate,
-
+        PermanentProgression,
+        GrowthRate,
         MoveSpeed,
         PickupRange
     }
@@ -89,29 +93,24 @@ public class StatsManager : MonoBehaviour, ISavableData
     }
 
     // todo: binary search
-    public GameObject FindContainer<T>(GameCurrencyType gct)
+    public GameObject FindStatContainer(GameCurrencyType gct, Collectable.CollectableType ct)
     {
-        foreach (GameObject gO in m_LoadedDataNodes)
-        {
-            T res = gO.GetComponent<T>();
+        GameObject res = null;
 
-            if (res != null)
-            {
-                switch (res)
-                {
-                    case GameCurrency gc:
-                        if (gc.m_Currency.m_CurrencyType == gct)
-                            return gO;
-                        break;
+        var cont = m_LoadedDataNodes.FindAll(s => s.GetComponent<GameCurrency>() != null);
+        res = cont.Find(s => s.GetComponent<GameCurrency>().m_Currency.m_CurrencyType == gct &&
+                            s.GetComponent<GameCurrency>().m_Currency.m_CollectableType == ct);
 
-                    case Experience ex:
-                        if (ex.m_ExpData.m_ExpType == gct)
-                            return gO;
-                        break;
-                }
-            }
-        }
-        return null;
+        // early return if container was already found (it was of type GameCurrency)
+        if (res != null)
+            return res;
+
+        var cont2 = m_LoadedDataNodes.FindAll(s => s.GetComponent<Experience>() != null);
+        res = cont2.Find(s => s.GetComponent<Experience>().m_ExpData.m_CurrencyType == gct &&
+                            s.GetComponent<Experience>().m_ExpData.m_CollectableType == ct);
+
+        // res at this point will either be of type Experience or null
+        return res;
     }
 
     public List<GameObject> FindUpgrades(Collectable.CollectableType type)
@@ -121,4 +120,14 @@ public class StatsManager : MonoBehaviour, ISavableData
         res = cont.FindAll(searched => searched.GetComponent<Upgrade>().m_UpgradeData.m_CollectableType == type);
         return res;
     }
+}
+
+public abstract class Data
+{
+    // What this data container affects
+    public StatsManager.GameCurrencyType m_CurrencyType;
+
+    // What this collectible type is (there will eventually be more than 1
+    // type of collectible)
+    public Collectable.CollectableType m_CollectableType;
 }
