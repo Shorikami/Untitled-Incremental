@@ -961,7 +961,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Sensitivity: 1000
-  m_Target: {fileID: 2096488801}
+  m_Target: {fileID: 1218173711}
   m_PlayerController: {fileID: 2096488799}
   m_TargetOrientation: {fileID: 2096488800}
   m_DistFromTarget: 0
@@ -1080,11 +1080,6 @@ MonoBehaviour:
 --- !u!4 &2096488800 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1468522740251354251, guid: 3a155f9265ff7ee46a36435c6ebd764f, type: 3}
-  m_PrefabInstance: {fileID: 2096488798}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &2096488801 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7024421175640337613, guid: 3a155f9265ff7ee46a36435c6ebd764f, type: 3}
   m_PrefabInstance: {fileID: 2096488798}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4793599210802532917

@@ -142,16 +142,14 @@ public class DataManager : MonoBehaviour
 
         up.m_UpgradeData = new UpgradeData();
         up.m_UpgradeData.m_UpgradeBonuses = new UpgradeData.Bonus();
-        up.m_UpgradeData.m_UpgradeName = "XP Value";
-        up.m_UpgradeData.m_Description = "Increases XP value by +25% per level. XP Value is doubled every 25 levels.";
+        up.m_UpgradeData.m_UpgradeName = "Pickup Range+";
+        up.m_UpgradeData.m_Description = "Increase pickup range by 10% per level.";
         up.m_UpgradeData.m_CurrLevel = 0;
-        up.m_UpgradeData.m_MaxLevel = 500;
-        up.m_UpgradeData.m_BaseCost = 7;
-        up.m_UpgradeData.m_UpgradeBonuses.m_RequiredLevels = 25;
-        up.m_UpgradeData.m_UpgradeBonuses.m_LevelBonus = 2.0f;
-        up.m_UpgradeData.m_UpgradeBonuses.m_BonusMultiplier = 0.25f;
-        up.m_UpgradeData.m_CurrencyType = StatsManager.GameCurrencyType.Experience;
-        up.m_UpgradeData.m_NonCurrType = StatsManager.NonCurrencyUpgrades.Invalid;
+        up.m_UpgradeData.m_MaxLevel = 20;
+        up.m_UpgradeData.m_BaseCost = 10000;
+        up.m_UpgradeData.m_UpgradeBonuses.m_BonusMultiplier = 0.1f;
+        up.m_UpgradeData.m_CurrencyType = StatsManager.GameCurrencyType.Coins;
+        up.m_UpgradeData.m_NonCurrType = StatsManager.NonCurrencyUpgrades.PickupRange;
         up.m_UpgradeData.m_CollectableType = Collectable.CollectableType.Default;
         StatsManager.m_Instance.UpdateMultiplier(up.m_UpgradeData, up.m_UpgradeData.m_UpgradeBonuses.m_CurrentBonus);
 
@@ -164,16 +162,14 @@ public class DataManager : MonoBehaviour
 
         up.m_UpgradeData = new UpgradeData();
         up.m_UpgradeData.m_UpgradeBonuses = new UpgradeData.Bonus();
-        up.m_UpgradeData.m_UpgradeName = "XP Value";
-        up.m_UpgradeData.m_Description = "Increases XP value by +25% per level. XP Value is doubled every 25 levels.";
+        up.m_UpgradeData.m_UpgradeName = "Speed+";
+        up.m_UpgradeData.m_Description = "Increase movement speed by 10% per level.";
         up.m_UpgradeData.m_CurrLevel = 0;
-        up.m_UpgradeData.m_MaxLevel = 500;
-        up.m_UpgradeData.m_BaseCost = 7;
-        up.m_UpgradeData.m_UpgradeBonuses.m_RequiredLevels = 25;
-        up.m_UpgradeData.m_UpgradeBonuses.m_LevelBonus = 2.0f;
-        up.m_UpgradeData.m_UpgradeBonuses.m_BonusMultiplier = 0.25f;
-        up.m_UpgradeData.m_CurrencyType = StatsManager.GameCurrencyType.Experience;
-        up.m_UpgradeData.m_NonCurrType = StatsManager.NonCurrencyUpgrades.Invalid;
+        up.m_UpgradeData.m_MaxLevel = 10;
+        up.m_UpgradeData.m_BaseCost = 1500;
+        up.m_UpgradeData.m_UpgradeBonuses.m_BonusMultiplier = 0.1f;
+        up.m_UpgradeData.m_CurrencyType = StatsManager.GameCurrencyType.Coins;
+        up.m_UpgradeData.m_NonCurrType = StatsManager.NonCurrencyUpgrades.MoveSpeed;
         up.m_UpgradeData.m_CollectableType = Collectable.CollectableType.Default;
         StatsManager.m_Instance.UpdateMultiplier(up.m_UpgradeData, up.m_UpgradeData.m_UpgradeBonuses.m_CurrentBonus);
 

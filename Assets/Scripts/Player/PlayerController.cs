@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
+using System.Linq;
 
 public class PlayerController : MonoBehaviour
 {
@@ -17,7 +18,11 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private Transform m_Player;
     [SerializeField] private GameObject m_PrefabPlayerUI;
+    [SerializeField] private GameObject m_PickupRange;
     private PlayerInterface m_PlayerUI;
+
+    private List<Upgrade> m_PickupRangeUpgrades;
+    private List<Upgrade> m_MoveSpeedUpgrades;
 
     public PlayerInterface PlayerUI
     { 
@@ -52,7 +57,8 @@ public class PlayerController : MonoBehaviour
         private set { m_MousePos = value; }
     }
 
-    public float m_Speed;
+    public float m_BaseSpeed;
+    private float m_CurrentSpeed;
     
     [Header("Ground Check")]
     private bool m_Grounded;
@@ -105,11 +111,14 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-
+        m_PickupRangeUpgrades = StatsManager.m_Instance.FindUpgrades(StatsManager.NonCurrencyUpgrades.PickupRange);
+        m_MoveSpeedUpgrades = StatsManager.m_Instance.FindUpgrades(StatsManager.NonCurrencyUpgrades.MoveSpeed);
     }
 
     private void Update()
     {
+        //m_PickupRange.transform.rotation = Quaternion.identity;
+
         LimitSpeed();
         GroundCheck();
 
@@ -123,11 +132,26 @@ public class PlayerController : MonoBehaviour
             HandleInteractionCheck();
             HandleInteractionInput();
         }
+
+        UpdateSpeed();
+        UpdatePickupRange();
     }
 
     private void FixedUpdate()
     {
         MovePlayer(m_Camera.transform);
+    }
+
+    private void UpdateSpeed()
+    {
+        float bonus = m_MoveSpeedUpgrades.ConvertAll(x => x.m_UpgradeData.m_UpgradeBonuses.m_CurrentBonus).Aggregate((a, b) => a * b);
+        m_CurrentSpeed = m_BaseSpeed * bonus;
+    }
+
+    private void UpdatePickupRange()
+    {
+        float bonus = m_PickupRangeUpgrades.ConvertAll(x => x.m_UpgradeData.m_UpgradeBonuses.m_CurrentBonus).Aggregate((a, b) => a * b);
+        m_PickupRange.transform.localScale = new Vector3(bonus, m_PickupRange.transform.localScale.y, bonus);
     }
 
     private void MouseRaycast()
@@ -224,7 +248,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // TODO: Change arbitrary 10.0f value
-        m_RB.AddForce(targetDir * m_Speed * 10.0f, ForceMode.Force);
+        m_RB.AddForce(targetDir * m_CurrentSpeed * 10.0f, ForceMode.Force);
 
         //transform.Translate(inputDir.normalized * m_Speed * Time.deltaTime, Space.World);
     }
@@ -242,9 +266,9 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 vel = new Vector3(m_RB.velocity.x, 0.0f, m_RB.velocity.z);
         
-        if (vel.magnitude > m_Speed)
+        if (vel.magnitude > m_CurrentSpeed)
         {
-            Vector3 limitedVelocity = vel.normalized * m_Speed;
+            Vector3 limitedVelocity = vel.normalized * m_CurrentSpeed;
             m_RB.velocity = new Vector3(limitedVelocity.x, m_RB.velocity.y, limitedVelocity.z);
         }
     }

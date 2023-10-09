@@ -80,7 +80,7 @@ public class StatsManager : MonoBehaviour, ISavableData
 
     public void UpdateMultiplier(UpgradeData data, float val)
     {
-        if (data.m_CurrencyType != GameCurrencyType.None)
+        if (data.m_CurrencyType != GameCurrencyType.None && data.m_NonCurrType == NonCurrencyUpgrades.Invalid)
             m_Multipliers[data.m_CurrencyType] = val;
 
         else
@@ -137,6 +137,18 @@ public class StatsManager : MonoBehaviour, ISavableData
         List<GameObject> res = new List<GameObject>();
         var cont = m_LoadedDataNodes.FindAll(searched => searched.GetComponent<Upgrade>() != null);
         res = cont.FindAll(searched => searched.GetComponent<Upgrade>().m_UpgradeData.m_CollectableType == type);
+        return res;
+    }
+
+    public List<Upgrade> FindUpgrades(NonCurrencyUpgrades ncu)
+    {
+        List<Upgrade> res = new List<Upgrade>();
+        var cont = m_LoadedDataNodes.FindAll(searched => searched.GetComponent<Upgrade>() != null);
+        var matching = cont.FindAll(s => s.GetComponent<Upgrade>().m_UpgradeData.m_NonCurrType == ncu);
+
+        foreach (GameObject gO in matching)
+            res.Add(gO.GetComponent<Upgrade>());
+
         return res;
     }
 }
