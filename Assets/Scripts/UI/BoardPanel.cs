@@ -12,6 +12,12 @@ public class BoardPanel : MonoBehaviour
     [SerializeField] private GameObject m_PanelContent;
 
     [SerializeField] private GameObject m_UpgradePrefab;
+    [SerializeField] private GameObject m_HorizontalBlankPrefab;
+
+    [SerializeField] private bool m_IsVertical = false;
+    [SerializeField][Min(0)] private float m_Spacing;
+
+    [SerializeField] private StatsManager.GameCurrencyType m_CurrencyDisplay;
 
     private List<GameObject> m_Upgrades = new List<GameObject>();
 
@@ -28,21 +34,29 @@ public class BoardPanel : MonoBehaviour
 
     public void Initialize()
     {
-        CreateUpgrades();
+        if (m_IsVertical)
+            CreateUpgradesVertical();
+        else
+            CreateUpgradesHorizontal();
     }
 
-    public void CreateUpgrades(int spacing = 5)
+    private void CreateUpgradesHorizontal()
     {
-        m_PanelContent.GetComponent<HorizontalLayoutGroup>().spacing = spacing;
+        m_PanelContent.GetComponent<HorizontalLayoutGroup>().spacing = m_Spacing;
 
-        foreach (GameObject u in StatsManager.m_Instance.m_LoadedDataNodes)
-        {
-            if (u.TryGetComponent<Upgrade>(out Upgrade upgr))
-            {
-                m_Upgrades.Add(CreateNewUpgrade(upgr.m_UpgradeData));
-            }
-        }
+        List<Upgrade> upgrades = StatsManager.m_Instance.FindUpgrades(m_CurrencyDisplay);
+
+        foreach (Upgrade ugr in upgrades)
+            m_Upgrades.Add(CreateNewUpgrade(ugr.m_UpgradeData));
+
         //m_Upgrades.Add(CreateNewUpgrade("test", "lorem ipsum", 0, 100));
+    }
+
+    private void CreateUpgradesVertical()
+    {
+        m_PanelContent.GetComponent<VerticalLayoutGroup>().spacing = m_Spacing;
+
+
     }
 
     private GameObject CreateNewUpgrade(UpgradeData loadedUpgr)

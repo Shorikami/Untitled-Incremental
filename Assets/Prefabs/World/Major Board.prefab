@@ -203,7 +203,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_LevelNumberDisplay: {fileID: 7216369379167689817}
   m_ExpBar: {fileID: 295787389119125895}
-  m_ExpType: 0
+  m_DisplayWhatExp: 4
+  m_DisplayWhatColl: 1
 --- !u!1 &675774333721926512
 GameObject:
   m_ObjectHideFlags: 0
@@ -531,7 +532,7 @@ GameObject:
   - component: {fileID: 4968873447262523546}
   - component: {fileID: 6484462808559026087}
   m_Layer: 0
-  m_Name: Board
+  m_Name: Major Board
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -634,6 +635,10 @@ MonoBehaviour:
   m_UpgradeDisplay: {fileID: 1183634316773905278}
   m_PanelContent: {fileID: 9058843848244749738}
   m_UpgradePrefab: {fileID: 360586422766285890, guid: f2210b55a881d6f4f96c2093bcd0853b, type: 3}
+  m_HorizontalBlankPrefab: {fileID: 7924481659873413840, guid: f0bc47c9cf423dc48a4653a80718ce17, type: 3}
+  m_IsVertical: 0
+  m_Spacing: 0
+  m_CurrencyDisplay: 0
 --- !u!1 &6536453412153592215
 GameObject:
   m_ObjectHideFlags: 0
@@ -931,6 +936,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5869201923353595448, guid: e75e0c5d49d133249816d7922def3451, type: 3}
+      propertyPath: m_Size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5869201923353595448, guid: e75e0c5d49d133249816d7922def3451, type: 3}
+      propertyPath: m_Value
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5869201923865877449, guid: e75e0c5d49d133249816d7922def3451, type: 3}
       propertyPath: m_PresetInfoIsWorld
       value: 1
@@ -1029,6 +1042,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5869201923940022863, guid: e75e0c5d49d133249816d7922def3451, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5869201923940022863, guid: e75e0c5d49d133249816d7922def3451, type: 3}
+      propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5869201924362489335, guid: e75e0c5d49d133249816d7922def3451, type: 3}

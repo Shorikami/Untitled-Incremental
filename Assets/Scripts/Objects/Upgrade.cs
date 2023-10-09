@@ -6,6 +6,7 @@ public class Upgrade : MonoBehaviour, ISavableData
 {
     public GameObject m_CurrencyPanel;
     public UpgradeData m_UpgradeData;
+
     public enum Operation { Add = 0, Multiply };
 
     public void SaveData(ref GameData data)
@@ -19,6 +20,7 @@ public class Upgrade : MonoBehaviour, ISavableData
         upgr.m_NonCurrType = m_UpgradeData.m_NonCurrType;
         upgr.m_UpgradeBonuses = m_UpgradeData.m_UpgradeBonuses;
         upgr.m_Description = m_UpgradeData.m_Description;
+        upgr.m_BoughtWith = m_UpgradeData.m_BoughtWith;
     }
 
     public void LoadData(GameData data)
@@ -32,6 +34,7 @@ public class Upgrade : MonoBehaviour, ISavableData
         m_UpgradeData.m_NonCurrType = upgr.m_NonCurrType;
         m_UpgradeData.m_UpgradeBonuses = upgr.m_UpgradeBonuses;
         m_UpgradeData.m_Description = upgr.m_Description;
+        m_UpgradeData.m_BoughtWith = upgr.m_BoughtWith;
     }
 
     public void OpenUpgradeMenu()
@@ -95,6 +98,9 @@ public class UpgradeData : Data
     public Bonus m_UpgradeBonuses;
     public StatsManager.NonCurrencyUpgrades m_NonCurrType = StatsManager.NonCurrencyUpgrades.Invalid;
 
+    // What this upgrade is bought with
+    public StatsManager.GameCurrencyType m_BoughtWith;
+
     [Min(1)]
     public double m_BaseCost;
 
@@ -109,6 +115,7 @@ public class UpgradeData : Data
         m_BaseCost = other.m_BaseCost;
         m_CollectableType = other.m_CollectableType;
         m_CurrencyType = other.m_CurrencyType;
+        m_BoughtWith = other.m_BoughtWith;
     }
 
     public bool CanBuyLevel(out GameCurrency currToModify)

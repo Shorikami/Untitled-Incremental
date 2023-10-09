@@ -140,6 +140,18 @@ public class StatsManager : MonoBehaviour, ISavableData
         return res;
     }
 
+    public List<Upgrade> FindUpgrades(GameCurrencyType gct)
+    {
+        List<Upgrade> res = new List<Upgrade>();
+        var cont = m_LoadedDataNodes.FindAll(searched => searched.GetComponent<Upgrade>() != null);
+        var matching = cont.FindAll(s => s.GetComponent<Upgrade>().m_UpgradeData.m_BoughtWith == gct);
+
+        foreach (GameObject gO in matching)
+            res.Add(gO.GetComponent<Upgrade>());
+
+        return res;
+    }
+
     public List<Upgrade> FindUpgrades(NonCurrencyUpgrades ncu)
     {
         List<Upgrade> res = new List<Upgrade>();
