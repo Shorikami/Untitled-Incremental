@@ -322,6 +322,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1251972713244623739}
   - component: {fileID: 9210228650085314084}
+  - component: {fileID: 1671162928133197719}
   m_Layer: 5
   m_Name: Content
   m_TagString: Untagged
@@ -347,7 +348,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -40}
-  m_SizeDelta: {x: 80, y: 80}
+  m_SizeDelta: {x: 80, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &9210228650085314084
 MonoBehaviour:
@@ -375,6 +376,20 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &1671162928133197719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1605995857124465339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 0
+  m_VerticalFit: 2
 --- !u!1 &1730319194371032713
 GameObject:
   m_ObjectHideFlags: 0
@@ -389,7 +404,7 @@ GameObject:
   - component: {fileID: 397317759400701804}
   - component: {fileID: 4583916674409622627}
   m_Layer: 5
-  m_Name: Vertical
+  m_Name: Vertical Board
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1353,8 +1368,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1978644260061664920}
   m_HandleRect: {fileID: 5837964115401597285}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.9999999
+  m_Value: 0
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
