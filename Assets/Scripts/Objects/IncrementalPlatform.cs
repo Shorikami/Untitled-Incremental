@@ -12,13 +12,11 @@ public class IncrementalPlatform : MonoBehaviour
 
     private GameCurrency m_CurrencyToModify;
     private Experience m_ExpToModify;
-    private List<GameObject> m_Upgrades;
-
     private Upgrade m_GrowthUpgrade;
 
     private void Start()
     {
-        InitializeCollectable();
+        InitializePlatform();
         m_CurrTime = 1.0f / m_BaseTimer;
     }
 
@@ -55,7 +53,7 @@ public class IncrementalPlatform : MonoBehaviour
         return 1.0f / (m_BaseTimer * m_GrowthUpgrade.m_UpgradeData.m_UpgradeBonuses.m_CurrentBonus);
     }
 
-    private void InitializeCollectable()
+    private void InitializePlatform()
     {
         m_CurrencyToModify = StatsManager.m_Instance.FindStatContainer
             (StatsManager.GameCurrencyType.Coins, m_CollectableType).GetComponent<GameCurrency>();
@@ -63,11 +61,8 @@ public class IncrementalPlatform : MonoBehaviour
         m_ExpToModify = StatsManager.m_Instance.FindStatContainer
             (StatsManager.GameCurrencyType.Experience, m_CollectableType).GetComponent<Experience>();
 
-        m_Upgrades = StatsManager.m_Instance.FindUpgrades(m_CollectableType);
-
-        // todo: improve the search of this?
-        m_GrowthUpgrade = m_Upgrades
-            .Find(search => search.GetComponent<Upgrade>().m_UpgradeData.m_UpgradeName.Contains("Growth"))
+        m_GrowthUpgrade = StatsManager.m_Instance
+            .FindUpgrade(m_CollectableType, StatsManager.NonCurrencyUpgrades.GrowthRate)
             .GetComponent<Upgrade>();
     }
 }

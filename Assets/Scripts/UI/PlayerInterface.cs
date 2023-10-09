@@ -14,7 +14,7 @@ public class PlayerInterface : MonoBehaviour
     private void Start()
     {
         m_CurrencyNumber.text = StatsManager.m_Instance.FindStatContainer(m_DisplayWhatCurr, m_DisplayWhatColl)
-            .GetComponent<GameCurrency>().m_Currency.m_TotalCount.ToString();
+            .GetComponent<GameCurrency>().m_Currency.m_TotalValue.ToString();
     }
 
     public void UpdateText(string text)

@@ -113,6 +113,25 @@ public class StatsManager : MonoBehaviour, ISavableData
         return res;
     }
 
+    // there shouldn't be more than 1 of a specific 
+    public GameCurrency FindGameCurrency(Collectable.CollectableType ct)
+    {
+        GameCurrency res = null;
+
+        var cont = m_LoadedDataNodes.FindAll(s => s.GetComponent<GameCurrency>() != null);
+        res = cont.Find(s => 
+        s.GetComponent<GameCurrency>().m_Currency.m_CollectableType == ct).GetComponent<GameCurrency>();
+
+        return res;
+    }
+
+    public GameObject FindUpgrade(Collectable.CollectableType type, NonCurrencyUpgrades ncu)
+    {
+        var cont = m_LoadedDataNodes.FindAll(searched => searched.GetComponent<Upgrade>() != null);
+        return cont.Find(s => s.GetComponent<Upgrade>().m_UpgradeData.m_CollectableType == type &&
+                                s.GetComponent<Upgrade>().m_UpgradeData.m_NonCurrType == ncu);
+    }
+
     public List<GameObject> FindUpgrades(Collectable.CollectableType type)
     {
         List<GameObject> res = new List<GameObject>();
@@ -124,10 +143,25 @@ public class StatsManager : MonoBehaviour, ISavableData
 
 public abstract class Data
 {
+    // this might overflow but this is mostly for debugging
+    public double m_TotalValue;
+
+    // How many (in current rank) e.g. 0-9
+    public int m_Value;
+
+    // Current tenths position e.g. 10s, 100s, 1000s...
+    [Min(0)]
+    public int m_Rank;
+
     // What this data container affects
     public StatsManager.GameCurrencyType m_CurrencyType;
 
     // What this collectible type is (there will eventually be more than 1
     // type of collectible)
     public Collectable.CollectableType m_CollectableType;
+
+    public virtual void UpdateValue(double toAdd)
+    {
+        m_TotalValue += toAdd;
+    }
 }

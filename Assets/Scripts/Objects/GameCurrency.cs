@@ -10,42 +10,32 @@ public class GameCurrency : MonoBehaviour, ISavableData
     public void SaveData(ref GameData data)
     {
         CurrencyData toSave = data.FindGameCurrency(m_Currency.m_CurrencyType);
-        toSave.m_Count = m_Currency.m_Count;
+        toSave.m_Value = m_Currency.m_Value;
         toSave.m_Rank = m_Currency.m_Rank;
-        toSave.m_TotalCount = m_Currency.m_TotalCount;
+        toSave.m_TotalValue = m_Currency.m_TotalValue;
     }
 
     public void LoadData(GameData data)
     {
         CurrencyData toLoad = data.FindGameCurrency(m_Currency.m_CurrencyType);
-        m_Currency.m_Count = toLoad.m_Count;
+        m_Currency.m_Value = toLoad.m_Value;
         m_Currency.m_Rank = toLoad.m_Rank;
-        m_Currency.m_TotalCount = toLoad.m_TotalCount;
+        m_Currency.m_TotalValue = toLoad.m_TotalValue;
     }
 
-    public void UpdateCurrency(int toAdd)
+    public void UpdateCurrency(int val)
     {
-        m_Currency.m_TotalCount += toAdd;
+        m_Currency.UpdateValue(val);
     }
 }
 
 [System.Serializable]
 public class CurrencyData : Data
 {
-    // this might overflow but this is mostly for debugging
-    public int m_TotalCount;
-
-    // How many (in current rank) e.g. 0-9
-    public int m_Count;
-
-    // Current tenths position e.g. 10s, 100s, 1000s...
-    [Min(0)]
-    public int m_Rank;
-
     public CurrencyData()
     {
-        m_TotalCount = 0;
-        m_Count = 0;
+        m_TotalValue = 0;
+        m_Value = 0;
         m_Rank = 0;
         m_CurrencyType = StatsManager.GameCurrencyType.None;
         m_CollectableType = Collectable.CollectableType.None;
@@ -53,9 +43,14 @@ public class CurrencyData : Data
 
     public void Save(CurrencyData other)
     {
-        m_TotalCount = other.m_TotalCount;
-        m_Count = other.m_Count;
+        m_TotalValue = other.m_TotalValue;
+        m_Value = other.m_Value;
         m_Rank = other.m_Rank;
         m_CurrencyType = other.m_CurrencyType;
+    }
+
+    public override void UpdateValue(double toAdd)
+    {
+        base.UpdateValue(toAdd);
     }
 }

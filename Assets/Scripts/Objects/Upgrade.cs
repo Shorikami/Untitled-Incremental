@@ -119,34 +119,8 @@ public class UpgradeData : Data
             return false;
         }
 
-        currToModify = StatsManager.m_Instance.FindStatContainer(m_CurrencyType, m_CollectableType).GetComponent<GameCurrency>();
-
-        //switch (m_CurrencyType)
-        //{
-        //
-        //    case StatsManager.GameCurrencyType.None:
-        //
-        //        // todo: improve deciding on what currency to modify if the game currency type is specified as none
-        //        StatsManager.GameCurrencyType toFind = StatsManager.GameCurrencyType.None;
-        //        switch (m_NonCurrType)
-        //        {
-        //            case StatsManager.NonCurrencyUpgrades.DefaultGrowthRate:
-        //                toFind = StatsManager.GameCurrencyType.Coins;
-        //                break;
-        //        }
-        //
-        //        if (toFind == StatsManager.GameCurrencyType.None)
-        //            Debug.LogError("Error when attempting to buy upgrade level! Currency type is still none at this point."); 
-        //
-        //        currToModify = StatsManager.m_Instance.FindContainer<GameCurrency>(toFind).GetComponent<GameCurrency>();
-        //        break;
-        //
-        //    default:
-        //        currToModify = StatsManager.m_Instance.FindContainer<GameCurrency>(m_CurrencyType).GetComponent<GameCurrency>();
-        //        break;
-        //}
-
-        return currToModify.m_Currency.m_TotalCount >= Cost();
+        currToModify = StatsManager.m_Instance.FindGameCurrency(m_CollectableType);
+        return currToModify.m_Currency.m_TotalValue >= Cost();
     }
 
     public double Cost()

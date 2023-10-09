@@ -13,22 +13,15 @@ public class Experience : MonoBehaviour, ISavableData
     public void LoadData(GameData data)
     {
         ExperienceData toLoad = data.FindExperienceType(m_ExpData.m_CurrencyType);
-        m_ExpData.m_TotalExperience = toLoad.m_TotalExperience;
+        m_ExpData.m_TotalValue = toLoad.m_TotalValue;
         CalculateLevel();
-    }
-
-    public void AddExperience(int exp)
-    {
-        m_ExpData.m_TotalExperience += exp;
-        m_ExpData.m_CurrExp += exp;
-        CalculateForNextLevel();
     }
 
     // Calculate level on start up (after loading)
     public void CalculateLevel()
     {
         // early break if this instance is a new game
-        if (m_ExpData.m_TotalExperience <= 0)
+        if (m_ExpData.m_TotalValue <= 0)
             return;
 
         // TODO: make this more efficient. don't think looping this
@@ -58,14 +51,18 @@ public class Experience : MonoBehaviour, ISavableData
 
         return leveledUp;
     }
+
+    public void AddExperience(int exp)
+    {
+        m_ExpData.m_TotalValue += exp;
+        m_ExpData.m_CurrExp += exp;
+        CalculateForNextLevel();
+    }
 }
 
 [System.Serializable]
 public class ExperienceData : Data
 {
-    // TODO: Eventually crunch this down to handle super big numbers
-    public int m_TotalExperience;
-
     public int m_CurrLevel;
     public int m_CurrExp;
 
@@ -78,9 +75,14 @@ public class ExperienceData : Data
 
     public void Save(ExperienceData other)
     {
-        m_TotalExperience = other.m_TotalExperience;
+        m_TotalValue = other.m_TotalValue;
         m_CurrLevel = other.m_CurrLevel;
         m_CurrExp = other.m_CurrExp;
         m_CurrencyType = other.m_CurrencyType;
+    }
+
+    public override void UpdateValue(double toAdd)
+    {
+        base.UpdateValue(toAdd);
     }
 }

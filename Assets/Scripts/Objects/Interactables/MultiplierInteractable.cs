@@ -42,7 +42,7 @@ public class MultiplierInteractable : ButtonInteractable
                 // update the value of the currency that was used to buy this upgrade
                 buying.UpdateCurrency(-m_UpgrToHandle.m_UpgradeData.IntCost());
                 StatsManager.m_Instance.Player.
-                    GetComponent<PlayerController>().PlayerUI.UpdateText(buying.m_Currency.m_TotalCount.ToString());
+                    GetComponent<PlayerController>().PlayerUI.UpdateText(buying.m_Currency.m_TotalValue.ToString());
 
                 // increase level by 1 (do this last)
                 m_UpgrToHandle.m_UpgradeData.m_CurrLevel += 1;
