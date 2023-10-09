@@ -47,7 +47,7 @@ public class BoardPanel : MonoBehaviour
         List<Upgrade> upgrades = StatsManager.m_Instance.FindUpgrades(m_CurrencyDisplay);
 
         foreach (Upgrade ugr in upgrades)
-            m_Upgrades.Add(CreateNewUpgrade(ugr.m_UpgradeData));
+            m_Upgrades.Add(CreateNewUpgrade(ugr.m_UpgradeData, m_PanelContent.transform));
 
         //m_Upgrades.Add(CreateNewUpgrade("test", "lorem ipsum", 0, 100));
     }
@@ -56,12 +56,24 @@ public class BoardPanel : MonoBehaviour
     {
         m_PanelContent.GetComponent<VerticalLayoutGroup>().spacing = m_Spacing;
 
+        List<Upgrade> upgrades = StatsManager.m_Instance.FindUpgrades(m_CurrencyDisplay);
+        int iter = 0;
 
+        GameObject currHorizPanel = null;
+
+        foreach (Upgrade ugr in upgrades)
+        {
+            if (iter % 2 == 0)
+                currHorizPanel = Instantiate(m_HorizontalBlankPrefab, m_PanelContent.transform);
+
+            m_Upgrades.Add(CreateNewUpgrade(ugr.m_UpgradeData, currHorizPanel.transform));
+            ++iter;
+        }
     }
 
-    private GameObject CreateNewUpgrade(UpgradeData loadedUpgr)
+    private GameObject CreateNewUpgrade(UpgradeData loadedUpgr, Transform parent)
     {
-        GameObject upgr = Instantiate(m_UpgradePrefab, m_PanelContent.transform);
+        GameObject upgr = Instantiate(m_UpgradePrefab, parent);
         upgr.GetComponent<Upgrade>().m_CurrencyPanel = this.gameObject;
 
         upgr.GetComponent<Upgrade>().m_UpgradeData = loadedUpgr;

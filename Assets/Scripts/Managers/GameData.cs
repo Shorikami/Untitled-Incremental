@@ -47,8 +47,9 @@ public class GameData
         return m_GameCurrencies.Find(searched => searched.m_CurrencyType == type);
     }
 
-    public UpgradeData FindUpgrade(string name)
+    public UpgradeData FindUpgrade(UpgradeData upgr)
     {
-        return m_AvailableUpgrades.Find(searched => searched.m_UpgradeName.CompareTo(name) == 0);
+        return m_AvailableUpgrades.Find(searched => searched.m_UpgradeName.CompareTo(upgr.m_UpgradeName) == 0 &&
+        searched.m_BoughtWith == upgr.m_BoughtWith);
     }
 }
