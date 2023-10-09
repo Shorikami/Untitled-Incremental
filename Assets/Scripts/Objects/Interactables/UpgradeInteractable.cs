@@ -35,7 +35,7 @@ public class UpgradeInteractable : ButtonInteractable
         m_UpgradeStats = transform.parent.GetComponent<Upgrade>();
 
         // this is awful
-        m_BoardPanel = transform.parent.parent.parent.parent.parent.parent.GetComponent<BoardPanel>();
+        m_BoardPanel = transform.GetComponentInParent<BoardPanel>();
         m_UpgradeDisplay = m_BoardPanel.m_UpgradeDisplay;
     }
 

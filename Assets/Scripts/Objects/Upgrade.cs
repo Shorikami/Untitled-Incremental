@@ -11,7 +11,7 @@ public class Upgrade : MonoBehaviour, ISavableData
 
     public void SaveData(ref GameData data)
     {
-        UpgradeData upgr = data.FindUpgrade(m_UpgradeData.m_UpgradeName);
+        UpgradeData upgr = data.FindUpgrade(m_UpgradeData);
         upgr.m_CurrLevel = m_UpgradeData.m_CurrLevel;
         upgr.m_MaxLevel = m_UpgradeData.m_MaxLevel;
         upgr.m_BaseCost = m_UpgradeData.m_BaseCost;
@@ -25,7 +25,7 @@ public class Upgrade : MonoBehaviour, ISavableData
 
     public void LoadData(GameData data)
     {
-        UpgradeData upgr = data.FindUpgrade(m_UpgradeData.m_UpgradeName);
+        UpgradeData upgr = data.FindUpgrade(m_UpgradeData);
         m_UpgradeData.m_CurrLevel = upgr.m_CurrLevel;
         m_UpgradeData.m_MaxLevel = upgr.m_MaxLevel;
         m_UpgradeData.m_BaseCost = upgr.m_BaseCost;

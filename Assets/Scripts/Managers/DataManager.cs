@@ -180,6 +180,69 @@ public class DataManager : MonoBehaviour
 
         m_GameData.m_AvailableUpgrades.Add(up.m_UpgradeData);
         StatsManager.m_Instance.m_LoadedDataNodes.Add(gO);
+
+        gO = Instantiate(m_EmptyCurrencyPrefab, StatsManager.m_Instance.gameObject.transform);
+        gO.AddComponent<Upgrade>();
+        up = gO.GetComponent<Upgrade>();
+
+        up.m_UpgradeData = new UpgradeData();
+        up.m_UpgradeData.m_UpgradeBonuses = new UpgradeData.Bonus();
+        up.m_UpgradeData.m_UpgradeName = "Speed+";
+        up.m_UpgradeData.m_Description = "Increase movement speed by 10% per level.";
+        up.m_UpgradeData.m_CurrLevel = 0;
+        up.m_UpgradeData.m_MaxLevel = 10;
+        up.m_UpgradeData.m_BaseCost = 1500;
+        up.m_UpgradeData.m_UpgradeBonuses.m_BonusMultiplier = 0.1f;
+        up.m_UpgradeData.m_CurrencyType = StatsManager.GameCurrencyType.Perks;
+        up.m_UpgradeData.m_BoughtWith = StatsManager.GameCurrencyType.Perks;
+        up.m_UpgradeData.m_NonCurrType = StatsManager.NonCurrencyUpgrades.MoveSpeed;
+        up.m_UpgradeData.m_CollectableType = Collectable.CollectableType.Default;
+        StatsManager.m_Instance.UpdateMultiplier(up.m_UpgradeData, up.m_UpgradeData.m_UpgradeBonuses.m_CurrentBonus);
+
+        m_GameData.m_AvailableUpgrades.Add(up.m_UpgradeData);
+        StatsManager.m_Instance.m_LoadedDataNodes.Add(gO);
+
+        gO = Instantiate(m_EmptyCurrencyPrefab, StatsManager.m_Instance.gameObject.transform);
+        gO.AddComponent<Upgrade>();
+        up = gO.GetComponent<Upgrade>();
+
+        up.m_UpgradeData = new UpgradeData();
+        up.m_UpgradeData.m_UpgradeBonuses = new UpgradeData.Bonus();
+        up.m_UpgradeData.m_UpgradeName = "Speed+";
+        up.m_UpgradeData.m_Description = "Increase movement speed by 10% per level.";
+        up.m_UpgradeData.m_CurrLevel = 0;
+        up.m_UpgradeData.m_MaxLevel = 10;
+        up.m_UpgradeData.m_BaseCost = 1500;
+        up.m_UpgradeData.m_UpgradeBonuses.m_BonusMultiplier = 0.1f;
+        up.m_UpgradeData.m_CurrencyType = StatsManager.GameCurrencyType.Perks;
+        up.m_UpgradeData.m_BoughtWith = StatsManager.GameCurrencyType.Perks;
+        up.m_UpgradeData.m_NonCurrType = StatsManager.NonCurrencyUpgrades.MoveSpeed;
+        up.m_UpgradeData.m_CollectableType = Collectable.CollectableType.Default;
+        StatsManager.m_Instance.UpdateMultiplier(up.m_UpgradeData, up.m_UpgradeData.m_UpgradeBonuses.m_CurrentBonus);
+
+        m_GameData.m_AvailableUpgrades.Add(up.m_UpgradeData);
+        StatsManager.m_Instance.m_LoadedDataNodes.Add(gO);
+
+        gO = Instantiate(m_EmptyCurrencyPrefab, StatsManager.m_Instance.gameObject.transform);
+        gO.AddComponent<Upgrade>();
+        up = gO.GetComponent<Upgrade>();
+
+        up.m_UpgradeData = new UpgradeData();
+        up.m_UpgradeData.m_UpgradeBonuses = new UpgradeData.Bonus();
+        up.m_UpgradeData.m_UpgradeName = "Speed+";
+        up.m_UpgradeData.m_Description = "Increase movement speed by 10% per level.";
+        up.m_UpgradeData.m_CurrLevel = 0;
+        up.m_UpgradeData.m_MaxLevel = 10;
+        up.m_UpgradeData.m_BaseCost = 1500;
+        up.m_UpgradeData.m_UpgradeBonuses.m_BonusMultiplier = 0.1f;
+        up.m_UpgradeData.m_CurrencyType = StatsManager.GameCurrencyType.Perks;
+        up.m_UpgradeData.m_BoughtWith = StatsManager.GameCurrencyType.Perks;
+        up.m_UpgradeData.m_NonCurrType = StatsManager.NonCurrencyUpgrades.MoveSpeed;
+        up.m_UpgradeData.m_CollectableType = Collectable.CollectableType.Default;
+        StatsManager.m_Instance.UpdateMultiplier(up.m_UpgradeData, up.m_UpgradeData.m_UpgradeBonuses.m_CurrentBonus);
+
+        m_GameData.m_AvailableUpgrades.Add(up.m_UpgradeData);
+        StatsManager.m_Instance.m_LoadedDataNodes.Add(gO);
     }
 
     public void Save()
