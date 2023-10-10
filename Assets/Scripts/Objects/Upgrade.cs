@@ -5,6 +5,9 @@ using UnityEngine;
 public class Upgrade : MonoBehaviour, ISavableData
 {
     public GameObject m_CurrencyPanel;
+    public GameObject m_MainButton;
+    public GameObject m_AutobuyButton;
+
     public UpgradeData m_UpgradeData;
 
     public enum Operation { Add = 0, Multiply };

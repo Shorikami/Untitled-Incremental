@@ -19,6 +19,16 @@ public class BoardPanel : MonoBehaviour
 
     [SerializeField] private StatsManager.GameCurrencyType m_CurrencyDisplay;
 
+    public bool m_ModifyLayout = false;
+    [Min(0)] public int m_PreferredWidth;
+    [Min(0)] public int m_PreferredHeight;
+
+    [Min(0)] public float m_MainButtonSize;
+    public float m_MainButtonPosY;
+
+    [Min(0)] public float m_AutobuyButtonSize;
+    public float m_AutobuyButtonPosY;
+
     private List<GameObject> m_Upgrades = new List<GameObject>();
 
     private void Awake()
@@ -74,9 +84,26 @@ public class BoardPanel : MonoBehaviour
     private GameObject CreateNewUpgrade(UpgradeData loadedUpgr, Transform parent)
     {
         GameObject upgr = Instantiate(m_UpgradePrefab, parent);
-        upgr.GetComponent<Upgrade>().m_CurrencyPanel = this.gameObject;
 
-        upgr.GetComponent<Upgrade>().m_UpgradeData = loadedUpgr;
+        Upgrade instancedUgr = upgr.GetComponent<Upgrade>();
+
+        instancedUgr.m_CurrencyPanel = this.gameObject;
+        instancedUgr.m_UpgradeData = loadedUpgr;
+
+        if (m_ModifyLayout)
+        {
+            upgr.AddComponent<LayoutElement>();
+            upgr.GetComponent<LayoutElement>().preferredWidth = m_PreferredWidth;
+            upgr.GetComponent<LayoutElement>().preferredHeight = m_PreferredHeight;
+
+            instancedUgr.m_MainButton.GetComponent<RectTransform>().sizeDelta = new Vector2(0, m_MainButtonSize);
+            instancedUgr.m_AutobuyButton.GetComponent<RectTransform>().sizeDelta = new Vector2(0, m_AutobuyButtonSize);
+
+            instancedUgr.m_MainButton.GetComponent<RectTransform>().anchoredPosition3D = new Vector3(0, m_MainButtonPosY, 0);
+
+            Vector3 oldPos = instancedUgr.m_AutobuyButton.GetComponent<RectTransform>().localPosition;
+            instancedUgr.m_AutobuyButton.GetComponent<RectTransform>().anchoredPosition3D = new Vector3(oldPos.x, m_AutobuyButtonPosY, oldPos.z);
+        }
 
         return upgr;
     }

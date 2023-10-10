@@ -1563,6 +1563,8 @@ MonoBehaviour:
   m_Level: {fileID: 6297322771701721130}
   m_CostText: {fileID: 8400416306218004465}
   m_BonusText: {fileID: 1751224815732852969}
+  m_BuyOne: {fileID: 8791793361754147787}
+  m_BuyMax: {fileID: 7861505393981777878}
 --- !u!1 &7638654373256539255
 GameObject:
   m_ObjectHideFlags: 0

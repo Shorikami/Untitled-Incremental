@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class UpgradePanel : MonoBehaviour
@@ -10,6 +11,9 @@ public class UpgradePanel : MonoBehaviour
     public TextMeshProUGUI m_Level;
     public TextMeshProUGUI m_CostText;
     public TextMeshProUGUI m_BonusText;
+
+    public Button m_BuyOne;
+    public Button m_BuyMax;
 
     public void UpdateText(Upgrade upgr)
     {

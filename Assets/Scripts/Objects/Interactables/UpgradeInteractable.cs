@@ -44,8 +44,14 @@ public class UpgradeInteractable : ButtonInteractable
         if (!m_BoardPanel.m_UpgradeDisplay.activeSelf)
         {
             m_UpgradeDisplay.GetComponent<UpgradePanel>().UpdateText(m_UpgradeStats);
-            FindChildWithName(m_UpgradeDisplay, "Buy One").GetComponent<MultiplierInteractable>().UpdateHandledUpgrade(m_UpgradeStats);
-            FindChildWithName(m_UpgradeDisplay, "Buy Max").GetComponent<MultiplierInteractable>().UpdateHandledUpgrade(m_UpgradeStats);
+
+            m_UpgradeDisplay.GetComponent<UpgradePanel>()
+                .m_BuyOne.gameObject.GetComponent<MultiplierInteractable>()
+                .UpdateHandledUpgrade(m_UpgradeStats);
+
+            m_UpgradeDisplay.GetComponent<UpgradePanel>()
+                .m_BuyMax.gameObject.GetComponent<MultiplierInteractable>()
+                .UpdateHandledUpgrade(m_UpgradeStats);
         }
 
         m_BoardPanel.ToggleUpgradeMenu(true);

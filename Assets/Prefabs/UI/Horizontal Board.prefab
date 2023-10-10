@@ -577,6 +577,8 @@ MonoBehaviour:
   m_Level: {fileID: 2499703032037781833}
   m_CostText: {fileID: 7062574771366573405}
   m_BonusText: {fileID: 3722908097078425947}
+  m_BuyOne: {fileID: 4867820906019836357}
+  m_BuyMax: {fileID: 7501638629684920098}
 --- !u!1 &4394215766332660858
 GameObject:
   m_ObjectHideFlags: 0
@@ -1489,7 +1491,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &5869201923865877454
 MonoBehaviour:
   m_ObjectHideFlags: 0
