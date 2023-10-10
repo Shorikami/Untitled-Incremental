@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 [System.Serializable]
 public class StatsManager : MonoBehaviour, ISavableData
@@ -87,6 +88,18 @@ public class StatsManager : MonoBehaviour, ISavableData
             m_NonCurrMultipliers[data.m_NonCurrType] = val;
     }
 
+    public float FindAllUpgradeMultipliers(GameCurrencyType gct, bool checkBoughtWith = true)
+    {
+        List<Upgrade> validUpgrades = FindUpgrades(gct, checkBoughtWith);
+        return validUpgrades.ConvertAll(x => x.m_UpgradeData.m_UpgradeBonuses.m_CurrentBonus).Aggregate((a, b) => a * b);
+    }
+
+    public float FindAllUpgradeMultipliers(NonCurrencyUpgrades ncu)
+    {
+        List<Upgrade> validUpgrades = FindUpgrades(ncu);
+        return validUpgrades.ConvertAll(x => x.m_UpgradeData.m_UpgradeBonuses.m_CurrentBonus).Aggregate((a, b) => a * b);
+    }
+
     public void RefreshPlayer()
     {
         m_Player =  GameObject.FindGameObjectWithTag("Player");
@@ -113,14 +126,34 @@ public class StatsManager : MonoBehaviour, ISavableData
         return res;
     }
 
-    // there shouldn't be more than 1 of a specific 
-    public GameCurrency FindGameCurrency(Collectable.CollectableType ct)
+    // there shouldn't be more than 1 of a specific currency based on collectable type
+    public GameCurrency FindGameCurrency(Collectable.CollectableType ct, GameCurrencyType gct = GameCurrencyType.None)
     {
         GameCurrency res = null;
 
         var cont = m_LoadedDataNodes.FindAll(s => s.GetComponent<GameCurrency>() != null);
-        res = cont.Find(s => 
-        s.GetComponent<GameCurrency>().m_Currency.m_CollectableType == ct).GetComponent<GameCurrency>();
+
+        if (gct == GameCurrencyType.None)
+            res = cont.Find(s => 
+            s.GetComponent<GameCurrency>().m_Currency.m_CollectableType == ct)
+                .GetComponent<GameCurrency>();
+
+        else
+            res = cont.Find(s =>
+            s.GetComponent<GameCurrency>().m_Currency.m_CollectableType == ct && 
+            s.GetComponent<GameCurrency>().m_Currency.m_CurrencyType == gct)
+                .GetComponent<GameCurrency>();
+
+        return res;
+    }
+
+    public Experience FindExperience(Collectable.CollectableType ct)
+    {
+        Experience res = null;
+
+        var cont = m_LoadedDataNodes.FindAll(s => s.GetComponent<Experience>() != null);
+        res = cont.Find(s =>
+        s.GetComponent<Experience>().m_ExpData.m_CollectableType == ct).GetComponent<Experience>();
 
         return res;
     }
@@ -140,11 +173,18 @@ public class StatsManager : MonoBehaviour, ISavableData
         return res;
     }
 
-    public List<Upgrade> FindUpgrades(GameCurrencyType gct)
+    public List<Upgrade> FindUpgrades(GameCurrencyType gct, bool checkBoughtWith = true)
     {
         List<Upgrade> res = new List<Upgrade>();
         var cont = m_LoadedDataNodes.FindAll(searched => searched.GetComponent<Upgrade>() != null);
-        var matching = cont.FindAll(s => s.GetComponent<Upgrade>().m_UpgradeData.m_BoughtWith == gct);
+
+        List<GameObject> matching = null;
+
+        if (checkBoughtWith)
+            matching = cont.FindAll(s => s.GetComponent<Upgrade>().m_UpgradeData.m_BoughtWith == gct);
+
+        else
+            matching = cont.FindAll(s => s.GetComponent<Upgrade>().m_UpgradeData.m_CurrencyType == gct);
 
         foreach (GameObject gO in matching)
             res.Add(gO.GetComponent<Upgrade>());

@@ -60,12 +60,25 @@ public class DataManager : MonoBehaviour
         StatsManager.m_Instance.m_LoadedDataNodes.Add(gO);
 
         gO = Instantiate(m_EmptyCurrencyPrefab, StatsManager.m_Instance.gameObject.transform);
+        gO.AddComponent<GameCurrency>();
+        gc = gO.GetComponent<GameCurrency>();
+
+        gc.m_Currency = new CurrencyData();
+        gc.m_Currency.m_CurrencyType = StatsManager.GameCurrencyType.Perks;
+        gc.m_Currency.m_CollectableType = Collectable.CollectableType.Default;
+        gc.m_Currency.m_Value = 0;
+
+        m_GameData.m_GameCurrencies.Add(gc.m_Currency);
+        StatsManager.m_Instance.m_LoadedDataNodes.Add(gO);
+
+        gO = Instantiate(m_EmptyCurrencyPrefab, StatsManager.m_Instance.gameObject.transform);
         gO.AddComponent<Experience>();
         Experience ex = gO.GetComponent<Experience>();
 
         ex.m_ExpData = new ExperienceData();
         ex.m_ExpData.m_CurrencyType = StatsManager.GameCurrencyType.Experience;
         ex.m_ExpData.m_CollectableType = Collectable.CollectableType.Default;
+        ex.m_ExpData.m_PerkType = StatsManager.GameCurrencyType.Perks;
         ex.m_ExpData.m_TotalValue = 0;
 
         m_GameData.m_ExperienceTypes.Add(ex.m_ExpData);
@@ -82,6 +95,7 @@ public class DataManager : MonoBehaviour
         up.m_UpgradeData.m_CurrLevel = 0;
         up.m_UpgradeData.m_MaxLevel = 500;
         up.m_UpgradeData.m_BaseCost = 5;
+        up.m_UpgradeData.m_StaticCost = false;
         up.m_UpgradeData.m_UpgradeBonuses.m_RequiredLevels = 25;
         up.m_UpgradeData.m_UpgradeBonuses.m_LevelBonus = 2.0f;
         up.m_UpgradeData.m_UpgradeBonuses.m_BonusMultiplier = 0.25f;
@@ -105,6 +119,7 @@ public class DataManager : MonoBehaviour
         up.m_UpgradeData.m_CurrLevel = 0;
         up.m_UpgradeData.m_MaxLevel = 10;
         up.m_UpgradeData.m_BaseCost = 10;
+        up.m_UpgradeData.m_StaticCost = false;
         up.m_UpgradeData.m_UpgradeBonuses.m_BonusMultiplier = 0.20f;
         up.m_UpgradeData.m_CurrencyType = StatsManager.GameCurrencyType.Coins;
         up.m_UpgradeData.m_BoughtWith = StatsManager.GameCurrencyType.Coins;
@@ -127,6 +142,7 @@ public class DataManager : MonoBehaviour
         up.m_UpgradeData.m_CurrLevel = 0;
         up.m_UpgradeData.m_MaxLevel = 500;
         up.m_UpgradeData.m_BaseCost = 7;
+        up.m_UpgradeData.m_StaticCost = false;
         up.m_UpgradeData.m_UpgradeBonuses.m_RequiredLevels = 25;
         up.m_UpgradeData.m_UpgradeBonuses.m_LevelBonus = 2.0f;
         up.m_UpgradeData.m_UpgradeBonuses.m_BonusMultiplier = 0.25f;
@@ -150,6 +166,7 @@ public class DataManager : MonoBehaviour
         up.m_UpgradeData.m_CurrLevel = 0;
         up.m_UpgradeData.m_MaxLevel = 20;
         up.m_UpgradeData.m_BaseCost = 10000;
+        up.m_UpgradeData.m_StaticCost = false;
         up.m_UpgradeData.m_UpgradeBonuses.m_BonusMultiplier = 0.1f;
         up.m_UpgradeData.m_CurrencyType = StatsManager.GameCurrencyType.Coins;
         up.m_UpgradeData.m_BoughtWith = StatsManager.GameCurrencyType.Coins;
@@ -171,6 +188,7 @@ public class DataManager : MonoBehaviour
         up.m_UpgradeData.m_CurrLevel = 0;
         up.m_UpgradeData.m_MaxLevel = 10;
         up.m_UpgradeData.m_BaseCost = 1500;
+        up.m_UpgradeData.m_StaticCost = false;
         up.m_UpgradeData.m_UpgradeBonuses.m_BonusMultiplier = 0.1f;
         up.m_UpgradeData.m_CurrencyType = StatsManager.GameCurrencyType.Coins;
         up.m_UpgradeData.m_BoughtWith = StatsManager.GameCurrencyType.Coins;
@@ -187,13 +205,36 @@ public class DataManager : MonoBehaviour
 
         up.m_UpgradeData = new UpgradeData();
         up.m_UpgradeData.m_UpgradeBonuses = new UpgradeData.Bonus();
-        up.m_UpgradeData.m_UpgradeName = "Speed+";
-        up.m_UpgradeData.m_Description = "Increase movement speed by 10% per level.";
+        up.m_UpgradeData.m_UpgradeName = "Perks Coins Value";
+        up.m_UpgradeData.m_Description = "Increases value of coins by +10% per level.";
         up.m_UpgradeData.m_CurrLevel = 0;
-        up.m_UpgradeData.m_MaxLevel = 10;
-        up.m_UpgradeData.m_BaseCost = 1500;
+        up.m_UpgradeData.m_MaxLevel = 100;
+        up.m_UpgradeData.m_BaseCost = 1;
+        up.m_UpgradeData.m_StaticCost = true;
         up.m_UpgradeData.m_UpgradeBonuses.m_BonusMultiplier = 0.1f;
-        up.m_UpgradeData.m_CurrencyType = StatsManager.GameCurrencyType.Perks;
+        up.m_UpgradeData.m_CurrencyType = StatsManager.GameCurrencyType.Coins;
+        up.m_UpgradeData.m_BoughtWith = StatsManager.GameCurrencyType.Perks;
+        up.m_UpgradeData.m_NonCurrType = StatsManager.NonCurrencyUpgrades.Invalid;
+        up.m_UpgradeData.m_CollectableType = Collectable.CollectableType.Default;
+        StatsManager.m_Instance.UpdateMultiplier(up.m_UpgradeData, up.m_UpgradeData.m_UpgradeBonuses.m_CurrentBonus);
+
+        m_GameData.m_AvailableUpgrades.Add(up.m_UpgradeData);
+        StatsManager.m_Instance.m_LoadedDataNodes.Add(gO);
+
+        gO = Instantiate(m_EmptyCurrencyPrefab, StatsManager.m_Instance.gameObject.transform);
+        gO.AddComponent<Upgrade>();
+        up = gO.GetComponent<Upgrade>();
+
+        up.m_UpgradeData = new UpgradeData();
+        up.m_UpgradeData.m_UpgradeBonuses = new UpgradeData.Bonus();
+        up.m_UpgradeData.m_UpgradeName = "Perks EXP Value";
+        up.m_UpgradeData.m_Description = "Increases value of EXP by +10% per level.";
+        up.m_UpgradeData.m_CurrLevel = 0;
+        up.m_UpgradeData.m_MaxLevel = 100;
+        up.m_UpgradeData.m_BaseCost = 1;
+        up.m_UpgradeData.m_StaticCost = true;
+        up.m_UpgradeData.m_UpgradeBonuses.m_BonusMultiplier = 0.1f;
+        up.m_UpgradeData.m_CurrencyType = StatsManager.GameCurrencyType.Experience;
         up.m_UpgradeData.m_BoughtWith = StatsManager.GameCurrencyType.Perks;
         up.m_UpgradeData.m_NonCurrType = StatsManager.NonCurrencyUpgrades.MoveSpeed;
         up.m_UpgradeData.m_CollectableType = Collectable.CollectableType.Default;
@@ -208,34 +249,13 @@ public class DataManager : MonoBehaviour
 
         up.m_UpgradeData = new UpgradeData();
         up.m_UpgradeData.m_UpgradeBonuses = new UpgradeData.Bonus();
-        up.m_UpgradeData.m_UpgradeName = "Speed+";
+        up.m_UpgradeData.m_UpgradeName = "Perks Speed+";
         up.m_UpgradeData.m_Description = "Increase movement speed by 10% per level.";
         up.m_UpgradeData.m_CurrLevel = 0;
         up.m_UpgradeData.m_MaxLevel = 10;
-        up.m_UpgradeData.m_BaseCost = 1500;
+        up.m_UpgradeData.m_BaseCost = 1;
         up.m_UpgradeData.m_UpgradeBonuses.m_BonusMultiplier = 0.1f;
-        up.m_UpgradeData.m_CurrencyType = StatsManager.GameCurrencyType.Perks;
-        up.m_UpgradeData.m_BoughtWith = StatsManager.GameCurrencyType.Perks;
-        up.m_UpgradeData.m_NonCurrType = StatsManager.NonCurrencyUpgrades.MoveSpeed;
-        up.m_UpgradeData.m_CollectableType = Collectable.CollectableType.Default;
-        StatsManager.m_Instance.UpdateMultiplier(up.m_UpgradeData, up.m_UpgradeData.m_UpgradeBonuses.m_CurrentBonus);
-
-        m_GameData.m_AvailableUpgrades.Add(up.m_UpgradeData);
-        StatsManager.m_Instance.m_LoadedDataNodes.Add(gO);
-
-        gO = Instantiate(m_EmptyCurrencyPrefab, StatsManager.m_Instance.gameObject.transform);
-        gO.AddComponent<Upgrade>();
-        up = gO.GetComponent<Upgrade>();
-
-        up.m_UpgradeData = new UpgradeData();
-        up.m_UpgradeData.m_UpgradeBonuses = new UpgradeData.Bonus();
-        up.m_UpgradeData.m_UpgradeName = "Speed+";
-        up.m_UpgradeData.m_Description = "Increase movement speed by 10% per level.";
-        up.m_UpgradeData.m_CurrLevel = 0;
-        up.m_UpgradeData.m_MaxLevel = 10;
-        up.m_UpgradeData.m_BaseCost = 1500;
-        up.m_UpgradeData.m_UpgradeBonuses.m_BonusMultiplier = 0.1f;
-        up.m_UpgradeData.m_CurrencyType = StatsManager.GameCurrencyType.Perks;
+        up.m_UpgradeData.m_CurrencyType = StatsManager.GameCurrencyType.None;
         up.m_UpgradeData.m_BoughtWith = StatsManager.GameCurrencyType.Perks;
         up.m_UpgradeData.m_NonCurrType = StatsManager.NonCurrencyUpgrades.MoveSpeed;
         up.m_UpgradeData.m_CollectableType = Collectable.CollectableType.Default;

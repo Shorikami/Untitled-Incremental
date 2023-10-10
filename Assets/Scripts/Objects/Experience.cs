@@ -47,7 +47,8 @@ public class Experience : MonoBehaviour, ISavableData
 
         // that way the level can be applied independently from resetting
         // the required experience
-        m_ExpData.m_CurrLevel = leveledUp ? m_ExpData.m_CurrLevel + 1 : m_ExpData.m_CurrLevel;
+        if (leveledUp)
+            LevelUp();
 
         return leveledUp;
     }
@@ -58,6 +59,14 @@ public class Experience : MonoBehaviour, ISavableData
         m_ExpData.m_CurrExp += exp;
         CalculateForNextLevel();
     }
+
+    public void LevelUp()
+    {
+        ++m_ExpData.m_CurrLevel;
+        StatsManager.m_Instance.FindStatContainer(m_ExpData.m_PerkType, m_ExpData.m_CollectableType)
+            .GetComponent<GameCurrency>()
+            .UpdateCurrency(1);
+    }
 }
 
 [System.Serializable]
@@ -65,6 +74,10 @@ public class ExperienceData : Data
 {
     public int m_CurrLevel;
     public int m_CurrExp;
+
+    // what kind of level perk currency this specific EXP container affects
+    // (there may be more than 1 type of perk currency)
+    public StatsManager.GameCurrencyType m_PerkType;
 
     // Required amount of experience to level up
     // formula: 25 + (5 * currLevel * 1.05^currLevel)
@@ -78,6 +91,7 @@ public class ExperienceData : Data
         m_TotalValue = other.m_TotalValue;
         m_CurrLevel = other.m_CurrLevel;
         m_CurrExp = other.m_CurrExp;
+        m_PerkType = other.m_PerkType;
         m_CurrencyType = other.m_CurrencyType;
     }
 

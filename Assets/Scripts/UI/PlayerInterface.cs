@@ -17,8 +17,9 @@ public class PlayerInterface : MonoBehaviour
             .GetComponent<GameCurrency>().m_Currency.m_TotalValue.ToString();
     }
 
-    public void UpdateText(string text)
+    public void UpdateText(GameCurrency gc)
     {
-        m_CurrencyNumber.text = text;
+        if (m_DisplayWhatCurr == gc.m_Currency.m_CurrencyType)
+            m_CurrencyNumber.text = gc.m_Currency.m_TotalValue.ToString();
     }
 }

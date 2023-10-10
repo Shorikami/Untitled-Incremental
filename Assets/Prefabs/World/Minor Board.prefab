@@ -215,6 +215,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: Vertical
       objectReference: {fileID: 0}
+    - target: {fileID: 5496530710978559322, guid: f937cdfc990c92341916934514cd7a95, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5496530710978559322, guid: f937cdfc990c92341916934514cd7a95, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5496530710978559322, guid: f937cdfc990c92341916934514cd7a95, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6484462808559026087}
+    - target: {fileID: 5496530710978559322, guid: f937cdfc990c92341916934514cd7a95, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5496530710978559322, guid: f937cdfc990c92341916934514cd7a95, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ToggleUpgradeMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 5496530710978559322, guid: f937cdfc990c92341916934514cd7a95, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: BoardPanel, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5496530710978559322, guid: f937cdfc990c92341916934514cd7a95, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 5837964115401597285, guid: f937cdfc990c92341916934514cd7a95, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -222,6 +250,10 @@ PrefabInstance:
     - target: {fileID: 5837964115401597285, guid: f937cdfc990c92341916934514cd7a95, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6573431547169200399, guid: f937cdfc990c92341916934514cd7a95, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f937cdfc990c92341916934514cd7a95, type: 3}

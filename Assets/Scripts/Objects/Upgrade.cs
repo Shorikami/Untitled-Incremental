@@ -95,6 +95,9 @@ public class UpgradeData : Data
 
     public int m_CurrLevel, m_MaxLevel;
 
+    // whether or not this upgrade increases cost per level
+    public bool m_StaticCost;
+
     public Bonus m_UpgradeBonuses;
     public StatsManager.NonCurrencyUpgrades m_NonCurrType = StatsManager.NonCurrencyUpgrades.Invalid;
 
@@ -126,12 +129,15 @@ public class UpgradeData : Data
             return false;
         }
 
-        currToModify = StatsManager.m_Instance.FindGameCurrency(m_CollectableType);
+        currToModify = StatsManager.m_Instance.FindGameCurrency(m_CollectableType, m_BoughtWith);
         return currToModify.m_Currency.m_TotalValue >= Cost();
     }
 
     public double Cost()
     {
+        if (m_StaticCost)
+            return m_BaseCost;
+
         return System.Math.Floor(m_BaseCost + (m_BaseCost * Mathf.Pow(1.1f, m_CurrLevel)));
     }
 
