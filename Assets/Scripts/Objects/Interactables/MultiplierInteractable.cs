@@ -36,9 +36,6 @@ public class MultiplierInteractable : ButtonInteractable
                 Upgrade.UpdateMultiplier(m_UpgrToHandle, Upgrade.Operation.Add,
                     m_UpgrToHandle.m_UpgradeData.m_UpgradeBonuses.m_BonusMultiplier);
 
-                StatsManager.m_Instance.UpdateMultiplier(m_UpgrToHandle.m_UpgradeData,
-                    m_UpgrToHandle.m_UpgradeData.m_UpgradeBonuses.m_CurrentBonus);
-
                 // update the value of the currency that was used to buy this upgrade
                 buying.UpdateCurrency(-m_UpgrToHandle.m_UpgradeData.IntCost());
                 StatsManager.m_Instance.Player.

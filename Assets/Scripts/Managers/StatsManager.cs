@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Linq;
 
 [System.Serializable]
-public class StatsManager : MonoBehaviour, ISavableData
+public class StatsManager : MonoBehaviour
 {
     // THESE WILL BE STORED IN AN INSTANCED CLASS THAT IS
     // ATTACHED TO THE MANAGER (m_LoadedDataNodes, which is
@@ -32,8 +32,8 @@ public class StatsManager : MonoBehaviour, ISavableData
     public static StatsManager m_Instance { get; private set; }
 
     public List<GameObject> m_LoadedDataNodes = new List<GameObject>();
-    public Dictionary<GameCurrencyType, float> m_Multipliers = new Dictionary<GameCurrencyType, float>();
-    public SerializableDict<NonCurrencyUpgrades, float> m_NonCurrMultipliers = new SerializableDict<NonCurrencyUpgrades, float>();
+    //public Dictionary<GameCurrencyType, float> m_Multipliers = new Dictionary<GameCurrencyType, float>();
+    //public SerializableDict<NonCurrencyUpgrades, float> m_NonCurrMultipliers = new SerializableDict<NonCurrencyUpgrades, float>();
 
     private GameObject m_Player;
 
@@ -53,39 +53,6 @@ public class StatsManager : MonoBehaviour, ISavableData
         }
         m_Instance = this;
         DontDestroyOnLoad(this.gameObject);
-    }
-
-    public void SaveData(ref GameData data)
-    {
-        foreach (var keyPair in m_NonCurrMultipliers)
-        {
-            if (!data.m_NonCurrMultipliers.ContainsKey(keyPair.Key))
-                data.m_NonCurrMultipliers.Add(keyPair.Key, keyPair.Value);
-
-            else
-                data.m_NonCurrMultipliers[keyPair.Key] = keyPair.Value;
-        }
-    }
-
-    public void LoadData(GameData data)
-    {
-        foreach (var keyPair in data.m_NonCurrMultipliers)
-        {
-            if (!m_NonCurrMultipliers.ContainsKey(keyPair.Key))
-                m_NonCurrMultipliers.Add(keyPair.Key, keyPair.Value);
-
-            else
-                m_NonCurrMultipliers[keyPair.Key] = keyPair.Value;
-        }
-    }
-
-    public void UpdateMultiplier(UpgradeData data, float val)
-    {
-        if (data.m_CurrencyType != GameCurrencyType.None && data.m_NonCurrType == NonCurrencyUpgrades.Invalid)
-            m_Multipliers[data.m_CurrencyType] = val;
-
-        else
-            m_NonCurrMultipliers[data.m_NonCurrType] = val;
     }
 
     public float FindAllUpgradeMultipliers(GameCurrencyType gct, bool checkBoughtWith = true)

@@ -103,7 +103,6 @@ public class DataManager : MonoBehaviour
         up.m_UpgradeData.m_BoughtWith = StatsManager.GameCurrencyType.Coins;
         up.m_UpgradeData.m_NonCurrType = StatsManager.NonCurrencyUpgrades.Invalid;
         up.m_UpgradeData.m_CollectableType = Collectable.CollectableType.Default;
-        StatsManager.m_Instance.UpdateMultiplier(up.m_UpgradeData, up.m_UpgradeData.m_UpgradeBonuses.m_CurrentBonus);
 
         m_GameData.m_AvailableUpgrades.Add(up.m_UpgradeData);
         StatsManager.m_Instance.m_LoadedDataNodes.Add(gO);
@@ -128,7 +127,6 @@ public class DataManager : MonoBehaviour
         //StatsManager.m_Instance.UpdateMultiplier(up.m_UpgradeData, up.m_UpgradeData.m_UpgradeBonuses.m_CurrentBonus);
 
         m_GameData.m_AvailableUpgrades.Add(up.m_UpgradeData);
-        m_GameData.m_NonCurrMultipliers.Add(StatsManager.NonCurrencyUpgrades.GrowthRate, up.m_UpgradeData.m_UpgradeBonuses.m_CurrentBonus);
         StatsManager.m_Instance.m_LoadedDataNodes.Add(gO);
 
         gO = Instantiate(m_EmptyCurrencyPrefab, StatsManager.m_Instance.gameObject.transform);
@@ -150,7 +148,6 @@ public class DataManager : MonoBehaviour
         up.m_UpgradeData.m_BoughtWith = StatsManager.GameCurrencyType.Coins;
         up.m_UpgradeData.m_NonCurrType = StatsManager.NonCurrencyUpgrades.Invalid;
         up.m_UpgradeData.m_CollectableType = Collectable.CollectableType.Default;
-        StatsManager.m_Instance.UpdateMultiplier(up.m_UpgradeData, up.m_UpgradeData.m_UpgradeBonuses.m_CurrentBonus);
 
         m_GameData.m_AvailableUpgrades.Add(up.m_UpgradeData);
         StatsManager.m_Instance.m_LoadedDataNodes.Add(gO);
@@ -172,7 +169,6 @@ public class DataManager : MonoBehaviour
         up.m_UpgradeData.m_BoughtWith = StatsManager.GameCurrencyType.Coins;
         up.m_UpgradeData.m_NonCurrType = StatsManager.NonCurrencyUpgrades.PickupRange;
         up.m_UpgradeData.m_CollectableType = Collectable.CollectableType.Default;
-        StatsManager.m_Instance.UpdateMultiplier(up.m_UpgradeData, up.m_UpgradeData.m_UpgradeBonuses.m_CurrentBonus);
 
         m_GameData.m_AvailableUpgrades.Add(up.m_UpgradeData);
         StatsManager.m_Instance.m_LoadedDataNodes.Add(gO);
@@ -194,7 +190,6 @@ public class DataManager : MonoBehaviour
         up.m_UpgradeData.m_BoughtWith = StatsManager.GameCurrencyType.Coins;
         up.m_UpgradeData.m_NonCurrType = StatsManager.NonCurrencyUpgrades.MoveSpeed;
         up.m_UpgradeData.m_CollectableType = Collectable.CollectableType.Default;
-        StatsManager.m_Instance.UpdateMultiplier(up.m_UpgradeData, up.m_UpgradeData.m_UpgradeBonuses.m_CurrentBonus);
 
         m_GameData.m_AvailableUpgrades.Add(up.m_UpgradeData);
         StatsManager.m_Instance.m_LoadedDataNodes.Add(gO);
@@ -216,7 +211,6 @@ public class DataManager : MonoBehaviour
         up.m_UpgradeData.m_BoughtWith = StatsManager.GameCurrencyType.Perks;
         up.m_UpgradeData.m_NonCurrType = StatsManager.NonCurrencyUpgrades.Invalid;
         up.m_UpgradeData.m_CollectableType = Collectable.CollectableType.Default;
-        StatsManager.m_Instance.UpdateMultiplier(up.m_UpgradeData, up.m_UpgradeData.m_UpgradeBonuses.m_CurrentBonus);
 
         m_GameData.m_AvailableUpgrades.Add(up.m_UpgradeData);
         StatsManager.m_Instance.m_LoadedDataNodes.Add(gO);
@@ -238,7 +232,6 @@ public class DataManager : MonoBehaviour
         up.m_UpgradeData.m_BoughtWith = StatsManager.GameCurrencyType.Perks;
         up.m_UpgradeData.m_NonCurrType = StatsManager.NonCurrencyUpgrades.MoveSpeed;
         up.m_UpgradeData.m_CollectableType = Collectable.CollectableType.Default;
-        StatsManager.m_Instance.UpdateMultiplier(up.m_UpgradeData, up.m_UpgradeData.m_UpgradeBonuses.m_CurrentBonus);
 
         m_GameData.m_AvailableUpgrades.Add(up.m_UpgradeData);
         StatsManager.m_Instance.m_LoadedDataNodes.Add(gO);
@@ -259,7 +252,6 @@ public class DataManager : MonoBehaviour
         up.m_UpgradeData.m_BoughtWith = StatsManager.GameCurrencyType.Perks;
         up.m_UpgradeData.m_NonCurrType = StatsManager.NonCurrencyUpgrades.MoveSpeed;
         up.m_UpgradeData.m_CollectableType = Collectable.CollectableType.Default;
-        StatsManager.m_Instance.UpdateMultiplier(up.m_UpgradeData, up.m_UpgradeData.m_UpgradeBonuses.m_CurrentBonus);
 
         m_GameData.m_AvailableUpgrades.Add(up.m_UpgradeData);
         StatsManager.m_Instance.m_LoadedDataNodes.Add(gO);
@@ -348,7 +340,6 @@ public class DataManager : MonoBehaviour
             up.m_UpgradeData.m_UpgradeBonuses = new UpgradeData.Bonus();
             up.m_UpgradeData = ud;
             StatsManager.m_Instance.m_LoadedDataNodes.Add(gO);
-            StatsManager.m_Instance.UpdateMultiplier(up.m_UpgradeData, up.m_UpgradeData.m_UpgradeBonuses.m_CurrentBonus);
         }
     }
 }
