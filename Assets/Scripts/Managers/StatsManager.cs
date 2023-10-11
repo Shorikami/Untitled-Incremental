@@ -125,6 +125,17 @@ public class StatsManager : MonoBehaviour
         return res;
     }
 
+    public Experience FindExperience(GameCurrencyType gct)
+    {
+        Experience res = null;
+
+        var cont = m_LoadedDataNodes.FindAll(s => s.GetComponent<Experience>() != null);
+        res = cont.Find(s =>
+        s.GetComponent<Experience>().m_ExpData.m_CurrencyType == gct).GetComponent<Experience>();
+
+        return res;
+    }
+
     public GameObject FindUpgrade(Collectable.CollectableType type, NonCurrencyUpgrades ncu)
     {
         var cont = m_LoadedDataNodes.FindAll(searched => searched.GetComponent<Upgrade>() != null);

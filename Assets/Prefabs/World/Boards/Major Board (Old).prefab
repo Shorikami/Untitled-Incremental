@@ -532,7 +532,7 @@ GameObject:
   - component: {fileID: 4968873447262523546}
   - component: {fileID: 6484462808559026087}
   m_Layer: 0
-  m_Name: Major Board 1
+  m_Name: Major Board (Old)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

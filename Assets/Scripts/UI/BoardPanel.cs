@@ -13,6 +13,7 @@ public class BoardPanel : MonoBehaviour
 
     [SerializeField] private GameObject m_UpgradePrefab;
     [SerializeField] private GameObject m_HorizontalBlankPrefab;
+    [SerializeField] private GameObject m_BoardLock;
 
     [SerializeField] private bool m_IsVertical = false;
     [SerializeField][Min(0)] private float m_Spacing;
@@ -29,6 +30,12 @@ public class BoardPanel : MonoBehaviour
     [Min(0)] public float m_AutobuyButtonSize;
     public float m_AutobuyButtonPosY;
 
+    // What level the player needs to be in order to unlock this board
+    public bool m_Locked;
+    public int m_RequiredLevel;
+    public StatsManager.GameCurrencyType m_ExpTypeReq;
+    private Experience m_CheckingThisExp;
+
     private List<GameObject> m_Upgrades = new List<GameObject>();
 
     private void Awake()
@@ -40,6 +47,26 @@ public class BoardPanel : MonoBehaviour
     private void Start()
     {
         Initialize();
+
+        // initializing board lock (if there is one)
+        if (m_BoardLock != null)
+        {
+            m_CheckingThisExp = StatsManager.m_Instance.FindExperience(m_ExpTypeReq);
+            m_BoardLock.GetComponent<BoardLock>().UpdateText(m_RequiredLevel);
+        }
+    }
+
+    private void Update()
+    {
+        // todo: make this not in an update function?
+        if (m_BoardLock != null)
+            CheckToBeLocked();
+    }
+
+    private void CheckToBeLocked()
+    {
+        m_Locked = m_CheckingThisExp.m_ExpData.m_CurrLevel < m_RequiredLevel ? true : false;
+        m_BoardLock.SetActive(m_Locked);
     }
 
     public void Initialize()
