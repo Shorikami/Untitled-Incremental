@@ -113,7 +113,7 @@ public class DataManager : MonoBehaviour
         NewExperience(StatsManager.GameCurrencyType.Experience, Collectable.CollectableType.Default, StatsManager.GameCurrencyType.Perks);
 
         NewUpgrade("Coins Value", "Increases value of coins by +25% per level. Coin value is doubled every 25 levels.",
-            500, 5, false, 25, 2.0f, 0.5f, StatsManager.GameCurrencyType.Coins, StatsManager.GameCurrencyType.Coins,
+            500, 5, false, 25, 2.0f, 0.25f, StatsManager.GameCurrencyType.Coins, StatsManager.GameCurrencyType.Coins,
             StatsManager.NonCurrencyUpgrades.Invalid, Collectable.CollectableType.Default);
         NewUpgrade("Growth", "Increases spawn rate by +20% per level.",
             100, 10, false, 0, 0.0f, 0.2f, StatsManager.GameCurrencyType.Coins, StatsManager.GameCurrencyType.Coins,

@@ -15,7 +15,9 @@ public class StatsManager : MonoBehaviour
         None = 0,
         Coins = 1,
         Credits,
+
         Perks,
+
         Experience,
         Tier
     };

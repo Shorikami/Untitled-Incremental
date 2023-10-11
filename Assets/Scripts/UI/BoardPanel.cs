@@ -36,6 +36,9 @@ public class BoardPanel : MonoBehaviour
     public StatsManager.GameCurrencyType m_ExpTypeReq;
     private Experience m_CheckingThisExp;
 
+    // whether or not Initialize() runs at the start
+    public bool m_InitialStart = true;
+
     private List<GameObject> m_Upgrades = new List<GameObject>();
 
     private void Awake()
@@ -46,7 +49,8 @@ public class BoardPanel : MonoBehaviour
 
     private void Start()
     {
-        Initialize();
+        if (m_InitialStart)
+            Initialize();
 
         // initializing board lock (if there is one)
         if (m_BoardLock != null)
