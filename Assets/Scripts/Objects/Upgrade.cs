@@ -40,6 +40,12 @@ public class Upgrade : MonoBehaviour, ISavableData
         m_UpgradeData.m_BoughtWith = upgr.m_BoughtWith;
     }
 
+    public void ResetData()
+    {
+        m_UpgradeData.m_CurrLevel = 0;
+        m_UpgradeData.m_UpgradeBonuses.m_CurrentBonus = 1.0f;
+    }
+
     public void OpenUpgradeMenu()
     {
         m_CurrencyPanel.GetComponent<BoardPanel>().ToggleUpgradeMenu(true);

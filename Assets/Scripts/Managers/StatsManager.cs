@@ -95,6 +95,25 @@ public class StatsManager : MonoBehaviour
         return res;
     }
 
+    // todo: binary search
+    public GameObject FindStatContainer(GameCurrencyType gct)
+    {
+        GameObject res = null;
+
+        var cont = m_LoadedDataNodes.FindAll(s => s.GetComponent<GameCurrency>() != null);
+        res = cont.Find(s => s.GetComponent<GameCurrency>().m_Currency.m_CurrencyType == gct);
+
+        // early return if container was already found (it was of type GameCurrency)
+        if (res != null)
+            return res;
+
+        var cont2 = m_LoadedDataNodes.FindAll(s => s.GetComponent<Experience>() != null);
+        res = cont2.Find(s => s.GetComponent<Experience>().m_ExpData.m_CurrencyType == gct);
+
+        // res at this point will either be of type Experience or null
+        return res;
+    }
+
     // there shouldn't be more than 1 of a specific currency based on collectable type
     public GameCurrency FindGameCurrency(Collectable.CollectableType ct, GameCurrencyType gct = GameCurrencyType.None)
     {
@@ -113,6 +132,25 @@ public class StatsManager : MonoBehaviour
             s.GetComponent<GameCurrency>().m_Currency.m_CurrencyType == gct)
                 .GetComponent<GameCurrency>();
 
+        return res;
+    }
+
+    public GameCurrency FindGameCurrency(GameCurrencyType gct)
+    {
+        GameCurrency res = null;
+
+        var cont = m_LoadedDataNodes.FindAll(s => s.GetComponent<GameCurrency>() != null);
+
+        if (cont == null)
+            return res;
+
+        GameObject searched = cont.Find(s =>
+        s.GetComponent<GameCurrency>().m_Currency.m_CurrencyType == gct);
+
+        if (searched == null)
+            return res;
+
+        res = searched.GetComponent<GameCurrency>();
         return res;
     }
 
@@ -182,6 +220,21 @@ public class StatsManager : MonoBehaviour
             res.Add(gO.GetComponent<Upgrade>());
 
         return res;
+    }
+
+    // reset upgrades based on what they're bought with
+    public void ResetUpgrades(GameCurrencyType gct)
+    {
+        var cont = m_LoadedDataNodes.FindAll(searched => searched.GetComponent<Upgrade>() != null);
+        List<GameObject> matching = cont.FindAll(s => s.GetComponent<Upgrade>().m_UpgradeData.m_BoughtWith == gct);
+
+        if (matching == null)
+            return;
+
+        foreach (GameObject go in matching)
+        {
+            go.GetComponent<Upgrade>().ResetData();
+        }
     }
 }
 

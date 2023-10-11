@@ -17,6 +17,13 @@ public class Experience : MonoBehaviour, ISavableData
         CalculateLevel();
     }
 
+    public void ResetData()
+    {
+        m_ExpData.m_CurrLevel = 0;
+        m_ExpData.m_CurrExp = 0;
+        m_ExpData.m_TotalValue = 0;
+    }
+
     // Calculate level on start up (after loading)
     public void CalculateLevel()
     {

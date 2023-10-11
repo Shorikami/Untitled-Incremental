@@ -23,6 +23,11 @@ public class GameCurrency : MonoBehaviour, ISavableData
         m_Currency.m_TotalValue = toLoad.m_TotalValue;
     }
 
+    public void ResetData()
+    {
+        m_Currency.m_TotalValue = 0;
+    }
+
     public void UpdateCurrency(int val)
     {
         m_Currency.UpdateValue(val);

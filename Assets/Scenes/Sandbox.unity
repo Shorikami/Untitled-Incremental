@@ -514,6 +514,10 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: -6259578005092469864, guid: bf65fa9bb6f5cf24cbf69f98e7aaec52, type: 3}
+      propertyPath: m_InitialStart
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -6259578005092469864, guid: bf65fa9bb6f5cf24cbf69f98e7aaec52, type: 3}
       propertyPath: m_RequiredLevel
       value: 2
       objectReference: {fileID: 0}
@@ -1672,9 +1676,25 @@ PrefabInstance:
       value: Credits
       objectReference: {fileID: 0}
     - target: {fileID: 6267398770978982294, guid: 017b733d483ceb941a9be0ba3299744c, type: 3}
+      propertyPath: m_Resets.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6267398770978982294, guid: 017b733d483ceb941a9be0ba3299744c, type: 3}
       propertyPath: m_PrestigeBoardUnlock
       value: 
       objectReference: {fileID: 1066688745}
+    - target: {fileID: 6267398770978982294, guid: 017b733d483ceb941a9be0ba3299744c, type: 3}
+      propertyPath: m_Resets.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6267398770978982294, guid: 017b733d483ceb941a9be0ba3299744c, type: 3}
+      propertyPath: m_Resets.Array.data[1]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6267398770978982294, guid: 017b733d483ceb941a9be0ba3299744c, type: 3}
+      propertyPath: m_Resets.Array.data[2]
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6267398770978982294, guid: 017b733d483ceb941a9be0ba3299744c, type: 3}
       propertyPath: m_RequiredLevelToPrestige
       value: 12

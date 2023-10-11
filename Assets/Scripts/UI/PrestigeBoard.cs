@@ -17,7 +17,7 @@ public class PrestigeBoard : MonoBehaviour
     // what currency this prestige will give
     public StatsManager.GameCurrencyType m_ResetFor;
 
-    List<StatsManager.GameCurrencyType> m_Resets; 
+    public List<StatsManager.GameCurrencyType> m_Resets; 
 
     // What experience type to check
     public StatsManager.GameCurrencyType m_ExpToCheck;
@@ -98,12 +98,12 @@ public class PrestigeBoard : MonoBehaviour
             DataManager.m_Instance.NewUpgrade("Credits Coins Value", 
                 "Increases value of coins by +25% per level. Coin value is doubled every 25 levels.",
             500, 5, false, 25, 2.0f, 0.25f, StatsManager.GameCurrencyType.Coins, StatsManager.GameCurrencyType.Credits,
-            StatsManager.NonCurrencyUpgrades.Invalid, Collectable.CollectableType.Default);
+            StatsManager.NonCurrencyUpgrades.Invalid, Collectable.CollectableType.None);
 
             DataManager.m_Instance.NewUpgrade("Credits EXP Value",
                 "Increases value of EXP by +25% per level. EXP value is doubled every 25 levels.",
             500, 5, false, 25, 2.0f, 0.25f, StatsManager.GameCurrencyType.Coins, StatsManager.GameCurrencyType.Credits,
-            StatsManager.NonCurrencyUpgrades.Invalid, Collectable.CollectableType.Default);
+            StatsManager.NonCurrencyUpgrades.Invalid, Collectable.CollectableType.None);
         }
 
         // then initialize the board panel
@@ -111,8 +111,33 @@ public class PrestigeBoard : MonoBehaviour
     }
 
     public void Prestige()
-    { 
-    
+    {
+        GameCurrency prestCurr = StatsManager.m_Instance.FindGameCurrency(StatsManager.GameCurrencyType.Credits);
+
+        if (prestCurr == null)
+        {
+            DataManager.m_Instance.NewCurrency(m_ResetFor, Collectable.CollectableType.None);
+            prestCurr = StatsManager.m_Instance.FindGameCurrency(StatsManager.GameCurrencyType.Credits);
+        }
+
+        prestCurr.m_Currency.UpdateValue(PayoutFormula());
+
+        foreach (StatsManager.GameCurrencyType type in m_Resets)
+        {
+            StatsManager.m_Instance.ResetUpgrades(type);
+            GameObject go = StatsManager.m_Instance.FindStatContainer(type);
+
+            if (go.TryGetComponent<GameCurrency>(out GameCurrency gc))
+            {
+                gc.ResetData();
+                StatsManager.m_Instance.Player.GetComponent<PlayerController>().PlayerUI.UpdateText(gc);
+            }
+
+            else if (go.TryGetComponent<Experience>(out Experience ex))
+                ex.ResetData();
+        }
+
+
     }
 
     private int PayoutFormula()
