@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+using System;
 
 public class BoardPanel : MonoBehaviour
 {
@@ -20,6 +22,12 @@ public class BoardPanel : MonoBehaviour
 
     [SerializeField] private StatsManager.GameCurrencyType m_CurrencyDisplay;
 
+    [Header("Board Text")]
+    [SerializeField] private TextMeshProUGUI m_CurrencyText;
+    public bool m_DisplayCurrency;
+    [HideInInspector] public GameCurrency m_DisplayThis;
+
+    [Header("Board Layout")]
     public bool m_ModifyLayout = false;
     [Min(0)] public int m_PreferredWidth;
     [Min(0)] public int m_PreferredHeight;
@@ -30,6 +38,7 @@ public class BoardPanel : MonoBehaviour
     [Min(0)] public float m_AutobuyButtonSize;
     public float m_AutobuyButtonPosY;
 
+    [Header("Board Lock")]
     // What level the player needs to be in order to unlock this board
     public bool m_Locked;
     public int m_RequiredLevel;
@@ -49,7 +58,7 @@ public class BoardPanel : MonoBehaviour
 
     private void Start()
     {
-        if (m_InitialStart)
+        if (m_InitialStart && m_Upgrades.Count == 0)
             Initialize();
 
         // initializing board lock (if there is one)
@@ -58,6 +67,11 @@ public class BoardPanel : MonoBehaviour
             m_CheckingThisExp = StatsManager.m_Instance.FindExperience(m_ExpTypeReq);
             m_BoardLock.GetComponent<BoardLock>().UpdateText(m_RequiredLevel);
         }
+
+        m_DisplayThis = StatsManager.m_Instance.FindGameCurrency(m_CurrencyDisplay);
+
+        if (m_CurrencyText != null)
+            m_CurrencyText.gameObject.SetActive(m_DisplayCurrency);
     }
 
     private void Update()
@@ -65,12 +79,25 @@ public class BoardPanel : MonoBehaviour
         // todo: make this not in an update function?
         if (m_BoardLock != null)
             CheckToBeLocked();
+
+        if (m_CurrencyText != null && m_DisplayCurrency)
+            UpdateText();
     }
 
     private void CheckToBeLocked()
     {
         m_Locked = m_CheckingThisExp.m_ExpData.m_CurrLevel < m_RequiredLevel ? true : false;
         m_BoardLock.SetActive(m_Locked);
+    }
+
+    private void UpdateText()
+    {
+        string currName = Enum.GetName(typeof(StatsManager.GameCurrencyType), m_CurrencyDisplay);
+
+        if (m_DisplayThis != null)
+            m_CurrencyText.text = currName + ": " + m_DisplayThis.m_Currency.m_TotalValue.ToString();
+        else
+            m_CurrencyText.text = currName + ": 0";
     }
 
     public void Initialize()
@@ -143,5 +170,6 @@ public class BoardPanel : MonoBehaviour
     {
         m_ScrollPanel.SetActive(!open);
         m_UpgradeDisplay.SetActive(open);
+        m_CurrencyText.gameObject.SetActive(!open);
     }
 }

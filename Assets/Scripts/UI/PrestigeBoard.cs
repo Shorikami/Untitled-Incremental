@@ -67,7 +67,13 @@ public class PrestigeBoard : MonoBehaviour
         m_PrestigeBoardUnlock.SetActive(display);
 
         if (display)
+        {
+            if (StatsManager.m_Instance.FindGameCurrency(m_ResetFor) == null)
+                DataManager.m_Instance.NewCurrency(m_ResetFor, Collectable.CollectableType.None);
+
             AddUpgradesToBoard();
+            m_PrestigeBoardUnlock.GetComponent<BoardPanel>().m_DisplayThis = StatsManager.m_Instance.FindGameCurrency(m_ResetFor);
+        }
     }
 
     private void UpdateCurrAmountText()

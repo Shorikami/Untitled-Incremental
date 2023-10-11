@@ -1106,6 +1106,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4521914754435198695, guid: a6bcaff05fd09ef4bbbe48a6d5635d22, type: 3}
+      propertyPath: m_InitialStart
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4521914754435198695, guid: a6bcaff05fd09ef4bbbe48a6d5635d22, type: 3}
       propertyPath: m_ModifyLayout
       value: 1
       objectReference: {fileID: 0}
@@ -1124,6 +1128,10 @@ PrefabInstance:
     - target: {fileID: 4521914754435198695, guid: a6bcaff05fd09ef4bbbe48a6d5635d22, type: 3}
       propertyPath: m_CurrencyDisplay
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4521914754435198695, guid: a6bcaff05fd09ef4bbbe48a6d5635d22, type: 3}
+      propertyPath: m_DisplayCurrency
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4521914754435198695, guid: a6bcaff05fd09ef4bbbe48a6d5635d22, type: 3}
       propertyPath: m_PreferredHeight

@@ -73,6 +73,9 @@ public class Experience : MonoBehaviour, ISavableData
         StatsManager.m_Instance.FindStatContainer(m_ExpData.m_PerkType, m_ExpData.m_CollectableType)
             .GetComponent<GameCurrency>()
             .UpdateCurrency(1);
+
+        // recursive check to continue calculating level if it overflows
+        CalculateForNextLevel();
     }
 }
 
