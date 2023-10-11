@@ -122,6 +122,9 @@ MonoBehaviour:
   m_IsVertical: 1
   m_Spacing: 0
   m_CurrencyDisplay: 0
+  m_CurrencyText: {fileID: 0}
+  m_DisplayCurrency: 0
+  m_DisplayThis: {fileID: 0}
   m_ModifyLayout: 0
   m_PreferredWidth: 0
   m_PreferredHeight: 0
@@ -132,6 +135,7 @@ MonoBehaviour:
   m_Locked: 0
   m_RequiredLevel: 0
   m_ExpTypeReq: 0
+  m_InitialStart: 1
 --- !u!1001 &3442278533521536682
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -358,6 +362,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Vertical Board
       objectReference: {fileID: 0}
+    - target: {fileID: 1730319194371032713, guid: f937cdfc990c92341916934514cd7a95, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 1832020443345602766, guid: f937cdfc990c92341916934514cd7a95, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 15.2
@@ -413,6 +421,14 @@ PrefabInstance:
     - target: {fileID: 4235522707933611827, guid: f937cdfc990c92341916934514cd7a95, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4583916674409622627, guid: f937cdfc990c92341916934514cd7a95, type: 3}
+      propertyPath: m_Size.z
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4583916674409622627, guid: f937cdfc990c92341916934514cd7a95, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5496530710978559322, guid: f937cdfc990c92341916934514cd7a95, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size

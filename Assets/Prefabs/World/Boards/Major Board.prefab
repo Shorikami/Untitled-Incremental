@@ -111,6 +111,7 @@ MonoBehaviour:
   m_CurrencyDisplay: 1
   m_CurrencyText: {fileID: 6017899236466326262}
   m_DisplayCurrency: 0
+  m_DisplayThis: {fileID: 0}
   m_ModifyLayout: 0
   m_PreferredWidth: 0
   m_PreferredHeight: 0
@@ -732,6 +733,14 @@ PrefabInstance:
     - target: {fileID: 6733092505330311736, guid: e75e0c5d49d133249816d7922def3451, type: 3}
       propertyPath: m_Size.y
       value: 147
+      objectReference: {fileID: 0}
+    - target: {fileID: 6733092505330311736, guid: e75e0c5d49d133249816d7922def3451, type: 3}
+      propertyPath: m_Size.z
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 6733092505330311736, guid: e75e0c5d49d133249816d7922def3451, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7062574771366573405, guid: e75e0c5d49d133249816d7922def3451, type: 3}
       propertyPath: m_fontSize
