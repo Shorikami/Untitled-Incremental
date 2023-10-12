@@ -6,6 +6,7 @@ Logs/
 Library/
 obj/
 Temp/
+Assets/Resources
 
 # Visual Studio files and folder
 .vs/
