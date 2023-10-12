@@ -170,6 +170,8 @@ public class BoardPanel : MonoBehaviour
     {
         m_ScrollPanel.SetActive(!open);
         m_UpgradeDisplay.SetActive(open);
-        m_CurrencyText.gameObject.SetActive(!open);
+
+        if (m_CurrencyText != null)
+            m_CurrencyText.gameObject.SetActive(!open);
     }
 }

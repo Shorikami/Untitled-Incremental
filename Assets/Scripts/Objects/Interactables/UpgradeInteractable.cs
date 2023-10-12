@@ -33,8 +33,6 @@ public class UpgradeInteractable : ButtonInteractable
     public override void Awake()
     {
         m_UpgradeStats = transform.parent.GetComponent<Upgrade>();
-
-        // this is awful
         m_BoardPanel = transform.GetComponentInParent<BoardPanel>();
         m_UpgradeDisplay = m_BoardPanel.m_UpgradeDisplay;
     }
@@ -43,14 +41,18 @@ public class UpgradeInteractable : ButtonInteractable
     {
         if (!m_BoardPanel.m_UpgradeDisplay.activeSelf)
         {
-            m_UpgradeDisplay.GetComponent<UpgradePanel>().UpdateText(m_UpgradeStats);
+            UpgradePanel upgrp = m_UpgradeDisplay.GetComponent<UpgradePanel>();
+            upgrp.UpdateText(m_UpgradeStats);
 
-            m_UpgradeDisplay.GetComponent<UpgradePanel>()
-                .m_BuyOne.gameObject.GetComponent<MultiplierInteractable>()
+            upgrp.m_BuyOne.gameObject.GetComponent<MultiplierInteractable>()
                 .UpdateHandledUpgrade(m_UpgradeStats);
 
-            m_UpgradeDisplay.GetComponent<UpgradePanel>()
-                .m_BuyMax.gameObject.GetComponent<MultiplierInteractable>()
+            // not guaranteed the buy next button will exist on the board
+            if (upgrp.m_BuyNext != null)
+                upgrp.m_BuyNext.gameObject.GetComponent<MultiplierInteractable>()
+                    .UpdateHandledUpgrade(m_UpgradeStats);
+
+            upgrp.m_BuyMax.gameObject.GetComponent<MultiplierInteractable>()
                 .UpdateHandledUpgrade(m_UpgradeStats);
         }
 

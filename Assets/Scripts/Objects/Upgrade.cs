@@ -139,20 +139,36 @@ public class UpgradeData : Data
         }
 
         currToModify = StatsManager.m_Instance.FindGameCurrency(m_CollectableType, m_BoughtWith);
-        return currToModify.m_Currency.m_TotalValue >= Cost();
+        return currToModify.m_Currency.m_TotalValue >= CostToNextLevel();
     }
 
-    public double Cost()
+    public double CostToNextLevel()
     {
         if (m_StaticCost)
             return m_BaseCost;
 
-        return System.Math.Floor(m_BaseCost + (m_BaseCost * Mathf.Pow(1.1f, m_CurrLevel)));
+        return Formula();
     }
 
-    public int IntCost()
+    public int IntCostToNextLevel()
     {
-        return System.Convert.ToInt32(Cost());
+        return System.Convert.ToInt32(CostToNextLevel());
     }
 
+    public double Cost(int lvlAmountToCheck)
+    {
+        double total = 0.0;
+
+        total += Formula(lvlAmountToCheck);
+
+        if (lvlAmountToCheck == 0)
+            return total;
+
+        return total + Cost(lvlAmountToCheck - 1);
+    }
+
+    private double Formula(int addToLevel = 0)
+    {
+        return System.Math.Floor(m_BaseCost + (m_BaseCost * Mathf.Pow(1.1f, m_CurrLevel + addToLevel)));
+    }
 }

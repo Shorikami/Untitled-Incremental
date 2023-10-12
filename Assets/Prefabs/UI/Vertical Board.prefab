@@ -475,7 +475,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &397317759400701804
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1102,7 +1102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_UpgradePanel: {fileID: 152954203794807939}
   m_UpgrToHandle: {fileID: 0}
-  m_BuyMax: 0
+  m_BuyButtonType: 3
 --- !u!1 &5434488462636120235
 GameObject:
   m_ObjectHideFlags: 0
@@ -1564,6 +1564,7 @@ MonoBehaviour:
   m_CostText: {fileID: 8400416306218004465}
   m_BonusText: {fileID: 1751224815732852969}
   m_BuyOne: {fileID: 8791793361754147787}
+  m_BuyNext: {fileID: 0}
   m_BuyMax: {fileID: 7861505393981777878}
 --- !u!1 &7638654373256539255
 GameObject:
@@ -1804,7 +1805,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_UpgradePanel: {fileID: 152954203794807939}
   m_UpgrToHandle: {fileID: 0}
-  m_BuyMax: 0
+  m_BuyButtonType: 1
 --- !u!1 &9018866470822118635
 GameObject:
   m_ObjectHideFlags: 0
