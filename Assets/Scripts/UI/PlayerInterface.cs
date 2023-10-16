@@ -27,7 +27,7 @@ public class PlayerInterface : MonoBehaviour
             m_CurrencyNumber.text = gc.m_Currency.m_TotalValue.ToString();
     }
 
-    public void DisplayNPCPrompt(bool show)
+    public void DisplayNPCPrompt(bool show, NPCController target)
     {
         if (show)
         {
@@ -36,14 +36,20 @@ public class PlayerInterface : MonoBehaviour
                 if (m_OwnerPlayer.CurrentlyLookingAt != null)
                 {
                     m_NPCPrompt.SetActive(show);
+                    m_OwnerPlayer.m_CanInteractWithNPCs = show;
+                    m_OwnerPlayer.m_CurrNPC = target;
                 }
             }
             else
             {
                 m_NPCPrompt.SetActive(show);
+                m_OwnerPlayer.m_CanInteractWithNPCs = show;
+                m_OwnerPlayer.m_CurrNPC = target;
             }
             return;
         }
         m_NPCPrompt.SetActive(show);
+        m_OwnerPlayer.m_CanInteractWithNPCs = show;
+        m_OwnerPlayer.m_CurrNPC = target;
     }
 }

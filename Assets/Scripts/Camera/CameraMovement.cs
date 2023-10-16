@@ -64,7 +64,7 @@ public class CameraMovement : MonoBehaviour
     private void HandleCameraPerspective()
     {
         m_InFirstPerson = Mathf.Approximately(m_DistFromTarget, 0.0f) ? true : false;
-        Cursor.lockState = m_InFirstPerson ? CursorLockMode.Locked : CursorLockMode.None;
+        Cursor.lockState = m_InFirstPerson && !VNHandler.m_Instance.m_CutsceneIsActive ? CursorLockMode.Locked : CursorLockMode.None;
     }
 
     private void HandleCameraState()

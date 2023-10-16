@@ -9,12 +9,12 @@ public class NPCTriggerRange : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "PlayerBody")
-            other.gameObject.GetComponentInParent<PlayerController>().PlayerUI.DisplayNPCPrompt(true);
+            other.gameObject.GetComponentInParent<PlayerController>().PlayerUI.DisplayNPCPrompt(true, m_OwnerNPC);
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.tag == "PlayerBody")
-            other.gameObject.GetComponentInParent<PlayerController>().PlayerUI.DisplayNPCPrompt(false);
+            other.gameObject.GetComponentInParent<PlayerController>().PlayerUI.DisplayNPCPrompt(false, null);
     }
 }

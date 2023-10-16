@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class NPCController : MonoBehaviour
 {
+    
+    [Tooltip("This should be the same name as the portrait this NPC is intended to be in the text file.")] 
+    public string m_NPCName;
+
     [SerializeField] private Portrait m_NPCPortrait;
-    public Portrait NPCPotrait
+    public Portrait NPCPortrait
     {
         get { return m_NPCPortrait; }
         set { m_NPCPortrait = value; }
@@ -26,5 +30,10 @@ public class NPCController : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void ActivateEvent()
+    {
+        VNHandler.m_Instance.LoadTextFile(m_VNEvents[m_VNEventIdx], this);
     }
 }

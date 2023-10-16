@@ -21,6 +21,7 @@ public class VNHandler : MonoBehaviour
 
     public static VNHandler m_Instance { get; private set; }
     public string m_CurrCutsceneName;
+    public bool m_CutsceneIsActive;
 
     public List<string> m_LoadedCutscene;
     private int m_LoadedTxtIdx = 0;
@@ -102,11 +103,13 @@ public class VNHandler : MonoBehaviour
         m_SFXs = new Dictionary<string, AudioClip>();
 
         m_OriginalVolumeBGM = m_SourceBGM.volume;
+        m_CutsceneIsActive = false;
     }
 
     void Start()
     {
-        LoadTextFile(m_CurrCutsceneName);
+        m_LayoutBack.SetActive(false);
+        //LoadTextFile(m_CurrCutsceneName);
     }
     void Update()
     {
@@ -494,13 +497,16 @@ public class VNHandler : MonoBehaviour
     #endregion
     #region LoadingUtility
     // Loading text files in the StreamingAssets folder
-    public void LoadTextFile(string name)
+    public void LoadTextFile(string name, NPCController npc)
     {
+        m_LayoutBack.SetActive(true);
+        m_CutsceneIsActive = true;
+
         string path = Application.streamingAssetsPath + "/VN Events/" + name + ".txt";
         m_LoadedCutscene = File.ReadAllLines(path).Where(line => line != "" && !line.Contains("//")).ToList();
 
         // Load any assets into the cutscene (portraits, music, bg, etc.)
-        PreLoadCutscene();
+        PreLoadCutscene(npc);
 
         // force set both flags to true (cannot assume first line after pre-loading is text)
         m_EndWaiting = true;
@@ -511,7 +517,7 @@ public class VNHandler : MonoBehaviour
         //m_TextBox.ParseTextLine();
     }
 
-    public void PreLoadCutscene()
+    public void PreLoadCutscene(NPCController npc)
     {
         // Each loading token should start with "load"
         foreach (string s in m_LoadedCutscene)
@@ -532,7 +538,7 @@ public class VNHandler : MonoBehaviour
                 string[] startPos = tokens[5].Split(':');
                 float x = float.Parse(startPos[1]);
 
-                LoadCharacterPortrait(prtName, file, offset, x);
+                LoadCharacterPortrait(prtName, file, offset, x, npc);
             }
 
             else if (string.Compare(what, "bgm") == 0)
@@ -568,7 +574,7 @@ public class VNHandler : MonoBehaviour
     }
 
     // Load a character portrait if specified
-    public void LoadCharacterPortrait(string name, string tex, Vector2 offset, float xStart)
+    public void LoadCharacterPortrait(string name, string tex, Vector2 offset, float xStart, NPCController npc)
     {
         // Instantiate it as a game object
         GameObject portrait = Instantiate(m_PortraitBase);
@@ -593,6 +599,7 @@ public class VNHandler : MonoBehaviour
 
         // Load it after setting the above
         portrait.GetComponent<Portrait>().LoadPortrait();
+        npc.NPCPortrait = portrait.GetComponent<Portrait>();
 
         // Add new portrait to container of portraits in VN handler
         m_CharacterPortraits.Add(portrait);

@@ -17,6 +17,10 @@ public class PlayerController : MonoBehaviour
     }
     [HideInInspector] public bool m_FirstPerson;
 
+    [Header("NPC Interactions")]
+    [HideInInspector] public bool m_CanInteractWithNPCs = false;
+    [HideInInspector] public NPCController m_CurrNPC;
+
     [SerializeField] private Transform m_Player;
     [SerializeField] private GameObject m_PrefabPlayerUI;
     [SerializeField] private GameObject m_PickupRange;
@@ -110,6 +114,8 @@ public class PlayerController : MonoBehaviour
 
         m_PlayerInput.Player.MousePosition.performed += MousePos;
 
+        m_PlayerInput.Player.Interact.performed += Interact;
+
         i_LMB = m_PlayerInput.Player.LMB;
         i_RMB = m_PlayerInput.Player.RMB;
         i_MouseWheel = m_PlayerInput.Player.MouseWheel;
@@ -144,7 +150,7 @@ public class PlayerController : MonoBehaviour
 
             // initial state (do this after interaction check to see if the player isn't already looking at someone)
             if (!m_FirstPerson && CurrentlyLookingAt == null)
-                PlayerUI.DisplayNPCPrompt(false);
+                PlayerUI.DisplayNPCPrompt(false, null);
 
             m_FirstPerson = true;
         }
@@ -230,6 +236,15 @@ public class PlayerController : MonoBehaviour
     void MousePos(InputAction.CallbackContext ctx)
     {
         m_MousePos = ctx.ReadValue<Vector2>();
+    }
+
+    void Interact(InputAction.CallbackContext ctx)
+    {
+        if (m_CanInteractWithNPCs && m_CurrNPC != null)
+        {
+            if (m_FirstPerson && !VNHandler.m_Instance.m_CutsceneIsActive)
+                m_CurrNPC.ActivateEvent();
+        }
     }
 
     // https://www.youtube.com/watch?v=4HpC--2iowE

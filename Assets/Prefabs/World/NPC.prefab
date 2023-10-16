@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee671ab655e92294c90217af22be2666, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_OwnerNPC: {fileID: 0}
+  m_OwnerNPC: {fileID: 3811047566900009937}
 --- !u!1001 &7308543578637906162
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -232,6 +232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8ca733a6bb3ea64ea29dfca9e6cec51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_OwnerNPC: {fileID: 3811047566900009937}
 --- !u!1 &3799636183168268926 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5896950599737117324, guid: 81f7e40812aa7b74c9e419a30a7a6a22, type: 3}
@@ -249,8 +250,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d78755d6ed56a9e46b5866391e4991af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_NPCName: 
   m_NPCPortrait: {fileID: 0}
-  m_InteractionRange: {fileID: 0}
+  m_InteractionRange: {fileID: 4287140314131974808}
   m_VNEvents:
   - 
   m_VNEventIdx: 0
