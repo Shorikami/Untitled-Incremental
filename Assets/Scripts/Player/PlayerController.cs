@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
         get { return m_Camera; }
         set { m_Camera = value; }
     }
+    [HideInInspector] public bool m_FirstPerson;
 
     [SerializeField] private Transform m_Player;
     [SerializeField] private GameObject m_PrefabPlayerUI;
@@ -70,7 +71,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Vector3 m_InteractionRayPoint = default;
     [SerializeField] private float m_InteractionDist = default;
     [SerializeField] private LayerMask m_InteractionLayer = default;
+    
     private Interactable m_CurrInteractable;
+    public Interactable CurrentlyLookingAt
+    {
+        get { return m_CurrInteractable; }
+        private set { m_CurrInteractable = value; }
+    }
+
+    
 
     public Rigidbody m_RB;
 
@@ -107,6 +116,7 @@ public class PlayerController : MonoBehaviour
 
         m_RB = GetComponent<Rigidbody>();
         m_PlayerUI = Instantiate(m_PrefabPlayerUI, transform).GetComponent<PlayerInterface>();
+        m_PlayerUI.m_OwnerPlayer = this;
     }
 
     private void Start()
@@ -131,6 +141,12 @@ public class PlayerController : MonoBehaviour
             transform.rotation = m_Orientation.rotation;
             HandleInteractionCheck();
             HandleInteractionInput();
+
+            // initial state (do this after interaction check to see if the player isn't already looking at someone)
+            if (!m_FirstPerson && CurrentlyLookingAt == null)
+                PlayerUI.DisplayNPCPrompt(false);
+
+            m_FirstPerson = true;
         }
 
         UpdateSpeed();
@@ -156,6 +172,7 @@ public class PlayerController : MonoBehaviour
 
     private void MouseRaycast()
     {
+        m_FirstPerson = false;
         Ray r = m_Camera.GetComponent<Camera>().ScreenPointToRay(m_MousePos);
         if (Physics.Raycast(r, out RaycastHit hit))
         {
@@ -169,8 +186,14 @@ public class PlayerController : MonoBehaviour
 
     private void HandleInteractionCheck()
     {
+        // todo: make this its own variable
+        // reverse bit makes it so that it ignores these layers
+        int mask = 1 << LayerMask.NameToLayer("Default") | 1 << LayerMask.NameToLayer("Ignore Raycast") |
+            1<< LayerMask.NameToLayer("Ground") |  1 << LayerMask.NameToLayer("CameraZoomLock");
+        mask = ~mask;
+
         if (Physics.Raycast(m_Camera.GetComponent<Camera>().ViewportPointToRay(m_InteractionRayPoint), 
-            out RaycastHit hit, m_InteractionDist))
+            out RaycastHit hit, m_InteractionDist, mask))
         {
             if (hit.collider.gameObject.layer == 7 && 
                 (m_CurrInteractable == null || hit.collider.gameObject.GetInstanceID() != m_CurrInteractable.GetInstanceID()))

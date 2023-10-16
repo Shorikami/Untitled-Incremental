@@ -35,6 +35,7 @@ public class UpgradeInteractable : ButtonInteractable
         m_UpgradeStats = transform.parent.GetComponent<Upgrade>();
         m_BoardPanel = transform.GetComponentInParent<BoardPanel>();
         m_UpgradeDisplay = m_BoardPanel.m_UpgradeDisplay;
+        base.Awake();
     }
 
     public override void Interaction()

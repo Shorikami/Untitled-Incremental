@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8479604993019330697}
   - component: {fileID: 3105457080323256272}
   - component: {fileID: 5895223074260988450}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Pickup Range
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -126,6 +126,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6248931155251756333, guid: 81f7e40812aa7b74c9e419a30a7a6a22, type: 3}
+      propertyPath: m_TagString
+      value: PlayerBody
+      objectReference: {fileID: 0}
     - target: {fileID: 6393926900718958954, guid: 81f7e40812aa7b74c9e419a30a7a6a22, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0.073
@@ -204,6 +208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Camera: {fileID: 0}
+  m_FirstPerson: 0
   m_Player: {fileID: 7024421175640337613}
   m_PrefabPlayerUI: {fileID: 658944925226131003, guid: 46d992bfdb3fffc4eb72de8eddbc9b81, type: 3}
   m_PickupRange: {fileID: 893324050925930996}
@@ -215,7 +220,7 @@ MonoBehaviour:
     m_Bits: 64
   m_GroundDrag: 5
   m_InteractionRayPoint: {x: 0.5, y: 0.5, z: 0}
-  m_InteractionDist: 0
+  m_InteractionDist: 5
   m_InteractionLayer:
     serializedVersion: 2
     m_Bits: 128

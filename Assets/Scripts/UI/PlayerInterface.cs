@@ -6,13 +6,17 @@ using TMPro;
 
 public class PlayerInterface : MonoBehaviour
 {
+    [HideInInspector] public PlayerController m_OwnerPlayer;
     [SerializeField] private TextMeshProUGUI m_CurrencyNumber;
+    [SerializeField] private GameObject m_NPCPrompt;
+    //private TextMeshProUGUI m_PromptText;
 
     public StatsManager.GameCurrencyType m_DisplayWhatCurr = StatsManager.GameCurrencyType.Coins;
     public Collectable.CollectableType m_DisplayWhatColl = Collectable.CollectableType.Default;
 
     private void Start()
     {
+        m_NPCPrompt.SetActive(false);
         m_CurrencyNumber.text = StatsManager.m_Instance.FindStatContainer(m_DisplayWhatCurr, m_DisplayWhatColl)
             .GetComponent<GameCurrency>().m_Currency.m_TotalValue.ToString();
     }
@@ -21,5 +25,25 @@ public class PlayerInterface : MonoBehaviour
     {
         if (m_DisplayWhatCurr == gc.m_Currency.m_CurrencyType)
             m_CurrencyNumber.text = gc.m_Currency.m_TotalValue.ToString();
+    }
+
+    public void DisplayNPCPrompt(bool show)
+    {
+        if (show)
+        {
+            if (m_OwnerPlayer.m_FirstPerson)
+            {
+                if (m_OwnerPlayer.CurrentlyLookingAt != null)
+                {
+                    m_NPCPrompt.SetActive(show);
+                }
+            }
+            else
+            {
+                m_NPCPrompt.SetActive(show);
+            }
+            return;
+        }
+        m_NPCPrompt.SetActive(show);
     }
 }
