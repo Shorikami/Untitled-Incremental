@@ -303,6 +303,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Incremental Platform
       objectReference: {fileID: 0}
+    - target: {fileID: 8028416413126410115, guid: 52f7dd33b27835b41bb7ef28f57bba35, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8028416413126410116, guid: 52f7dd33b27835b41bb7ef28f57bba35, type: 3}
       propertyPath: m_BaseTimer
       value: 0.4
@@ -337,7 +341,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8028416413126410117, guid: 52f7dd33b27835b41bb7ef28f57bba35, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.29
+      value: 0.24
       objectReference: {fileID: 0}
     - target: {fileID: 8028416413126410117, guid: 52f7dd33b27835b41bb7ef28f57bba35, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1583,6 +1587,7 @@ GameObject:
   - component: {fileID: 1776323201}
   - component: {fileID: 1776323200}
   - component: {fileID: 1776323204}
+  - component: {fileID: 1776323205}
   m_Layer: 0
   m_Name: Player Camera
   m_TagString: MainCamera
@@ -1678,6 +1683,39 @@ MonoBehaviour:
   m_MinMaxViewAngle: 65
   m_InFirstPerson: 0
   m_PreventZoom: 0
+--- !u!114 &1776323205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1776323199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
 --- !u!1 &1834055300
 GameObject:
   m_ObjectHideFlags: 0
