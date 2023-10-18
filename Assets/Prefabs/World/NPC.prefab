@@ -251,6 +251,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_NPCName: 
+  m_NPC: {fileID: 650141027708080976}
   m_NPCPortrait: {fileID: 0}
   m_InteractionRange: {fileID: 4287140314131974808}
   m_VNEvents:

@@ -56,19 +56,17 @@ public class CameraMovement : MonoBehaviour
 
     void LateUpdate()
     {
-        RotateCameraAndTarget();
-        ZoomCamera();
-        HandleCameraState();
+        if (!VNHandler.m_Instance.CutsceneActive)
+        {
+            RotateCameraAndTarget();
+            ZoomCamera();
+        }
     }
 
     private void HandleCameraPerspective()
     {
         m_InFirstPerson = Mathf.Approximately(m_DistFromTarget, 0.0f) ? true : false;
-        Cursor.lockState = m_InFirstPerson && !VNHandler.m_Instance.m_CutsceneIsActive ? CursorLockMode.Locked : CursorLockMode.None;
-    }
-
-    private void HandleCameraState()
-    {
+        Cursor.lockState = m_InFirstPerson && !VNHandler.m_Instance.CutsceneActive ? CursorLockMode.Locked : CursorLockMode.None;
     }
 
     private void ZoomCamera()

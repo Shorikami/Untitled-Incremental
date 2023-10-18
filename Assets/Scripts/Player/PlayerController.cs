@@ -242,7 +242,7 @@ public class PlayerController : MonoBehaviour
     {
         if (m_CanInteractWithNPCs && m_CurrNPC != null)
         {
-            if (m_FirstPerson && !VNHandler.m_Instance.m_CutsceneIsActive)
+            if (m_FirstPerson && !VNHandler.m_Instance.CutsceneActive)
                 m_CurrNPC.ActivateEvent();
         }
     }

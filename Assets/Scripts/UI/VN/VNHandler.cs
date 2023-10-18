@@ -21,7 +21,13 @@ public class VNHandler : MonoBehaviour
 
     public static VNHandler m_Instance { get; private set; }
     public string m_CurrCutsceneName;
-    public bool m_CutsceneIsActive;
+
+    private bool m_CutsceneIsActive;
+    public bool CutsceneActive
+    { 
+        get { return m_CutsceneIsActive; }
+        set { m_CutsceneIsActive = value; }
+    }
 
     public List<string> m_LoadedCutscene;
     private int m_LoadedTxtIdx = 0;
@@ -111,6 +117,7 @@ public class VNHandler : MonoBehaviour
         m_LayoutBack.SetActive(false);
         //LoadTextFile(m_CurrCutsceneName);
     }
+
     void Update()
     {
         if (m_Waiting && !m_WaitStoppedByAction)
@@ -191,16 +198,16 @@ public class VNHandler : MonoBehaviour
 
             switch (tokens[0])
             {
-                // modify backgrounds
+                // modify backgrounds (disabled for now)
                 case "bg":
-                    if (string.Compare(tokens[1], "set") == 0)
-                    {
-                        string key = tokens[2];
-
-                        m_Background.SetActive(true);
-                        m_Background.transform.SetSiblingIndex(0);
-                        m_Background.GetComponent<Image>().sprite = m_Backgrounds[key];
-                    }
+                    //if (string.Compare(tokens[1], "set") == 0)
+                    //{
+                    //    string key = tokens[2];
+                    //
+                    //    m_Background.SetActive(true);
+                    //    m_Background.transform.SetSiblingIndex(0);
+                    //    m_Background.GetComponent<Image>().sprite = m_Backgrounds[key];
+                    //}
                     break;
 
                 // modifying bgm
@@ -500,7 +507,6 @@ public class VNHandler : MonoBehaviour
     public void LoadTextFile(string name, NPCController npc)
     {
         m_LayoutBack.SetActive(true);
-        m_CutsceneIsActive = true;
 
         string path = Application.streamingAssetsPath + "/VN Events/" + name + ".txt";
         m_LoadedCutscene = File.ReadAllLines(path).Where(line => line != "" && !line.Contains("//")).ToList();
