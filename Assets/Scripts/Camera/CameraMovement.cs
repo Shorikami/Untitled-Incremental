@@ -23,6 +23,12 @@ public class CameraMovement : MonoBehaviour
     [Min(0)]
     private float m_DistFromTarget = 3.0f;
 
+    public float DistanceFromTarget
+    { 
+        get { return m_DistFromTarget; }
+        set { m_DistFromTarget = value; }
+    }
+
     [SerializeField]
     [Range(1, 15)]
     private float m_MaxDistFromTarget = 15.0f;
@@ -176,6 +182,11 @@ public class CameraMovement : MonoBehaviour
 
         m_CameraState = camState;
 
+        UpdatePosition();
+    }
+
+    public void UpdatePosition()
+    {
         transform.position = m_Target.position - transform.forward * m_DistFromTarget;
     }
 }

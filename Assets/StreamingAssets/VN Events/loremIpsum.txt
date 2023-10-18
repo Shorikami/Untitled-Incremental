@@ -117,4 +117,9 @@ lorem state face2
 wait 1
 t "Lorem" "School of Ipsum" "Vivamus iaculis, justo ut bibendum dictum, ligula sapien finibus neque, et consequat ligula est a nunc."
 
-button "this is a test of the automatic textmeshpro text scaling but i don't think there will be any option with this long of text" b1 "bru h" b2 "FUCK!!!!" bo3
+button "this is a test of the automatic textmeshpro text scaling but i don't think there will be any option with this long of text" b1 "bru h" b2 "FUCK!!!!" b3
+
+target b1
+target b2
+target b3
+end

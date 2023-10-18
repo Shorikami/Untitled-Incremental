@@ -295,6 +295,11 @@ public class VNHandler : MonoBehaviour
                     m_FindTargetLine = true;
                     return;
 
+                // immediately turn off visual novel handler
+                case "end":
+                    EndCutscene();
+                    break;
+
                 // by default, modify sprites
                 default:
                     // Object to modify
@@ -305,6 +310,35 @@ public class VNHandler : MonoBehaviour
                     break;
             }
         }
+    }
+
+    private void EndCutscene()
+    {
+        m_LayoutBack.SetActive(false);
+
+        foreach (GameObject go in m_CharacterPortraits)
+            Destroy(go);
+
+        m_CharacterPortraits.Clear();
+        m_Backgrounds.Clear();
+        m_BGMs.Clear();
+        m_SFXs.Clear();
+
+        m_SourceBGM.Stop();
+        m_SourceSFX.Stop();
+
+        m_AudioAction = AudioFadeAction.None;
+
+        m_SourceBGM.clip = null;
+        m_SourceSFX.clip = null;
+
+        m_ActiveChoiceButtons.Clear();
+        m_ButtonChoiceActive = false;
+
+        m_LoadedCutscene.Clear();
+        m_LoadedTxtIdx = 0;
+
+        m_CutsceneIsActive = false;
     }
 
     #region Commands

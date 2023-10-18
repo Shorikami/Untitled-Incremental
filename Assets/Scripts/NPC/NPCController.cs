@@ -22,6 +22,7 @@ public class NPCController : MonoBehaviour
     [Min(0)] public int m_VNEventIdx;
 
     private bool m_RotateBeforeEvent;
+    private float m_InitialCameraDist;
 
     // Start is called before the first frame update
     void Start()
@@ -36,21 +37,21 @@ public class NPCController : MonoBehaviour
         if (m_RotateBeforeEvent)
         {
             VNHandler.m_Instance.CutsceneActive = true;
+            bool firstPerson = StatsManager.m_Instance.Player.GetComponent<PlayerController>().m_FirstPerson;
 
-            // has to be done separately since the NPC should rotate to the player
-            // before the player rotates
             if (DoneRotatingNPCToPlayer())
             {
-                if (DoneRotatingPlayerToNPC())
+                if (DoneRotatingPlayerToNPC(firstPerson))
                 {
                     m_RotateBeforeEvent = false;
                     ActivateEvent();
                 }
             }
-
         }
     }
 
+    // Find the direction vector between player and npc, then rotate the npc in that
+    // direction smoothly
     private bool DoneRotatingNPCToPlayer()
     {
         Vector3 targetDir = (StatsManager.m_Instance.Player.transform.position - m_NPC.position).normalized;
@@ -60,22 +61,42 @@ public class NPCController : MonoBehaviour
         return m_NPC.rotation == targetRot;
     }
 
-    private bool DoneRotatingPlayerToNPC()
+    // after rotating the npc, take the inverse of its forward vector, then smoothly
+    // rotate the player and their camera to said vector
+    private bool DoneRotatingPlayerToNPC(bool firstPerson)
     {
         Quaternion targetRot = Quaternion.LookRotation(-m_NPC.forward);
+
         Transform targetTransf = StatsManager.m_Instance.Player.transform;
+        targetTransf.rotation = Quaternion.Slerp(targetTransf.rotation, targetRot, Time.deltaTime * 5.0f);
+
         Transform cameraTransf = StatsManager.m_Instance.Player.GetComponent<PlayerController>().Camera.transform;
+        cameraTransf.rotation = Quaternion.Slerp(cameraTransf.rotation, targetRot, Time.deltaTime * 5.0f);
 
-        targetTransf.rotation = Quaternion.Slerp(targetTransf.rotation, targetRot, Time.deltaTime * 10.0f);
-        cameraTransf.rotation = Quaternion.Slerp(cameraTransf.rotation, targetRot, Time.deltaTime * 10.0f);
+        if (!firstPerson)
+        {
+            CameraMovement camMove = StatsManager.m_Instance.Player.GetComponent<PlayerController>()
+                .Camera.GetComponent<CameraMovement>();
 
-        return targetTransf.rotation == targetRot && cameraTransf.rotation == targetRot;
+            float camDist = camMove.DistanceFromTarget;
+
+            camMove.DistanceFromTarget =
+                Mathf.Max(0.0f, m_InitialCameraDist - (camDist * Time.deltaTime * 5.0f));
+
+            camMove.UpdatePosition();
+        }
+
+        return targetTransf.rotation == targetRot;
     }
 
     public void ActivateEvent()
     {
         if (!VNHandler.m_Instance.CutsceneActive)
         {
+            CameraMovement camMove = StatsManager.m_Instance.Player.GetComponent<PlayerController>()
+                .Camera.GetComponent<CameraMovement>();
+
+            m_InitialCameraDist = camMove.DistanceFromTarget;
             m_RotateBeforeEvent = true;
             return;
         }

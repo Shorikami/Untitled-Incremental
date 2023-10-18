@@ -133,7 +133,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        //m_PickupRange.transform.rotation = Quaternion.identity;
+        if (VNHandler.m_Instance.CutsceneActive)
+            return;
 
         LimitSpeed();
         GroundCheck();
@@ -161,6 +162,9 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (VNHandler.m_Instance.CutsceneActive)
+            return;
+
         MovePlayer(m_Camera.transform);
     }
 
@@ -242,7 +246,7 @@ public class PlayerController : MonoBehaviour
     {
         if (m_CanInteractWithNPCs && m_CurrNPC != null)
         {
-            if (m_FirstPerson && !VNHandler.m_Instance.CutsceneActive)
+            if (!VNHandler.m_Instance.CutsceneActive)
                 m_CurrNPC.ActivateEvent();
         }
     }
