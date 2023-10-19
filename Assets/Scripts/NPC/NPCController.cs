@@ -71,20 +71,27 @@ public class NPCController : MonoBehaviour
         targetTransf.rotation = Quaternion.Slerp(targetTransf.rotation, targetRot, Time.deltaTime * 5.0f);
 
         Transform cameraTransf = StatsManager.m_Instance.Player.GetComponent<PlayerController>().Camera.transform;
-        cameraTransf.rotation = Quaternion.Slerp(cameraTransf.rotation, targetRot, Time.deltaTime * 5.0f);
 
-        if (!firstPerson)
+        if (firstPerson)
         {
-            CameraMovement camMove = StatsManager.m_Instance.Player.GetComponent<PlayerController>()
+            cameraTransf.rotation = Quaternion.Slerp(cameraTransf.rotation, targetRot, Time.deltaTime * 5.0f);
+            return targetTransf.rotation == targetRot;
+        }
+
+        // create a vector perpendicular from the npc's forward vector, then
+        // adjust the camera rotation to match that look rotation
+        Vector3 perp = Vector3.Cross(m_NPC.forward, Vector3.up).normalized;
+        cameraTransf.rotation = Quaternion.Slerp(cameraTransf.rotation, Quaternion.LookRotation(perp), Time.deltaTime * 5.0f);
+
+        CameraMovement camMove = StatsManager.m_Instance.Player.GetComponent<PlayerController>()
                 .Camera.GetComponent<CameraMovement>();
 
-            float camDist = camMove.DistanceFromTarget;
+        float camDist = camMove.DistanceFromTarget;
 
-            camMove.DistanceFromTarget =
-                Mathf.Max(0.0f, m_InitialCameraDist - (camDist * Time.deltaTime * 5.0f));
+        camMove.DistanceFromTarget =
+            Mathf.Max(0.0f, m_InitialCameraDist - (camDist * Time.deltaTime * 5.0f));
 
-            camMove.UpdatePosition();
-        }
+        camMove.UpdatePosition();
 
         return targetTransf.rotation == targetRot;
     }
