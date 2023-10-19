@@ -28,12 +28,12 @@ public class LightingManager : MonoBehaviour
 
     private void UpdateLighting(float time)
     {
-        RenderSettings.ambientLight = m_LightConditions.m_AmbientColor.Evaluate(time);
-        RenderSettings.fogColor = m_LightConditions.m_FogColor.Evaluate(time);
+        //RenderSettings.ambientLight = m_LightConditions.m_AmbientColor.Evaluate(time);
+        //RenderSettings.fogColor = m_LightConditions.m_FogColor.Evaluate(time);
 
         if (m_DirectionalLight != null)
         {
-            m_DirectionalLight.color = m_LightConditions.m_DirectionalColor.Evaluate(time);
+            //m_DirectionalLight.color = m_LightConditions.m_DirectionalColor.Evaluate(time);
             m_DirectionalLight.transform.localRotation = Quaternion.Euler(new Vector3((time * 360.0f) - 90.0f, 170.0f, 0.0f));
         }
     }

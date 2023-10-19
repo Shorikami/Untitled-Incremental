@@ -9,4 +9,8 @@ public class LightingConditions : ScriptableObject
     public Gradient m_AmbientColor;
     public Gradient m_DirectionalColor;
     public Gradient m_FogColor;
+
+    public float m_StartHour;
+    public float m_SunriseHour;
+    public float m_SunsetHour;
 }
