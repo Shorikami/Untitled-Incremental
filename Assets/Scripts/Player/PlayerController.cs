@@ -22,9 +22,12 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public NPCController m_CurrNPC;
 
     [SerializeField] private Transform m_Player;
+
     [SerializeField] private GameObject m_PrefabPlayerUI;
-    [SerializeField] private GameObject m_PickupRange;
     private PlayerInterface m_PlayerUI;
+
+    [SerializeField] private GameObject m_PickupRange;
+    private Vector2 m_BaseRangePU;
 
     private List<Upgrade> m_PickupRangeUpgrades;
     private List<Upgrade> m_MoveSpeedUpgrades;
@@ -129,6 +132,8 @@ public class PlayerController : MonoBehaviour
     {
         m_PickupRangeUpgrades = StatsManager.m_Instance.FindUpgrades(StatsManager.NonCurrencyUpgrades.PickupRange);
         m_MoveSpeedUpgrades = StatsManager.m_Instance.FindUpgrades(StatsManager.NonCurrencyUpgrades.MoveSpeed);
+
+        m_BaseRangePU = new Vector2(m_PickupRange.transform.localScale.x, m_PickupRange.transform.localScale.z);
     }
 
     private void Update()
@@ -177,7 +182,7 @@ public class PlayerController : MonoBehaviour
     private void UpdatePickupRange()
     {
         float bonus = m_PickupRangeUpgrades.ConvertAll(x => x.m_UpgradeData.m_UpgradeBonuses.m_CurrentBonus).Aggregate((a, b) => a * b);
-        m_PickupRange.transform.localScale = new Vector3(bonus, m_PickupRange.transform.localScale.y, bonus);
+        m_PickupRange.transform.localScale = new Vector3(m_BaseRangePU.x * bonus, m_PickupRange.transform.localScale.y, m_BaseRangePU.y * bonus);
     }
 
     private void MouseRaycast()
