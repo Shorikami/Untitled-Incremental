@@ -29,8 +29,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4287140314131974808}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.845, z: 0}
-  m_LocalScale: {x: 6.5, y: 0.005, z: 6.5}
+  m_LocalPosition: {x: 0, y: -0.506, z: 0}
+  m_LocalScale: {x: 1.2, y: 0.005, z: 1.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 650141027708080976}
@@ -136,6 +136,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 283240763121822600, guid: 81f7e40812aa7b74c9e419a30a7a6a22, type: 3}
+      propertyPath: m_Name
+      value: NPC Body
+      objectReference: {fileID: 0}
+    - target: {fileID: 283240763121822600, guid: 81f7e40812aa7b74c9e419a30a7a6a22, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 283240763121822600, guid: 81f7e40812aa7b74c9e419a30a7a6a22, type: 3}
       propertyPath: m_TagString
       value: NPC
@@ -243,3 +251,21 @@ MonoBehaviour:
   m_VNEvents:
   - 
   m_VNEventIdx: 0
+--- !u!1 &7386866907789777786 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 283240763121822600, guid: 81f7e40812aa7b74c9e419a30a7a6a22, type: 3}
+  m_PrefabInstance: {fileID: 7308543578637906162}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2393517249797826739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7386866907789777786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8ca733a6bb3ea64ea29dfca9e6cec51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OwnerNPC: {fileID: 3811047566900009937}
