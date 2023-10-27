@@ -101,14 +101,14 @@ public class PrestigeBoard : MonoBehaviour
 
         if (upgrades == null || upgrades.Count == 0)
         { 
-            DataManager.m_Instance.NewUpgrade("Credits Coins Value", 
-                "Increases value of coins by +25% per level. Coin value is doubled every 25 levels.",
-            500, 5, false, 25, 2.0f, 0.25f, StatsManager.GameCurrencyType.Coins, StatsManager.GameCurrencyType.Credits,
+            DataManager.m_Instance.NewUpgrade("Credits Wheat Value",
+                "Increases value of wheat by +25% per level. Coin value is doubled every 25 levels.",
+            500, 5, false, 25, 2.0f, 0.25f, StatsManager.GameCurrencyType.Wheat, StatsManager.GameCurrencyType.Bread,
             StatsManager.NonCurrencyUpgrades.Invalid, Collectable.CollectableType.None);
 
             DataManager.m_Instance.NewUpgrade("Credits EXP Value",
                 "Increases value of EXP by +25% per level. EXP value is doubled every 25 levels.",
-            500, 5, false, 25, 2.0f, 0.25f, StatsManager.GameCurrencyType.Coins, StatsManager.GameCurrencyType.Credits,
+            500, 5, false, 25, 2.0f, 0.25f, StatsManager.GameCurrencyType.Wheat, StatsManager.GameCurrencyType.Bread,
             StatsManager.NonCurrencyUpgrades.Invalid, Collectable.CollectableType.None);
         }
 
@@ -118,12 +118,12 @@ public class PrestigeBoard : MonoBehaviour
 
     public void Prestige()
     {
-        GameCurrency prestCurr = StatsManager.m_Instance.FindGameCurrency(StatsManager.GameCurrencyType.Credits);
+        GameCurrency prestCurr = StatsManager.m_Instance.FindGameCurrency(StatsManager.GameCurrencyType.Bread);
 
         if (prestCurr == null)
         {
             DataManager.m_Instance.NewCurrency(m_ResetFor, Collectable.CollectableType.None);
-            prestCurr = StatsManager.m_Instance.FindGameCurrency(StatsManager.GameCurrencyType.Credits);
+            prestCurr = StatsManager.m_Instance.FindGameCurrency(StatsManager.GameCurrencyType.Bread);
         }
 
         prestCurr.m_Currency.UpdateValue(PayoutFormula());
@@ -142,8 +142,6 @@ public class PrestigeBoard : MonoBehaviour
             else if (go.TryGetComponent<Experience>(out Experience ex))
                 ex.ResetData();
         }
-
-
     }
 
     private int PayoutFormula()

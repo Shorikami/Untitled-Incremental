@@ -13,8 +13,8 @@ public class StatsManager : MonoBehaviour
     public enum GameCurrencyType
     {
         None = 0,
-        Coins = 1,
-        Credits,
+        Wheat = 1,
+        Bread,
 
         Perks,
 

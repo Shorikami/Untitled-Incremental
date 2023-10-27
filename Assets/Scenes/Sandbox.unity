@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1953203211}
-  m_IndirectSpecularColor: {r: 0.5151636, g: 0.51898307, b: 0.5382568, a: 1}
+  m_IndirectSpecularColor: {r: 0.50581694, g: 0.5060764, b: 0.5131564, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1852,6 +1852,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a382d3886fae1114886a5e80211dfef8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Camera: {fileID: 1776323201}
   m_Sensitivity: 1000
   m_Target: {fileID: 1286257264}
   m_PlayerController: {fileID: 1286257267}
@@ -2097,7 +2098,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6267398770978982294, guid: 017b733d483ceb941a9be0ba3299744c, type: 3}
       propertyPath: m_DescriptionText
-      value: Reset coins, coin upgrades, level, and perk upgrades to earn Credits.
+      value: Reset wheat, wheat upgrades, level, and perk upgrades to earn Bread.
       objectReference: {fileID: 0}
     - target: {fileID: 6267398770978982294, guid: 017b733d483ceb941a9be0ba3299744c, type: 3}
       propertyPath: m_PrestigeCurrName

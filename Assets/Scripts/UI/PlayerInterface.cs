@@ -11,7 +11,7 @@ public class PlayerInterface : MonoBehaviour
     [SerializeField] private GameObject m_NPCPrompt;
     //private TextMeshProUGUI m_PromptText;
 
-    public StatsManager.GameCurrencyType m_DisplayWhatCurr = StatsManager.GameCurrencyType.Coins;
+    public StatsManager.GameCurrencyType m_DisplayWhatCurr = StatsManager.GameCurrencyType.Wheat;
     public Collectable.CollectableType m_DisplayWhatColl = Collectable.CollectableType.Default;
 
     private void Start()

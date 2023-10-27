@@ -56,7 +56,7 @@ public class IncrementalPlatform : MonoBehaviour
     private void InitializePlatform()
     {
         m_CurrencyToModify = StatsManager.m_Instance.FindStatContainer
-            (StatsManager.GameCurrencyType.Coins, m_CollectableType).GetComponent<GameCurrency>();
+            (StatsManager.GameCurrencyType.Wheat, m_CollectableType).GetComponent<GameCurrency>();
 
         m_ExpToModify = StatsManager.m_Instance.FindStatContainer
             (StatsManager.GameCurrencyType.Experience, m_CollectableType).GetComponent<Experience>();

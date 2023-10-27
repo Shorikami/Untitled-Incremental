@@ -107,29 +107,29 @@ public class DataManager : MonoBehaviour
         // update this as more initial values are added
         m_GameData = new GameData();
 
-        NewCurrency(StatsManager.GameCurrencyType.Coins, Collectable.CollectableType.Default);
+        NewCurrency(StatsManager.GameCurrencyType.Wheat, Collectable.CollectableType.Default);
         NewCurrency(StatsManager.GameCurrencyType.Perks, Collectable.CollectableType.Default);
 
         NewExperience(StatsManager.GameCurrencyType.Experience, Collectable.CollectableType.Default, StatsManager.GameCurrencyType.Perks);
 
-        NewUpgrade("Coins Value", "Increases value of coins by +25% per level. Coin value is doubled every 25 levels.",
-            500, 5, false, 25, 2.0f, 0.25f, StatsManager.GameCurrencyType.Coins, StatsManager.GameCurrencyType.Coins,
+        NewUpgrade("Wheat Value", "Increases value of wheat by +25% per level. Coin value is doubled every 25 levels.",
+            500, 5, false, 25, 2.0f, 0.25f, StatsManager.GameCurrencyType.Wheat, StatsManager.GameCurrencyType.Wheat,
             StatsManager.NonCurrencyUpgrades.Invalid, Collectable.CollectableType.Default);
         NewUpgrade("Growth", "Increases spawn rate by +20% per level.",
-            100, 10, false, 0, 0.0f, 0.2f, StatsManager.GameCurrencyType.Coins, StatsManager.GameCurrencyType.Coins,
+            100, 10, false, 0, 0.0f, 0.2f, StatsManager.GameCurrencyType.Wheat, StatsManager.GameCurrencyType.Wheat,
             StatsManager.NonCurrencyUpgrades.GrowthRate, Collectable.CollectableType.Default);
         NewUpgrade("XP Value", "Increases XP value by +25% per level. XP Value is doubled every 25 levels.",
-            500, 7, false, 25, 2.0f, 0.25f, StatsManager.GameCurrencyType.Experience, StatsManager.GameCurrencyType.Coins,
+            500, 7, false, 25, 2.0f, 0.25f, StatsManager.GameCurrencyType.Experience, StatsManager.GameCurrencyType.Wheat,
             StatsManager.NonCurrencyUpgrades.Invalid, Collectable.CollectableType.Default);
         NewUpgrade("Pickup Range+", "Increase pickup range by 10% per level.",
-            20, 10000, false, 0, 0.0f, 0.1f, StatsManager.GameCurrencyType.Coins, StatsManager.GameCurrencyType.Coins,
+            20, 10000, false, 0, 0.0f, 0.1f, StatsManager.GameCurrencyType.Wheat, StatsManager.GameCurrencyType.Wheat,
             StatsManager.NonCurrencyUpgrades.PickupRange, Collectable.CollectableType.Default);
         NewUpgrade("Speed+", "Increase movement speed by 10% per level.",
-            7, 1500, false, 0, 0.0f, 0.1f, StatsManager.GameCurrencyType.Coins, StatsManager.GameCurrencyType.Coins,
+            7, 1500, false, 0, 0.0f, 0.1f, StatsManager.GameCurrencyType.Wheat, StatsManager.GameCurrencyType.Wheat,
             StatsManager.NonCurrencyUpgrades.MoveSpeed, Collectable.CollectableType.Default);
 
-        NewUpgrade("Perks Coins Value", "Increases value of coins by +10% per level.",
-            100, 1, true, 0, 0.0f, 0.1f, StatsManager.GameCurrencyType.Coins, StatsManager.GameCurrencyType.Perks,
+        NewUpgrade("Perks Wheat Value", "Increases value of wheat by +10% per level.",
+            100, 1, true, 0, 0.0f, 0.1f, StatsManager.GameCurrencyType.Wheat, StatsManager.GameCurrencyType.Perks,
             StatsManager.NonCurrencyUpgrades.Invalid, Collectable.CollectableType.Default);
         NewUpgrade("Perks EXP Value", "Increases value of EXP by +10% per level.",
             100, 1, true, 0, 0.0f, 0.1f, StatsManager.GameCurrencyType.Experience, StatsManager.GameCurrencyType.Perks,

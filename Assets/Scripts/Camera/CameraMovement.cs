@@ -6,6 +6,9 @@ using System;
 public class CameraMovement : MonoBehaviour
 {
     [SerializeField]
+    private Camera m_Camera;
+
+    [SerializeField]
     private float m_Sensitivity = 300.0f;
 
     private float m_RotX, m_RotY;
@@ -73,6 +76,11 @@ public class CameraMovement : MonoBehaviour
     {
         m_InFirstPerson = Mathf.Approximately(m_DistFromTarget, 0.0f) ? true : false;
         Cursor.lockState = m_InFirstPerson && !VNHandler.m_Instance.CutsceneActive ? CursorLockMode.Locked : CursorLockMode.None;
+
+        if (m_InFirstPerson)
+            m_Camera.cullingMask &= ~(1 << LayerMask.NameToLayer("Player"));
+        else
+            m_Camera.cullingMask |= (1 << LayerMask.NameToLayer("Player"));
     }
 
     private void ZoomCamera()
