@@ -65,6 +65,8 @@ public class PlayerController : MonoBehaviour
         private set { m_MousePos = value; }
     }
 
+    [SerializeField] private Animator m_Animator;
+
     public float m_BaseSpeed;
     private float m_CurrentSpeed;
     
@@ -163,6 +165,7 @@ public class PlayerController : MonoBehaviour
 
         UpdateSpeed();
         UpdatePickupRange();
+        UpdateAnimationProperties();
     }
 
     private void FixedUpdate()
@@ -171,6 +174,11 @@ public class PlayerController : MonoBehaviour
             return;
 
         MovePlayer(m_Camera.transform);
+    }
+
+    private void UpdateAnimationProperties()
+    {
+        m_Animator.SetFloat("Speed", m_RB.velocity.z);
     }
 
     private void UpdateSpeed()

@@ -201,6 +201,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1833552227006671844, guid: 81f7e40812aa7b74c9e419a30a7a6a22, type: 3}
   m_PrefabInstance: {fileID: 942144781874106223}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &3291054620945273065 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2359612504918843270, guid: 81f7e40812aa7b74c9e419a30a7a6a22, type: 3}
+  m_PrefabInstance: {fileID: 942144781874106223}
+  m_PrefabAsset: {fileID: 0}
 --- !u!54 &3918621374481226060 stripped
 Rigidbody:
   m_CorrespondingSourceObject: {fileID: 4283652011950134819, guid: 81f7e40812aa7b74c9e419a30a7a6a22, type: 3}
@@ -231,6 +236,7 @@ MonoBehaviour:
   m_PrefabPlayerUI: {fileID: 658944925226131003, guid: 46d992bfdb3fffc4eb72de8eddbc9b81, type: 3}
   m_PickupRange: {fileID: 893324050925930996}
   m_Orientation: {fileID: 1468522740251354251}
+  m_Animator: {fileID: 3291054620945273065}
   m_BaseSpeed: 24
   m_PlayerHeight: 1.6
   m_Ground:
