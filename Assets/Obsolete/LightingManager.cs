@@ -8,6 +8,7 @@ public class LightingManager : MonoBehaviour
     [SerializeField] private Light m_DirectionalLight;
     [SerializeField] private LightingConditions m_LightConditions;
     [SerializeField, Range(0, 24)] private float m_TimeOfDay;
+    [SerializeField] private float m_TimeMultiplier;
 
     private void Update()
     {
@@ -16,7 +17,7 @@ public class LightingManager : MonoBehaviour
 
         if (Application.isPlaying)
         {
-            m_TimeOfDay += Time.deltaTime;
+            m_TimeOfDay += Time.deltaTime * m_TimeMultiplier;
             m_TimeOfDay %= 24.0f;
             UpdateLighting(m_TimeOfDay / 24.0f);
         }
