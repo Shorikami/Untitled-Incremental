@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24146f00f95517949b1f594f84c4e625, type: 3}
+  m_Name: Bread
+  m_EditorClassIdentifier: 
+  m_ReqBaseLevel: 12
+  m_Scales: 0
+  m_LevelScale:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  m_BasePayoutValue: 1
+  m_ScalesWithExpLevel: 1
+  m_ResetFor: 2
+  m_Resets: 010000000400000003000000
+  m_ExpToCheck: 4
+  m_PrestigeCurrName: Bread
+  m_DescriptionText: Reset Wheat, Level, and Perks for Bread.
+  m_ActionName: Prestige
+  m_DisplayEarnings: 1
+  m_UsesDynamicBoard: 1
+  m_UpgradeAdditions:
+  - s_UpgradeName: Bread Wheat Value
+    s_Description: Increases value of wheat by +25% per level. Coin value is doubled
+      every 25 levels.
+    s_MaxLevel: 500
+    s_BaseCost: 5
+    s_StaticCost: 0
+    s_BonusReqLevels: 25
+    s_LevelBonusMulti: 2
+    s_BonusMulti: 0.25
+    s_Currtype: 1
+    s_BoughtWith: 2
+    s_NonCurrType: -1
+    s_Colltype: 0
+  - s_UpgradeName: Bread EXP Value
+    s_Description: Increases value of EXP by +25% per level. EXP value is doubled
+      every 25 levels.
+    s_MaxLevel: 500
+    s_BaseCost: 5
+    s_StaticCost: 0
+    s_BonusReqLevels: 25
+    s_LevelBonusMulti: 2
+    s_BonusMulti: 0.25
+    s_Currtype: 1
+    s_BoughtWith: 2
+    s_NonCurrType: -1
+    s_Colltype: 0

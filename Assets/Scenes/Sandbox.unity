@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1953203211}
-  m_IndirectSpecularColor: {r: 0.621954, g: 0.651254, b: 0.65908545, a: 1}
+  m_IndirectSpecularColor: {r: 0.41089046, g: 0.3826813, b: 0.38508537, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -148,7 +148,7 @@ PrefabInstance:
       objectReference: {fileID: 4794848375890685522, guid: c18bc963b58637c4f838f3ef236b1604, type: 3}
     - target: {fileID: 993772771559680597, guid: 0593e364c16d50f48970a564e7b2c64e, type: 3}
       propertyPath: m_RootOrder
-      value: 20
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 993772771559680597, guid: 0593e364c16d50f48970a564e7b2c64e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -219,7 +219,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_DirectionalLight: {fileID: 1953203211}
   m_LightConditions: {fileID: 11400000, guid: ca0f2ac127ef47e43b6f90f989d6fc4e, type: 2}
-  m_TimeOfDay: 8.9
+  m_TimeOfDay: 0
   m_TimeMultiplier: 0.01
 --- !u!1 &206857930
 GameObject:
@@ -261,7 +261,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1449394787538284217, guid: 8c350100b4f6c2541ae38889273647a8, type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 1449394787538284217, guid: 8c350100b4f6c2541ae38889273647a8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -407,7 +407,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8028416413126410117, guid: 52f7dd33b27835b41bb7ef28f57bba35, type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 8028416413126410117, guid: 52f7dd33b27835b41bb7ef28f57bba35, type: 3}
       propertyPath: m_LocalScale.x
@@ -492,7 +492,7 @@ Transform:
   - {fileID: 1893726398}
   - {fileID: 1066688744}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &793065032
 PrefabInstance:
@@ -672,7 +672,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 650141027708080976, guid: e6163565030602c499a8cf378cf2662e, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 650141027708080976, guid: e6163565030602c499a8cf378cf2662e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -842,7 +842,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1981020523408436678, guid: 75cc855555e04c24aa663a7f0e798b22, type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1981020523408436678, guid: 75cc855555e04c24aa663a7f0e798b22, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1006,7 +1006,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3167959273596000035, guid: 7ed4966886cc4af40a8cc3a4460bd303, type: 3}
       propertyPath: m_RootOrder
-      value: 22
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 3167959273596000035, guid: 7ed4966886cc4af40a8cc3a4460bd303, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1288,7 +1288,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3409760426244501351, guid: a6bcaff05fd09ef4bbbe48a6d5635d22, type: 3}
       propertyPath: m_Name
-      value: Major Board (Credits)
+      value: Major Board (Bread)
       objectReference: {fileID: 0}
     - target: {fileID: 3769824576198102706, guid: a6bcaff05fd09ef4bbbe48a6d5635d22, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1488,7 +1488,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 246587394392261125, guid: 63dfa6014bd92634d99ccb578f8c5580, type: 3}
       propertyPath: m_RootOrder
-      value: 14
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 246587394392261125, guid: 63dfa6014bd92634d99ccb578f8c5580, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1565,7 +1565,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7024421175640337613, guid: 3a155f9265ff7ee46a36435c6ebd764f, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7024421175640337613, guid: 3a155f9265ff7ee46a36435c6ebd764f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1659,7 +1659,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1464588440
 GameObject:
@@ -1710,7 +1710,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1981020523408436678, guid: 75cc855555e04c24aa663a7f0e798b22, type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 1981020523408436678, guid: 75cc855555e04c24aa663a7f0e798b22, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1944,7 +1944,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1981020523408436678, guid: 75cc855555e04c24aa663a7f0e798b22, type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 1981020523408436678, guid: 75cc855555e04c24aa663a7f0e798b22, type: 3}
       propertyPath: m_LocalScale.x
@@ -2026,7 +2026,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: da92df2cf18188844ac670a52d8e1f82, type: 2}
     - target: {fileID: 3474312687704878787, guid: 017b733d483ceb941a9be0ba3299744c, type: 3}
       propertyPath: m_Name
-      value: Prestige Board (Credits)
+      value: Prestige Board (Bread)
       objectReference: {fileID: 0}
     - target: {fileID: 4286560807245345913, guid: 017b733d483ceb941a9be0ba3299744c, type: 3}
       propertyPath: m_RootOrder
@@ -2088,6 +2088,10 @@ PrefabInstance:
       propertyPath: m_ActionName
       value: Reset
       objectReference: {fileID: 0}
+    - target: {fileID: 6267398770978982294, guid: 017b733d483ceb941a9be0ba3299744c, type: 3}
+      propertyPath: m_Conditions
+      value: 
+      objectReference: {fileID: 11400000, guid: 5108f802939d3e640b3b3d60e674e02a, type: 2}
     - target: {fileID: 6267398770978982294, guid: 017b733d483ceb941a9be0ba3299744c, type: 3}
       propertyPath: m_ExpToCheck
       value: 4
@@ -2308,7 +2312,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1953203209}
-  m_LocalRotation: {x: 0.032296225, y: 0.9252752, z: -0.3691473, w: 0.08095115}
+  m_LocalRotation: {x: -0.061628457, y: 0.70441604, z: 0.70441604, w: 0.061628457}
   m_LocalPosition: {x: 2.85, y: 8.05, z: -3.48}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2475,7 +2479,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3409760426244501351, guid: a6bcaff05fd09ef4bbbe48a6d5635d22, type: 3}
       propertyPath: m_Name
-      value: Major Board (Coins)
+      value: Major Board (Wheat)
       objectReference: {fileID: 0}
     - target: {fileID: 3769824576198102706, guid: a6bcaff05fd09ef4bbbe48a6d5635d22, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -2632,7 +2636,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2381067788971403615, guid: 0a2334af7027b7346a057bfb9181980c, type: 3}
       propertyPath: m_RootOrder
-      value: 21
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 2381067788971403615, guid: 0a2334af7027b7346a057bfb9181980c, type: 3}
       propertyPath: m_LocalPosition.x

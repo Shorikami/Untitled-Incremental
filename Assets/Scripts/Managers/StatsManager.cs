@@ -13,19 +13,25 @@ public class StatsManager : MonoBehaviour
     public enum GameCurrencyType
     {
         None = 0,
+
+        // Collectible currencies
         Wheat = 1,
         Bread,
 
+        // Non-collectible currencies
         Perks,
 
+        // Level-specific currencies
         Experience,
-        Tier
+
+        // Global currencies
+        Decryptions
     };
 
     public enum NonCurrencyUpgrades
     { 
         Invalid = -1,
-        PermanentProgression,
+        PermanentUpgrades,
         GrowthRate,
         MoveSpeed,
         PickupRange
