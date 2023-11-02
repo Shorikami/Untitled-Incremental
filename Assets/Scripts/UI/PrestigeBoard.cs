@@ -54,7 +54,7 @@ public class PrestigeBoard : MonoBehaviour
                 DataManager.m_Instance.NewCurrency(m_Conditions.m_ResetFor, Collectable.CollectableType.None);
 
             AddUpgradesToBoard();
-            m_PrestigeBoardUnlock.GetComponent<BoardPanel>().m_DisplayThis = 
+            m_PrestigeBoardUnlock.GetComponent<UpgradeBoardUI>().m_DisplayThis = 
                 StatsManager.m_Instance.FindGameCurrency(m_Conditions.m_ResetFor);
         }
 
@@ -90,7 +90,7 @@ public class PrestigeBoard : MonoBehaviour
         }
 
         // then initialize the board panel
-        m_PrestigeBoardUnlock.GetComponent<BoardPanel>().Initialize();
+        m_PrestigeBoardUnlock.GetComponent<UpgradeBoardUI>().Initialize();
     }
 
     public void Prestige()

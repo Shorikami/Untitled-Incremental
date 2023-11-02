@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 
-public class BoardPanel : MonoBehaviour
+public class UpgradeBoardUI : MonoBehaviour
 {
     [Header("UI Board")]
     [SerializeField] private GameObject m_Board;

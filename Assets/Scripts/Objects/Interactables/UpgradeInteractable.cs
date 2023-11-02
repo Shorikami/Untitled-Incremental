@@ -28,12 +28,12 @@ public class UpgradeInteractable : ButtonInteractable
         return res;
     }
 
-    private BoardPanel m_BoardPanel;
+    private UpgradeBoardUI m_BoardPanel;
 
     public override void Awake()
     {
         m_UpgradeStats = transform.parent.GetComponent<Upgrade>();
-        m_BoardPanel = transform.GetComponentInParent<BoardPanel>();
+        m_BoardPanel = transform.GetComponentInParent<UpgradeBoardUI>();
         m_UpgradeDisplay = m_BoardPanel.m_UpgradeDisplay;
         base.Awake();
     }

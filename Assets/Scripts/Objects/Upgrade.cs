@@ -48,7 +48,7 @@ public class Upgrade : MonoBehaviour, ISavableData
 
     public void OpenUpgradeMenu()
     {
-        m_CurrencyPanel.GetComponent<BoardPanel>().ToggleUpgradeMenu(true);
+        m_CurrencyPanel.GetComponent<UpgradeBoardUI>().ToggleUpgradeMenu(true);
     }
 
     public static void UpdateMultiplier(Upgrade ug, Operation what, float val)
