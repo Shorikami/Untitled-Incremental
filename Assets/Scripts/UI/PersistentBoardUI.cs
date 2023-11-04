@@ -31,10 +31,12 @@ public class PersistentBoardUI : MonoBehaviour
     private void Initialize()
     {
         GameObject currPanel = null;
+        int iter = 0;
 
         foreach (PersistentGlobals.PersistentData pd in m_PersistentDisplayContainer.m_DataDescriptions)
         {
             currPanel = Instantiate(m_HorizontalBlankPrefab, m_PanelContent.transform);
+            currPanel.GetComponent<PersistentUpgradeText>().Initialize(iter++, pd.m_Description, Mathf.RoundToInt(m_PanelContent.GetComponent<RectTransform>().rect.width));
         }
     }
 }

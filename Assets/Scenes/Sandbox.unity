@@ -1551,6 +1551,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Minor Board (Decryptions)
       objectReference: {fileID: 0}
+    - target: {fileID: 5177320478390042715, guid: 5887559bd9de7f445a00edc31488dad1, type: 3}
+      propertyPath: m_Spacing
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265866452771360946, guid: 5887559bd9de7f445a00edc31488dad1, type: 3}
+      propertyPath: m_HorizontalBlankPrefab
+      value: 
+      objectReference: {fileID: 5869201923865877452, guid: da815340b10424649aab6d444599cc34, type: 3}
     - target: {fileID: 7265866452771360946, guid: 5887559bd9de7f445a00edc31488dad1, type: 3}
       propertyPath: m_PersistentDisplayContainer
       value: 
