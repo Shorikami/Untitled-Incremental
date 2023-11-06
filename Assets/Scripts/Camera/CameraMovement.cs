@@ -52,6 +52,9 @@ public class CameraMovement : MonoBehaviour
     // 0 = first person, 1 = third person
     private int m_CameraState;
 
+    [SerializeField]
+    private BoxCollider m_CameraCollider;
+
     void Start()
     {
         m_CameraState = Convert.ToInt32(m_InFirstPerson);
@@ -61,7 +64,11 @@ public class CameraMovement : MonoBehaviour
     {
         HandleCameraPerspective();
     }
-    
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("a");
+    }
 
     void LateUpdate()
     {
@@ -69,6 +76,25 @@ public class CameraMovement : MonoBehaviour
         {
             RotateCameraAndTarget();
             ZoomCamera();
+
+            if (!m_InFirstPerson)
+                HandleCameraCollision();
+        }
+    }
+
+    private void HandleCameraCollision()
+    {
+        Vector3 direction = transform.position - m_Target.position;
+        Ray r = new Ray(m_Target.position, direction);
+
+        // reverse bit makes it so that it ignores these layers
+        int mask = 1 << LayerMask.NameToLayer("Player") | 1 << LayerMask.NameToLayer("CameraZoomLock");
+        mask = ~mask;
+
+        if (Physics.Raycast(r, out RaycastHit hit, Vector3.Distance(transform.position, m_Target.position), mask))
+        {
+            Debug.Log(hit.collider.gameObject.name);
+            //Debug.Log(hit.distance);
         }
     }
 
