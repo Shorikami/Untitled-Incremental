@@ -84,17 +84,26 @@ public class CameraMovement : MonoBehaviour
 
     private void HandleCameraCollision()
     {
+        // find vector between camera position and target position
         Vector3 direction = transform.position - m_Target.position;
+        // Create a ray in that direction, starting from the player's point of view
         Ray r = new Ray(m_Target.position, direction);
 
         // reverse bit makes it so that it ignores these layers
         int mask = 1 << LayerMask.NameToLayer("Player") | 1 << LayerMask.NameToLayer("CameraZoomLock");
         mask = ~mask;
 
+        // cast the created ray out from the player to the maximum distance of the camera's current position
+        // while also masking the cast to ignore certain layers
         if (Physics.Raycast(r, out RaycastHit hit, Vector3.Distance(transform.position, m_Target.position), mask))
         {
-            Debug.Log(hit.collider.gameObject.name);
+            //Debug.Log(hit.collider.gameObject.name);
             //Debug.Log(hit.distance);
+            
+            // Update the distance from target to the closest point before collision,
+            // then update the position to change the camera's location
+            m_DistFromTarget = hit.distance;
+            UpdatePosition();
         }
     }
 
