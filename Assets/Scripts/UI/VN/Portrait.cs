@@ -28,6 +28,9 @@ public class Portrait : MonoBehaviour
     [Min(0)] public float m_TalkingSpeed;
     private float m_CurrTalkingFrame;
 
+    private List<int> m_AllowedIndices = new List<int>();
+    private int m_SelectedIndex;
+
     void Awake()
     {
     }
@@ -70,6 +73,16 @@ public class Portrait : MonoBehaviour
 
         m_CurrTalkingFrame = m_TalkingSpeed;
         m_OwnerNPC = npc;
+
+        // set up the talking mouth container
+        m_SelectedIndex = Random.Range(0, m_TalkingMouths.Count);
+        for (int i = 0; i < m_TalkingMouths.Count; ++i)
+        {
+            if (i == m_SelectedIndex)
+                continue;
+
+            m_AllowedIndices.Add(i);
+        }
     }
 
     void Update()
@@ -80,7 +93,16 @@ public class Portrait : MonoBehaviour
             if (m_CurrTalkingFrame <= 0.0f)
             {
                 m_CurrTalkingFrame = m_TalkingSpeed;
-                m_SprMouth.sprite = m_TalkingMouths[Random.Range(0, m_TalkingMouths.Count)];
+
+                int idx = Random.Range(0, m_AllowedIndices.Count);
+                int selected = m_AllowedIndices[idx];
+                m_SprMouth.sprite = m_TalkingMouths[selected];
+
+                m_AllowedIndices.Remove(selected);
+                m_AllowedIndices.Add(m_SelectedIndex);
+
+                m_SelectedIndex = selected;
+
                 m_SprMouth.SetNativeSize();
                 m_OwnerNPC.PlayTalkingSFX();
             }
