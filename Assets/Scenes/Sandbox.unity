@@ -1054,7 +1054,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 650141027708080976, guid: e6163565030602c499a8cf378cf2662e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.211
+      value: 6.44
       objectReference: {fileID: 0}
     - target: {fileID: 650141027708080976, guid: e6163565030602c499a8cf378cf2662e, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1062,7 +1062,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 650141027708080976, guid: e6163565030602c499a8cf378cf2662e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -20.34
+      value: 21.67
       objectReference: {fileID: 0}
     - target: {fileID: 650141027708080976, guid: e6163565030602c499a8cf378cf2662e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1092,6 +1092,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2298602207438207103, guid: e6163565030602c499a8cf378cf2662e, type: 3}
+      propertyPath: m_Volume
+      value: 0.6
+      objectReference: {fileID: 0}
     - target: {fileID: 3799636183168268926, guid: e6163565030602c499a8cf378cf2662e, type: 3}
       propertyPath: m_Name
       value: NPC
@@ -1101,8 +1105,20 @@ PrefabInstance:
       value: ipsum
       objectReference: {fileID: 0}
     - target: {fileID: 3811047566900009937, guid: e6163565030602c499a8cf378cf2662e, type: 3}
+      propertyPath: m_DebugVNEvent
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3811047566900009937, guid: e6163565030602c499a8cf378cf2662e, type: 3}
+      propertyPath: m_NPCTalkingSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: a34a0ab3a0976ab4496246ceb9606a27, type: 3}
+    - target: {fileID: 3811047566900009937, guid: e6163565030602c499a8cf378cf2662e, type: 3}
+      propertyPath: m_PortraitTalkingSpeed
+      value: 0.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 3811047566900009937, guid: e6163565030602c499a8cf378cf2662e, type: 3}
       propertyPath: m_VNEvents.Array.data[0]
-      value: loremIpsum
+      value: novelaTest
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6163565030602c499a8cf378cf2662e, type: 3}

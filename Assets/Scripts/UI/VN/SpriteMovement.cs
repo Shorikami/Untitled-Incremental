@@ -130,8 +130,8 @@ public class SpriteMovement : MonoBehaviour
                     c = (m_ElapsedFade / 0.5f);
 
                 m_PortraitBase.GetComponent<Portrait>().m_SprBody.color = new Color(c, c, c, 1.0f);
-                m_PortraitBase.GetComponent<Portrait>().m_SprFace.color = new Color(c, c, c, 1.0f);
-                m_PortraitBase.GetComponent<Portrait>().m_SprHalo.color = new Color(c, c, c, 1.0f);
+                m_PortraitBase.GetComponent<Portrait>().m_SprEyes.color = new Color(c, c, c, 1.0f);
+                m_PortraitBase.GetComponent<Portrait>().m_SprMouth.color = new Color(c, c, c, 1.0f);
             }
 
             else if (m_ElapsedFade > 0.5f)
@@ -147,8 +147,8 @@ public class SpriteMovement : MonoBehaviour
                         c = 1.0f - (m_ElapsedFadePost / 0.2f);
 
                         m_PortraitBase.GetComponent<Portrait>().m_SprBody.color = new Color(0.0f, 0.0f, 0.0f, c);
-                        m_PortraitBase.GetComponent<Portrait>().m_SprFace.color = new Color(0.0f, 0.0f, 0.0f, c);
-                        m_PortraitBase.GetComponent<Portrait>().m_SprHalo.color = new Color(0.0f, 0.0f, 0.0f, c);
+                        m_PortraitBase.GetComponent<Portrait>().m_SprEyes.color = new Color(0.0f, 0.0f, 0.0f, c);
+                        m_PortraitBase.GetComponent<Portrait>().m_SprMouth.color = new Color(0.0f, 0.0f, 0.0f, c);
                     }
 
                     if (m_ElapsedFadePost > 0.2f)
@@ -252,8 +252,8 @@ public class SpriteMovement : MonoBehaviour
         }
 
         m_PortraitBase.GetComponent<Portrait>().m_SprBody.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
-        m_PortraitBase.GetComponent<Portrait>().m_SprFace.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
-        m_PortraitBase.GetComponent<Portrait>().m_SprHalo.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+        m_PortraitBase.GetComponent<Portrait>().m_SprEyes.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+        m_PortraitBase.GetComponent<Portrait>().m_SprMouth.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
     }
 
     public void Hide(bool instant = false)
@@ -266,15 +266,15 @@ public class SpriteMovement : MonoBehaviour
         }
 
         m_PortraitBase.GetComponent<Portrait>().m_SprBody.color = new Color(0.0f, 0.0f, 0.0f, 0.0f);
-        m_PortraitBase.GetComponent<Portrait>().m_SprFace.color = new Color(0.0f, 0.0f, 0.0f, 0.0f);
-        m_PortraitBase.GetComponent<Portrait>().m_SprHalo.color = new Color(0.0f, 0.0f, 0.0f, 0.0f);
+        m_PortraitBase.GetComponent<Portrait>().m_SprEyes.color = new Color(0.0f, 0.0f, 0.0f, 0.0f);
+        m_PortraitBase.GetComponent<Portrait>().m_SprMouth.color = new Color(0.0f, 0.0f, 0.0f, 0.0f);
     }
 
     public void Highlight(float val)
     {
         float c = Mathf.Min(Mathf.Max(0, val), 1.0f);
         m_PortraitBase.GetComponent<Portrait>().m_SprBody.color = new Color(c, c, c, 1.0f);
-        m_PortraitBase.GetComponent<Portrait>().m_SprFace.color = new Color(c, c, c, 1.0f);
-        m_PortraitBase.GetComponent<Portrait>().m_SprHalo.color = new Color(c, c, c, 1.0f);
+        m_PortraitBase.GetComponent<Portrait>().m_SprEyes.color = new Color(c, c, c, 1.0f);
+        m_PortraitBase.GetComponent<Portrait>().m_SprMouth.color = new Color(c, c, c, 1.0f);
     }
 }

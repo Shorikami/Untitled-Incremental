@@ -1,0 +1,24 @@
+// Load sprites
+// load portrait ("prtrC")
+load prtrC novela novela mouth:-105,150 pos:0
+
+// load background music ("bgm")
+// load bgm gaster gaster
+// load bgm theme01 Theme_01
+
+// load sound effects ("se")
+// load se siren SE_Siren_01
+// load se shower SE_Shower_01
+// load se rapid SE_Rapid_01
+
+load end
+
+// set to first background
+// bg set bg1
+
+// set bgm
+// bgm set theme01
+
+t "Beatrice Novela" "Astute Librarian" "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc lacinia varius vestibulum. Pellentesque sed leo commodo, dictum lacus id, consectetur dui."
+
+end

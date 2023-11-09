@@ -15,6 +15,10 @@ public class NPCController : MonoBehaviour
         get { return m_NPCPortrait; }
         set { m_NPCPortrait = value; }
     }
+    [SerializeField] private AudioSource m_NPCAudioSFXSource;
+    [SerializeField] private AudioClip m_NPCTalkingSFX;
+
+    [Min(0)] public float m_PortraitTalkingSpeed;
 
     [SerializeField] private GameObject m_InteractionRange;
 
@@ -23,6 +27,8 @@ public class NPCController : MonoBehaviour
 
     private bool m_RotateBeforeEvent;
     private float m_InitialCameraDist;
+
+    public bool m_DebugVNEvent;
 
     // Start is called before the first frame update
     void Start()
@@ -98,6 +104,12 @@ public class NPCController : MonoBehaviour
 
     public void ActivateEvent()
     {
+        if (m_DebugVNEvent)
+        {
+            ActivateVNEvent();
+            return;
+        }
+
         if (!VNHandler.m_Instance.CutsceneActive)
         {
             CameraMovement camMove = StatsManager.m_Instance.Player.GetComponent<PlayerController>()
@@ -108,6 +120,16 @@ public class NPCController : MonoBehaviour
             return;
         }
 
+        ActivateVNEvent();
+    }
+
+    public void ActivateVNEvent()
+    {
         VNHandler.m_Instance.LoadTextFile(m_VNEvents[m_VNEventIdx], this);
+    }
+
+    public void PlayTalkingSFX()
+    {
+        m_NPCAudioSFXSource.PlayOneShot(m_NPCTalkingSFX);
     }
 }

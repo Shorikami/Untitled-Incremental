@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5930054222687389475}
   - component: {fileID: 4023385361822966635}
   m_Layer: 0
-  m_Name: Potrait
+  m_Name: Portrait
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,8 +30,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4297797765438024967}
   - {fileID: 6596861303883159822}
+  - {fileID: 4297797765438024967}
   - {fileID: 3432148413765136736}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -56,9 +56,10 @@ MonoBehaviour:
   m_PortraitName: 
   m_TexName: 
   m_SprBody: {fileID: 69040799159963780}
-  m_SprFace: {fileID: 2286997768418972156}
-  m_SprHalo: {fileID: 4942444093254501815}
-  m_FacePivot: {x: 0, y: 0}
+  m_SprEyes: {fileID: 2286997768418972156}
+  m_SprMouth: {fileID: 4942444093254501815}
+  m_EyesPivot: {x: 0, y: 0}
+  m_MouthPivot: {x: 0, y: 0}
 --- !u!114 &4023385361822966635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -85,7 +86,7 @@ GameObject:
   - component: {fileID: 1939714419725226862}
   - component: {fileID: 4942444093254501815}
   m_Layer: 0
-  m_Name: Halo
+  m_Name: Mouth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -104,7 +105,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8573532087472525276}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -180,7 +181,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8573532087472525276}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -237,12 +238,12 @@ GameObject:
   - component: {fileID: 1045839688067067105}
   - component: {fileID: 2286997768418972156}
   m_Layer: 0
-  m_Name: Face
+  m_Name: Eyes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3432148413765136736
 RectTransform:
   m_ObjectHideFlags: 0

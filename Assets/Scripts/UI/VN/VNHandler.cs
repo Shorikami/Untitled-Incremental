@@ -450,8 +450,21 @@ public class VNHandler : MonoBehaviour
         Portrait pr = toModify.GetComponent<Portrait>();
 
         // Sprite sheet index
-        string idx = tokens[2];
-        pr.m_SprFace.sprite = pr.m_SprContainer[idx];
+        // modify eyes by default (if there's no keyword), unless mouth is specified
+        if (tokens.Count < 4)
+        {
+            string idx = tokens[2];
+            pr.m_SprEyes.sprite = pr.m_SprContainer[idx];
+        }
+        else
+        {
+            string modifyWhat = tokens[2];
+            if (string.Compare(modifyWhat, "eyes") == 0)
+                pr.m_SprEyes.sprite = pr.m_SprContainer[tokens[3]];
+
+            else if (string.Compare(modifyWhat, "mouth") == 0)
+                pr.m_SprMouth.sprite = pr.m_SprContainer[tokens[3]];
+        }
 
         // Recursive call to progress to the next line
         ProgressCutscene();
@@ -571,14 +584,34 @@ public class VNHandler : MonoBehaviour
                 string prtName = tokens[2];
                 string file = tokens[3];
 
-                string[] faceOffset = tokens[4].Split(':');
-                string[] xy = faceOffset[1].Split(',');
-                Vector2 offset = new Vector2(int.Parse(xy[0]), int.Parse(xy[1]));
+                bool hasEyes = false;
+                Vector2 eyesOffset = new Vector2(0, 0), mouthOffset = new Vector2(0, 0);
 
-                string[] startPos = tokens[5].Split(':');
-                float x = float.Parse(startPos[1]);
+                // eyes can be blank (aka baked in the portrait, like Novela) but a mouth
+                // is always required. attempt to check if there are unique portrait eyes
+                {
+                    string[] readInOffset = tokens[4].Split(':');
+                    if (string.Compare(readInOffset[0], "eyes") == 0)
+                    {
+                        hasEyes = true;
+                        string[] xy = readInOffset[1].Split(',');
+                        eyesOffset = new Vector2(int.Parse(xy[0]), int.Parse(xy[1]));
 
-                LoadCharacterPortrait(prtName, file, offset, x, npc);
+                        readInOffset = tokens[5].Split(':');
+                        xy = readInOffset[1].Split(',');
+                        mouthOffset = new Vector2(int.Parse(xy[0]), int.Parse(xy[1]));
+                    }
+                    else
+                    {
+                        string[] xy = readInOffset[1].Split(',');
+                        mouthOffset = new Vector2(int.Parse(xy[0]), int.Parse(xy[1]));
+                    }
+                }
+
+                string[] startPos = tokens[hasEyes ? 6 : 5].Split(':');
+                float startingX = float.Parse(startPos[1]);
+
+                LoadCharacterPortrait(prtName, file, hasEyes, eyesOffset, mouthOffset, startingX, npc);
             }
 
             else if (string.Compare(what, "bgm") == 0)
@@ -614,7 +647,8 @@ public class VNHandler : MonoBehaviour
     }
 
     // Load a character portrait if specified
-    public void LoadCharacterPortrait(string name, string tex, Vector2 offset, float xStart, NPCController npc)
+    public void LoadCharacterPortrait(string name, string tex, bool hasEyes,
+        Vector2 eyesOffs, Vector2 mouthOffs, float xStart, NPCController npc)
     {
         // Instantiate it as a game object
         GameObject portrait = Instantiate(m_PortraitBase);
@@ -635,10 +669,12 @@ public class VNHandler : MonoBehaviour
         // and face pivot for specific positioning of the face
         portrait.GetComponent<Portrait>().m_PortraitName = name;
         portrait.GetComponent<Portrait>().m_TexName = tex;
-        portrait.GetComponent<Portrait>().m_FacePivot = offset;
+        portrait.GetComponent<Portrait>().m_EyesPivot = eyesOffs;
+        portrait.GetComponent<Portrait>().m_MouthPivot = mouthOffs;
+        portrait.GetComponent<Portrait>().m_TalkingSpeed = npc.m_PortraitTalkingSpeed;
 
         // Load it after setting the above
-        portrait.GetComponent<Portrait>().LoadPortrait();
+        portrait.GetComponent<Portrait>().LoadPortrait(hasEyes, npc);
         npc.NPCPortrait = portrait.GetComponent<Portrait>();
 
         // Add new portrait to container of portraits in VN handler
