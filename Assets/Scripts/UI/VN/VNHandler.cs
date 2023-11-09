@@ -611,7 +611,9 @@ public class VNHandler : MonoBehaviour
                 string[] startPos = tokens[hasEyes ? 6 : 5].Split(':');
                 float startingX = float.Parse(startPos[1]);
 
-                LoadCharacterPortrait(prtName, file, hasEyes, eyesOffset, mouthOffset, startingX, npc);
+                float scale = float.Parse(tokens[hasEyes ? 7 : 6].Split(':')[1]);
+
+                LoadCharacterPortrait(prtName, file, hasEyes, eyesOffset, mouthOffset, startingX, scale, npc);
             }
 
             else if (string.Compare(what, "bgm") == 0)
@@ -648,7 +650,7 @@ public class VNHandler : MonoBehaviour
 
     // Load a character portrait if specified
     public void LoadCharacterPortrait(string name, string tex, bool hasEyes,
-        Vector2 eyesOffs, Vector2 mouthOffs, float xStart, NPCController npc)
+        Vector2 eyesOffs, Vector2 mouthOffs, float xStart, float scale, NPCController npc)
     {
         // Instantiate it as a game object
         GameObject portrait = Instantiate(m_PortraitBase);
@@ -660,7 +662,7 @@ public class VNHandler : MonoBehaviour
         portrait.GetComponent<SpriteMovement>().m_LayoutBack = m_LayoutBack;
         portrait.GetComponent<SpriteMovement>().m_PortraitBase = portrait;
         portrait.GetComponent<SpriteMovement>().SetPortraitPosition(new Vector3(xStart, 0, 0));
-        portrait.transform.localScale = new Vector3(1, 1, 1);
+        portrait.transform.localScale = new Vector3(scale, scale, 1);
 
         // Set its index to move it behind the text background
         portrait.transform.SetSiblingIndex(m_CharacterPortraits.Count);

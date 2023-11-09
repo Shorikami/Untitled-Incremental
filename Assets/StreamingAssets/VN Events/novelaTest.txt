@@ -1,6 +1,6 @@
 // Load sprites
 // load portrait ("prtrC")
-load prtrC novela novela mouth:-105,150 pos:0
+load prtrC novela novela mouth:-105,150 pos:0 scale:0.9
 
 // load background music ("bgm")
 // load bgm gaster gaster

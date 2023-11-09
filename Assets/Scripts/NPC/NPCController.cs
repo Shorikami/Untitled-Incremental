@@ -15,8 +15,9 @@ public class NPCController : MonoBehaviour
         get { return m_NPCPortrait; }
         set { m_NPCPortrait = value; }
     }
-    [SerializeField] private AudioSource m_NPCAudioSFXSource;
+
     [SerializeField] private AudioClip m_NPCTalkingSFX;
+    [SerializeField][Range(0, 1)] private float m_VolumeScale;
 
     [Min(0)] public float m_PortraitTalkingSpeed;
 
@@ -130,6 +131,6 @@ public class NPCController : MonoBehaviour
 
     public void PlayTalkingSFX()
     {
-        m_NPCAudioSFXSource.PlayOneShot(m_NPCTalkingSFX);
+        VNHandler.m_Instance.m_SourceSFX.PlayOneShot(m_NPCTalkingSFX, m_VolumeScale);
     }
 }
